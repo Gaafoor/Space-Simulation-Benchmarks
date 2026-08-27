@@ -1,0 +1,693 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2026-06-24 14:34:04
+
+
+%----------------------------------------
+%---------- User-Modified Default Celestial Bodies
+%----------------------------------------
+
+Earth.EquatorialRadius = 6378.1366;
+Earth.Flattening = 0.00335281310845547;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+% --- Case 1 ---
+Create Spacecraft A0_C1;
+A0_C1.DateFormat = UTCGregorian;
+A0_C1.Epoch = '02 Jun 2026 00:00:00.000';
+A0_C1.CoordinateSystem = EarthMJ2000Eq;
+A0_C1.DisplayStateType = Keplerian;
+A0_C1.SMA = 6878.136999999995;
+A0_C1.ECC = 1.226092540821424e-16;
+A0_C1.INC = 97.40000000000001;
+A0_C1.RAAN = 0;
+A0_C1.AOP = 0;
+A0_C1.TA = 0;
+A0_C1.DryMass = 12;
+A0_C1.Cd = 2.2;
+A0_C1.Cr = 1.8;
+A0_C1.DragArea = 0.08;
+A0_C1.SRPArea = 0.1;
+A0_C1.SPADDragScaleFactor = 1;
+A0_C1.SPADSRPScaleFactor = 1;
+A0_C1.AtmosDensityScaleFactor = 1;
+A0_C1.ExtendedMassPropertiesModel = 'None';
+A0_C1.NAIFId = -10016001;
+A0_C1.NAIFIdReferenceFrame = -9016001;
+A0_C1.OrbitColor = Red;
+A0_C1.TargetColor = Teal;
+A0_C1.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A0_C1.CdSigma = 1e+70;
+A0_C1.CrSigma = 1e+70;
+A0_C1.Id = 'SatId';
+A0_C1.Attitude = CoordinateSystemFixed;
+A0_C1.SPADSRPInterpolationMethod = Bilinear;
+A0_C1.SPADSRPScaleFactorSigma = 1e+70;
+A0_C1.SPADDragInterpolationMethod = Bilinear;
+A0_C1.SPADDragScaleFactorSigma = 1e+70;
+A0_C1.AtmosDensityScaleFactorSigma = 1e+70;
+A0_C1.ModelFile = 'aura.3ds';
+A0_C1.ModelOffsetX = 0;
+A0_C1.ModelOffsetY = 0;
+A0_C1.ModelOffsetZ = 0;
+A0_C1.ModelRotationX = 0;
+A0_C1.ModelRotationY = 0;
+A0_C1.ModelRotationZ = 0;
+A0_C1.ModelScale = 1;
+A0_C1.AttitudeDisplayStateType = 'Quaternion';
+A0_C1.AttitudeRateDisplayStateType = 'AngularVelocity';
+A0_C1.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A0_C1.EulerAngleSequence = '321';
+
+% --- Case 2 ---
+Create Spacecraft A0_C2;
+A0_C2.DateFormat = UTCGregorian;
+A0_C2.Epoch = '02 Jun 2026 00:00:00.000';
+A0_C2.CoordinateSystem = EarthMJ2000Eq;
+A0_C2.DisplayStateType = Keplerian;
+A0_C2.SMA = 6878.136999999995;
+A0_C2.ECC = 1.226092540821424e-16;
+A0_C2.INC = 97.40000000000001;
+A0_C2.RAAN = 0;
+A0_C2.AOP = 0;
+A0_C2.TA = 0;
+A0_C2.DryMass = 12;
+A0_C2.Cd = 2.2;
+A0_C2.Cr = 1.8;
+A0_C2.DragArea = 0.08;
+A0_C2.SRPArea = 0.1;
+A0_C2.SPADDragScaleFactor = 1;
+A0_C2.SPADSRPScaleFactor = 1;
+A0_C2.AtmosDensityScaleFactor = 1;
+A0_C2.ExtendedMassPropertiesModel = 'None';
+A0_C2.NAIFId = -10017001;
+A0_C2.NAIFIdReferenceFrame = -9017001;
+A0_C2.OrbitColor = Green;
+A0_C2.TargetColor = LightGray;
+A0_C2.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A0_C2.CdSigma = 1e+70;
+A0_C2.CrSigma = 1e+70;
+A0_C2.Id = 'SatId';
+A0_C2.Attitude = CoordinateSystemFixed;
+A0_C2.SPADSRPInterpolationMethod = Bilinear;
+A0_C2.SPADSRPScaleFactorSigma = 1e+70;
+A0_C2.SPADDragInterpolationMethod = Bilinear;
+A0_C2.SPADDragScaleFactorSigma = 1e+70;
+A0_C2.AtmosDensityScaleFactorSigma = 1e+70;
+A0_C2.ModelFile = 'aura.3ds';
+A0_C2.ModelOffsetX = 0;
+A0_C2.ModelOffsetY = 0;
+A0_C2.ModelOffsetZ = 0;
+A0_C2.ModelRotationX = 0;
+A0_C2.ModelRotationY = 0;
+A0_C2.ModelRotationZ = 0;
+A0_C2.ModelScale = 1;
+A0_C2.AttitudeDisplayStateType = 'Quaternion';
+A0_C2.AttitudeRateDisplayStateType = 'AngularVelocity';
+A0_C2.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A0_C2.EulerAngleSequence = '321';
+
+% --- Case 3 ---
+Create Spacecraft A0_C3;
+A0_C3.DateFormat = UTCGregorian;
+A0_C3.Epoch = '02 Jun 2026 00:00:00.000';
+A0_C3.CoordinateSystem = EarthMJ2000Eq;
+A0_C3.DisplayStateType = Keplerian;
+A0_C3.SMA = 6878.136999999995;
+A0_C3.ECC = 1.226092540821424e-16;
+A0_C3.INC = 97.40000000000001;
+A0_C3.RAAN = 0;
+A0_C3.AOP = 0;
+A0_C3.TA = 0;
+A0_C3.DryMass = 12;
+A0_C3.Cd = 2.2;
+A0_C3.Cr = 1.8;
+A0_C3.DragArea = 0.08;
+A0_C3.SRPArea = 0.1;
+A0_C3.SPADDragScaleFactor = 1;
+A0_C3.SPADSRPScaleFactor = 1;
+A0_C3.AtmosDensityScaleFactor = 1;
+A0_C3.ExtendedMassPropertiesModel = 'None';
+A0_C3.NAIFId = -10018001;
+A0_C3.NAIFIdReferenceFrame = -9018001;
+A0_C3.OrbitColor = Cyan;
+A0_C3.TargetColor = DarkGray;
+A0_C3.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A0_C3.CdSigma = 1e+70;
+A0_C3.CrSigma = 1e+70;
+A0_C3.Id = 'SatId';
+A0_C3.Attitude = CoordinateSystemFixed;
+A0_C3.SPADSRPInterpolationMethod = Bilinear;
+A0_C3.SPADSRPScaleFactorSigma = 1e+70;
+A0_C3.SPADDragInterpolationMethod = Bilinear;
+A0_C3.SPADDragScaleFactorSigma = 1e+70;
+A0_C3.AtmosDensityScaleFactorSigma = 1e+70;
+A0_C3.ModelFile = 'aura.3ds';
+A0_C3.ModelOffsetX = 0;
+A0_C3.ModelOffsetY = 0;
+A0_C3.ModelOffsetZ = 0;
+A0_C3.ModelRotationX = 0;
+A0_C3.ModelRotationY = 0;
+A0_C3.ModelRotationZ = 0;
+A0_C3.ModelScale = 1;
+A0_C3.AttitudeDisplayStateType = 'Quaternion';
+A0_C3.AttitudeRateDisplayStateType = 'AngularVelocity';
+A0_C3.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A0_C3.EulerAngleSequence = '321';
+
+% --- Case 4 ---
+Create Spacecraft A0_C4;
+A0_C4.DateFormat = UTCGregorian;
+A0_C4.Epoch = '02 Jun 2026 00:00:00.000';
+A0_C4.CoordinateSystem = EarthMJ2000Eq;
+A0_C4.DisplayStateType = Keplerian;
+A0_C4.SMA = 6878.136999999995;
+A0_C4.ECC = 1.226092540821424e-16;
+A0_C4.INC = 97.40000000000001;
+A0_C4.RAAN = 0;
+A0_C4.AOP = 0;
+A0_C4.TA = 0;
+A0_C4.DryMass = 12;
+A0_C4.Cd = 2.2;
+A0_C4.Cr = 1.8;
+A0_C4.DragArea = 0.08;
+A0_C4.SRPArea = 0.1;
+A0_C4.SPADDragScaleFactor = 1;
+A0_C4.SPADSRPScaleFactor = 1;
+A0_C4.AtmosDensityScaleFactor = 1;
+A0_C4.ExtendedMassPropertiesModel = 'None';
+A0_C4.NAIFId = -10019001;
+A0_C4.NAIFIdReferenceFrame = -9019001;
+A0_C4.OrbitColor = Magenta;
+A0_C4.TargetColor = DimGray;
+A0_C4.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A0_C4.CdSigma = 1e+70;
+A0_C4.CrSigma = 1e+70;
+A0_C4.Id = 'SatId';
+A0_C4.Attitude = CoordinateSystemFixed;
+A0_C4.SPADSRPInterpolationMethod = Bilinear;
+A0_C4.SPADSRPScaleFactorSigma = 1e+70;
+A0_C4.SPADDragInterpolationMethod = Bilinear;
+A0_C4.SPADDragScaleFactorSigma = 1e+70;
+A0_C4.AtmosDensityScaleFactorSigma = 1e+70;
+A0_C4.ModelFile = 'aura.3ds';
+A0_C4.ModelOffsetX = 0;
+A0_C4.ModelOffsetY = 0;
+A0_C4.ModelOffsetZ = 0;
+A0_C4.ModelRotationX = 0;
+A0_C4.ModelRotationY = 0;
+A0_C4.ModelRotationZ = 0;
+A0_C4.ModelScale = 1;
+A0_C4.AttitudeDisplayStateType = 'Quaternion';
+A0_C4.AttitudeRateDisplayStateType = 'AngularVelocity';
+A0_C4.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A0_C4.EulerAngleSequence = '321';
+
+% --- Case 5 ---
+Create Spacecraft A0_C5;
+A0_C5.DateFormat = UTCGregorian;
+A0_C5.Epoch = '02 Jun 2026 00:00:00.000';
+A0_C5.CoordinateSystem = EarthMJ2000Eq;
+A0_C5.DisplayStateType = Keplerian;
+A0_C5.SMA = 6878.136999999995;
+A0_C5.ECC = 1.226092540821424e-16;
+A0_C5.INC = 97.40000000000001;
+A0_C5.RAAN = 0;
+A0_C5.AOP = 0;
+A0_C5.TA = 0;
+A0_C5.DryMass = 12;
+A0_C5.Cd = 2.2;
+A0_C5.Cr = 1.8;
+A0_C5.DragArea = 0.08;
+A0_C5.SRPArea = 0.1;
+A0_C5.SPADDragScaleFactor = 1;
+A0_C5.SPADSRPScaleFactor = 1;
+A0_C5.AtmosDensityScaleFactor = 1;
+A0_C5.ExtendedMassPropertiesModel = 'None';
+A0_C5.NAIFId = -10020001;
+A0_C5.NAIFIdReferenceFrame = -9020001;
+A0_C5.OrbitColor = Yellow;
+A0_C5.TargetColor = DarkSlateGray;
+A0_C5.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A0_C5.CdSigma = 1e+70;
+A0_C5.CrSigma = 1e+70;
+A0_C5.Id = 'SatId';
+A0_C5.Attitude = CoordinateSystemFixed;
+A0_C5.SPADSRPInterpolationMethod = Bilinear;
+A0_C5.SPADSRPScaleFactorSigma = 1e+70;
+A0_C5.SPADDragInterpolationMethod = Bilinear;
+A0_C5.SPADDragScaleFactorSigma = 1e+70;
+A0_C5.AtmosDensityScaleFactorSigma = 1e+70;
+A0_C5.ModelFile = 'aura.3ds';
+A0_C5.ModelOffsetX = 0;
+A0_C5.ModelOffsetY = 0;
+A0_C5.ModelOffsetZ = 0;
+A0_C5.ModelRotationX = 0;
+A0_C5.ModelRotationY = 0;
+A0_C5.ModelRotationZ = 0;
+A0_C5.ModelScale = 1;
+A0_C5.AttitudeDisplayStateType = 'Quaternion';
+A0_C5.AttitudeRateDisplayStateType = 'AngularVelocity';
+A0_C5.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A0_C5.EulerAngleSequence = '321';
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel FM_C1;
+FM_C1.CentralBody = Earth;
+FM_C1.PrimaryBodies = {Earth};
+
+FM_C1.Drag = None;
+FM_C1.SRP = Off;
+FM_C1.RelativisticCorrection = Off;
+FM_C1.ErrorControl = RSSStep;
+FM_C1.GravityField.Earth.Degree = 0;
+FM_C1.GravityField.Earth.Order = 0;
+FM_C1.GravityField.Earth.StmLimit = 100;
+FM_C1.GravityField.Earth.PotentialFile = 'JGM2.cof';
+FM_C1.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel FM_C2;
+FM_C2.CentralBody = Earth;
+FM_C2.PrimaryBodies = {Earth};
+
+FM_C2.Drag = None;
+FM_C2.SRP = Off;
+FM_C2.RelativisticCorrection = Off;
+FM_C2.ErrorControl = RSSStep;
+FM_C2.GravityField.Earth.Degree = 2;
+FM_C2.GravityField.Earth.Order = 0;
+FM_C2.GravityField.Earth.StmLimit = 100;
+FM_C2.GravityField.Earth.PotentialFile = 'JGM2.cof';
+FM_C2.GravityField.Earth.TideModel = 'None';
+
+Create ForceModel FM_C3;
+FM_C3.CentralBody = Earth;
+FM_C3.PrimaryBodies = {Earth};
+
+FM_C3.SRP = Off;
+FM_C3.RelativisticCorrection = Off;
+FM_C3.ErrorControl = RSSStep;
+FM_C3.GravityField.Earth.Degree = 2;
+FM_C3.GravityField.Earth.Order = 0;
+FM_C3.GravityField.Earth.StmLimit = 100;
+FM_C3.GravityField.Earth.PotentialFile = 'JGM2.cof';
+FM_C3.GravityField.Earth.TideModel = 'None';
+FM_C3.Drag.AtmosphereModel = NRLMSISE00;
+FM_C3.Drag.HistoricWeatherSource = 'CSSISpaceWeatherFile';
+FM_C3.Drag.PredictedWeatherSource = 'CSSISpaceWeatherFile';
+FM_C3.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+FM_C3.Drag.SchattenFile = 'SchattenPredict.txt';
+FM_C3.Drag.F107 = 150;
+FM_C3.Drag.F107A = 150;
+FM_C3.Drag.MagneticIndex = 3;
+FM_C3.Drag.SchattenErrorModel = 'Nominal';
+FM_C3.Drag.SchattenTimingModel = 'NominalCycle';
+FM_C3.Drag.DragModel = 'Spherical';
+
+Create ForceModel FM_C4;
+FM_C4.CentralBody = Earth;
+FM_C4.PrimaryBodies = {Earth};
+
+FM_C4.SRP = On;
+FM_C4.RelativisticCorrection = Off;
+FM_C4.ErrorControl = RSSStep;
+FM_C4.GravityField.Earth.Degree = 2;
+FM_C4.GravityField.Earth.Order = 0;
+FM_C4.GravityField.Earth.StmLimit = 100;
+FM_C4.GravityField.Earth.PotentialFile = 'JGM2.cof';
+FM_C4.GravityField.Earth.TideModel = 'None';
+FM_C4.SRP.Flux = 1367;
+FM_C4.SRP.SRPModel = Spherical;
+FM_C4.SRP.Nominal_Sun = 149597870.691;
+FM_C4.Drag.AtmosphereModel = NRLMSISE00;
+FM_C4.Drag.HistoricWeatherSource = 'CSSISpaceWeatherFile';
+FM_C4.Drag.PredictedWeatherSource = 'CSSISpaceWeatherFile';
+FM_C4.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+FM_C4.Drag.SchattenFile = 'SchattenPredict.txt';
+FM_C4.Drag.F107 = 150;
+FM_C4.Drag.F107A = 150;
+FM_C4.Drag.MagneticIndex = 3;
+FM_C4.Drag.SchattenErrorModel = 'Nominal';
+FM_C4.Drag.SchattenTimingModel = 'NominalCycle';
+FM_C4.Drag.DragModel = 'Spherical';
+
+Create ForceModel FM_C5;
+FM_C5.CentralBody = Earth;
+FM_C5.PrimaryBodies = {Earth};
+
+FM_C5.PointMasses = {Sun, Luna};
+
+FM_C5.SRP = On;
+FM_C5.RelativisticCorrection = Off;
+FM_C5.ErrorControl = RSSStep;
+FM_C5.GravityField.Earth.Degree = 20;
+FM_C5.GravityField.Earth.Order = 20;
+FM_C5.GravityField.Earth.StmLimit = 100;
+FM_C5.GravityField.Earth.PotentialFile = 'JGM2.cof';
+FM_C5.GravityField.Earth.TideModel = 'None';
+FM_C5.SRP.Flux = 1367;
+FM_C5.SRP.SRPModel = Spherical;
+FM_C5.SRP.Nominal_Sun = 149597870.691;
+FM_C5.Drag.AtmosphereModel = NRLMSISE00;
+FM_C5.Drag.HistoricWeatherSource = 'CSSISpaceWeatherFile';
+FM_C5.Drag.PredictedWeatherSource = 'CSSISpaceWeatherFile';
+FM_C5.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+FM_C5.Drag.SchattenFile = 'SchattenPredict.txt';
+FM_C5.Drag.F107 = 150;
+FM_C5.Drag.F107A = 150;
+FM_C5.Drag.MagneticIndex = 3;
+FM_C5.Drag.SchattenErrorModel = 'Nominal';
+FM_C5.Drag.SchattenTimingModel = 'NominalCycle';
+FM_C5.Drag.DragModel = 'Spherical';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator Prop_C1;
+Prop_C1.FM = FM_C1;
+Prop_C1.Type = RungeKutta89;
+Prop_C1.InitialStepSize = 10;
+Prop_C1.Accuracy = 1e-12;
+Prop_C1.MinStep = 0.001;
+Prop_C1.MaxStep = 60;
+Prop_C1.MaxStepAttempts = 50;
+Prop_C1.StopIfAccuracyIsViolated = true;
+
+Create Propagator Prop_C2;
+Prop_C2.FM = FM_C2;
+Prop_C2.Type = RungeKutta89;
+Prop_C2.InitialStepSize = 10;
+Prop_C2.Accuracy = 1e-12;
+Prop_C2.MinStep = 0.001;
+Prop_C2.MaxStep = 60;
+Prop_C2.MaxStepAttempts = 50;
+Prop_C2.StopIfAccuracyIsViolated = true;
+
+Create Propagator Prop_C3;
+Prop_C3.FM = FM_C3;
+Prop_C3.Type = RungeKutta89;
+Prop_C3.InitialStepSize = 10;
+Prop_C3.Accuracy = 1e-12;
+Prop_C3.MinStep = 0.001;
+Prop_C3.MaxStep = 60;
+Prop_C3.MaxStepAttempts = 50;
+Prop_C3.StopIfAccuracyIsViolated = true;
+
+Create Propagator Prop_C4;
+Prop_C4.FM = FM_C4;
+Prop_C4.Type = RungeKutta89;
+Prop_C4.InitialStepSize = 10;
+Prop_C4.Accuracy = 1e-12;
+Prop_C4.MinStep = 0.001;
+Prop_C4.MaxStep = 60;
+Prop_C4.MaxStepAttempts = 50;
+Prop_C4.StopIfAccuracyIsViolated = true;
+
+Create Propagator Prop_C5;
+Prop_C5.FM = FM_C5;
+Prop_C5.Type = RungeKutta89;
+Prop_C5.InitialStepSize = 10;
+Prop_C5.Accuracy = 1e-12;
+Prop_C5.MinStep = 0.001;
+Prop_C5.MaxStep = 60;
+Prop_C5.MaxStepAttempts = 50;
+Prop_C5.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create ReportFile R1;
+R1.SolverIterations = Current;
+R1.UpperLeft = [ 0 0 ];
+R1.Size = [ 0 0 ];
+R1.RelativeZOrder = 0;
+R1.Maximized = false;
+R1.Filename = 'C:\Users\mahmed.ext\Downloads\Intern_ws\catec_ws\data\benchmark_a\gmat\a0_physics_fidelity_constellation\a0_case1_twobody/gmat_state.csv';
+R1.Precision = 16;
+R1.WriteHeaders = true;
+R1.LeftJustify = On;
+R1.ZeroFill = Off;
+R1.FixedWidth = true;
+R1.Delimiter = ' ';
+R1.ColumnWidth = 23;
+R1.WriteReport = true;
+R1.AppendToExistingFile = false;
+
+Create ReportFile R2;
+R2.SolverIterations = Current;
+R2.UpperLeft = [ 0 0 ];
+R2.Size = [ 0 0 ];
+R2.RelativeZOrder = 0;
+R2.Maximized = false;
+R2.Filename = 'C:\Users\mahmed.ext\Downloads\Intern_ws\catec_ws\data\benchmark_a\gmat\a0_physics_fidelity_constellation/a0_case2_j2/gmat_state.csv';
+R2.Precision = 16;
+R2.WriteHeaders = true;
+R2.LeftJustify = On;
+R2.ZeroFill = Off;
+R2.FixedWidth = true;
+R2.Delimiter = ' ';
+R2.ColumnWidth = 23;
+R2.WriteReport = true;
+R2.AppendToExistingFile = false;
+
+Create ReportFile R3;
+R3.SolverIterations = Current;
+R3.UpperLeft = [ 0 0 ];
+R3.Size = [ 0 0 ];
+R3.RelativeZOrder = 0;
+R3.Maximized = false;
+R3.Filename = 'C:\Users\mahmed.ext\Downloads\Intern_ws\catec_ws/data/benchmark_a/gmat/a0_physics_fidelity_constellation/a0_case3_j2_drag/gmat_state.csv';
+R3.Precision = 16;
+R3.WriteHeaders = true;
+R3.LeftJustify = On;
+R3.ZeroFill = Off;
+R3.FixedWidth = true;
+R3.Delimiter = ' ';
+R3.ColumnWidth = 23;
+R3.WriteReport = true;
+R3.AppendToExistingFile = false;
+
+Create ReportFile R4;
+R4.SolverIterations = Current;
+R4.UpperLeft = [ 0 0 ];
+R4.Size = [ 0 0 ];
+R4.RelativeZOrder = 0;
+R4.Maximized = false;
+R4.Filename = 'C:\Users\mahmed.ext\Downloads\Intern_ws\catec_ws/data/benchmark_a/gmat/a0_physics_fidelity_constellation/a0_case4_j2_drag_srp/gmat_state.csv';
+R4.Precision = 16;
+R4.WriteHeaders = true;
+R4.LeftJustify = On;
+R4.ZeroFill = Off;
+R4.FixedWidth = true;
+R4.Delimiter = ' ';
+R4.ColumnWidth = 23;
+R4.WriteReport = true;
+R4.AppendToExistingFile = false;
+
+Create ReportFile R5;
+R5.SolverIterations = Current;
+R5.UpperLeft = [ 0 0 ];
+R5.Size = [ 0 0 ];
+R5.RelativeZOrder = 0;
+R5.Maximized = false;
+R5.Filename = 'C:\Users\mahmed.ext\Downloads\Intern_ws\catec_ws/data/benchmark_a/gmat/a0_physics_fidelity_constellation/a0_case5_all_supported/gmat_state.csv';
+R5.Precision = 16;
+R5.WriteHeaders = true;
+R5.LeftJustify = On;
+R5.ZeroFill = Off;
+R5.FixedWidth = true;
+R5.Delimiter = ' ';
+R5.ColumnWidth = 23;
+R5.WriteReport = true;
+R5.AppendToExistingFile = false;
+
+Create OpenFramesInterface A0_OrbitView;
+A0_OrbitView.SolverIterations = Current;
+A0_OrbitView.UpperLeft = [ 0.2063933287004865 0.1610486891385768 ];
+A0_OrbitView.Size = [ 0.6990965948575399 0.6204744069912609 ];
+A0_OrbitView.RelativeZOrder = 29;
+A0_OrbitView.Maximized = true;
+A0_OrbitView.Add = {A0_C1, A0_C2, A0_C3, A0_C4, A0_C5, Earth};
+A0_OrbitView.View = {A0_OrbitView_View};
+A0_OrbitView.CoordinateSystem = EarthMJ2000Eq;
+A0_OrbitView.DrawObject = [ true true true true true true ];
+A0_OrbitView.DrawTrajectory = [ true true true true true true ];
+A0_OrbitView.DrawAxes = [ false false false false false false ];
+A0_OrbitView.DrawXYPlane = [ false false false false false false ];
+A0_OrbitView.DrawLabel = [ true true true true true true ];
+A0_OrbitView.DrawUsePropLabel = [ false false false false false false ];
+A0_OrbitView.DrawCenterPoint = [ true true true true true true ];
+A0_OrbitView.DrawEndPoints = [ true true true true true true ];
+A0_OrbitView.DrawVelocity = [ false false false false false false ];
+A0_OrbitView.DrawGrid = [ false false false false false false ];
+A0_OrbitView.DrawLineWidth = [ 2 2 2 2 2 2 ];
+A0_OrbitView.DrawMarkerSize = [ 10 10 10 10 10 10 ];
+A0_OrbitView.DrawFontSize = [ 20 20 20 20 20 20 ];
+A0_OrbitView.Axes = On;
+A0_OrbitView.AxesLength = 12756.2726;
+A0_OrbitView.AxesLabels = On;
+A0_OrbitView.FrameLabel = Off;
+A0_OrbitView.XYPlane = On;
+A0_OrbitView.EclipticPlane = Off;
+A0_OrbitView.EnableStars = On;
+A0_OrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+A0_OrbitView.StarCount = 40000;
+A0_OrbitView.MinStarMag = -2;
+A0_OrbitView.MaxStarMag = 6;
+A0_OrbitView.MinStarPixels = 1;
+A0_OrbitView.MaxStarPixels = 10;
+A0_OrbitView.MinStarDimRatio = 0.5;
+A0_OrbitView.ShowPlot = true;
+A0_OrbitView.ShowToolbar = true;
+A0_OrbitView.SolverIterLastN = 1;
+A0_OrbitView.ShowVR = false;
+A0_OrbitView.PlaybackTimeScale = 3600;
+A0_OrbitView.MultisampleAntiAliasing = On;
+A0_OrbitView.MSAASamples = 2;
+A0_OrbitView.DrawFontPosition = {'Top-Right', 'Top-Right', 'Top-Right', 'Top-Right', 'Top-Right', 'Top-Right'};
+
+Create EphemerisFile EphemerisFile1;
+EphemerisFile1.UpperLeft = [ 0 0 ];
+EphemerisFile1.Size = [ 0 0 ];
+EphemerisFile1.RelativeZOrder = 0;
+EphemerisFile1.Maximized = false;
+EphemerisFile1.Spacecraft = A0_C1;
+EphemerisFile1.Filename = 'case1.bsp';
+EphemerisFile1.FileFormat = SPK;
+EphemerisFile1.EpochFormat = UTCGregorian;
+EphemerisFile1.InitialEpoch = InitialSpacecraftEpoch;
+EphemerisFile1.FinalEpoch = FinalSpacecraftEpoch;
+EphemerisFile1.StepSize = IntegratorSteps;
+EphemerisFile1.Interpolator = Hermite;
+EphemerisFile1.InterpolationOrder = 7;
+EphemerisFile1.CoordinateSystem = EarthMJ2000Eq;
+EphemerisFile1.OutputFormat = LittleEndian;
+EphemerisFile1.IncludeCovariance = None;
+EphemerisFile1.WriteEphemeris = true;
+
+Create EphemerisFile EphemerisFile2;
+EphemerisFile2.UpperLeft = [ 0 0 ];
+EphemerisFile2.Size = [ 0 0 ];
+EphemerisFile2.RelativeZOrder = 0;
+EphemerisFile2.Maximized = false;
+EphemerisFile2.Spacecraft = A0_C2;
+EphemerisFile2.Filename = 'case2.bsp';
+EphemerisFile2.FileFormat = SPK;
+EphemerisFile2.EpochFormat = UTCGregorian;
+EphemerisFile2.InitialEpoch = InitialSpacecraftEpoch;
+EphemerisFile2.FinalEpoch = FinalSpacecraftEpoch;
+EphemerisFile2.StepSize = IntegratorSteps;
+EphemerisFile2.Interpolator = Hermite;
+EphemerisFile2.InterpolationOrder = 7;
+EphemerisFile2.CoordinateSystem = EarthMJ2000Eq;
+EphemerisFile2.OutputFormat = LittleEndian;
+EphemerisFile2.IncludeCovariance = None;
+EphemerisFile2.WriteEphemeris = true;
+
+Create EphemerisFile EphemerisFile3;
+EphemerisFile3.UpperLeft = [ 0 0 ];
+EphemerisFile3.Size = [ 0 0 ];
+EphemerisFile3.RelativeZOrder = 0;
+EphemerisFile3.Maximized = false;
+EphemerisFile3.Spacecraft = A0_C3;
+EphemerisFile3.Filename = 'case3.bsp';
+EphemerisFile3.FileFormat = SPK;
+EphemerisFile3.EpochFormat = UTCGregorian;
+EphemerisFile3.InitialEpoch = InitialSpacecraftEpoch;
+EphemerisFile3.FinalEpoch = FinalSpacecraftEpoch;
+EphemerisFile3.StepSize = IntegratorSteps;
+EphemerisFile3.Interpolator = Hermite;
+EphemerisFile3.InterpolationOrder = 7;
+EphemerisFile3.CoordinateSystem = EarthMJ2000Eq;
+EphemerisFile3.OutputFormat = LittleEndian;
+EphemerisFile3.IncludeCovariance = None;
+EphemerisFile3.WriteEphemeris = true;
+
+Create EphemerisFile EphemerisFile4;
+EphemerisFile4.UpperLeft = [ 0 0 ];
+EphemerisFile4.Size = [ 0 0 ];
+EphemerisFile4.RelativeZOrder = 0;
+EphemerisFile4.Maximized = false;
+EphemerisFile4.Spacecraft = A0_C4;
+EphemerisFile4.Filename = 'case4.bsp';
+EphemerisFile4.FileFormat = SPK;
+EphemerisFile4.EpochFormat = UTCGregorian;
+EphemerisFile4.InitialEpoch = InitialSpacecraftEpoch;
+EphemerisFile4.FinalEpoch = FinalSpacecraftEpoch;
+EphemerisFile4.StepSize = IntegratorSteps;
+EphemerisFile4.Interpolator = Hermite;
+EphemerisFile4.InterpolationOrder = 7;
+EphemerisFile4.CoordinateSystem = EarthMJ2000Eq;
+EphemerisFile4.OutputFormat = LittleEndian;
+EphemerisFile4.IncludeCovariance = None;
+EphemerisFile4.WriteEphemeris = true;
+
+Create EphemerisFile EphemerisFile5;
+EphemerisFile5.UpperLeft = [ 0 0 ];
+EphemerisFile5.Size = [ 0 0 ];
+EphemerisFile5.RelativeZOrder = 0;
+EphemerisFile5.Maximized = false;
+EphemerisFile5.Spacecraft = A0_C5;
+EphemerisFile5.Filename = 'case5.bsp';
+EphemerisFile5.FileFormat = SPK;
+EphemerisFile5.EpochFormat = UTCGregorian;
+EphemerisFile5.InitialEpoch = InitialSpacecraftEpoch;
+EphemerisFile5.FinalEpoch = FinalSpacecraftEpoch;
+EphemerisFile5.StepSize = IntegratorSteps;
+EphemerisFile5.Interpolator = Hermite;
+EphemerisFile5.InterpolationOrder = 7;
+EphemerisFile5.CoordinateSystem = EarthMJ2000Eq;
+EphemerisFile5.OutputFormat = LittleEndian;
+EphemerisFile5.IncludeCovariance = None;
+EphemerisFile5.WriteEphemeris = true;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable i stepSec;
+i = 0;
+stepSec = 60;
+
+
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView A0_OrbitView_View;
+A0_OrbitView_View.ViewFrame = CoordinateSystem;
+A0_OrbitView_View.ViewTrajectory = Off;
+A0_OrbitView_View.InertialFrame = Off;
+A0_OrbitView_View.SetDefaultLocation = On;
+A0_OrbitView_View.DefaultEye = [ 30000 0 0 ];
+A0_OrbitView_View.DefaultCenter = [ 0 0 0 ];
+A0_OrbitView_View.DefaultUp = [ 0 0 1 ];
+A0_OrbitView_View.SetCurrentLocation = On;
+A0_OrbitView_View.CurrentEye = [ 9687.98975144488 830.2179408470766 33456.19010149786 ];
+A0_OrbitView_View.CurrentCenter = [ 0 4.547473508864641e-13 0 ];
+A0_OrbitView_View.CurrentUp = [ -0.2853169378204925 0.9566228326577164 0.05888124515211864 ];
+A0_OrbitView_View.FOVy = 45;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+
+BeginMissionSequence;
+
+For i = 1:1:525600;
+   Propagate Synchronized Prop_C1(A0_C1) Prop_C2(A0_C2) Prop_C3(A0_C3) Prop_C4(A0_C4) Prop_C5(A0_C5) {A0_C1.ElapsedSecs = stepSec};
+%Report R1 A0_C1.ElapsedSecs A0_C1.EarthMJ2000Eq.X A0_C1.EarthMJ2000Eq.Y A0_C1.EarthMJ2000Eq.Z A0_C1.EarthMJ2000Eq.VX A0_C1.EarthMJ2000Eq.VY A0_C1.EarthMJ2000Eq.VZ;
+%Report R2 A0_C2.ElapsedSecs A0_C2.EarthMJ2000Eq.X A0_C2.EarthMJ2000Eq.Y A0_C2.EarthMJ2000Eq.Z A0_C2.EarthMJ2000Eq.VX A0_C2.EarthMJ2000Eq.VY A0_C2.EarthMJ2000Eq.VZ;
+%Report R3 A0_C3.ElapsedSecs A0_C3.EarthMJ2000Eq.X A0_C3.EarthMJ2000Eq.Y A0_C3.EarthMJ2000Eq.Z A0_C3.EarthMJ2000Eq.VX A0_C3.EarthMJ2000Eq.VY A0_C3.EarthMJ2000Eq.VZ;
+%Report R4 A0_C4.ElapsedSecs A0_C4.EarthMJ2000Eq.X A0_C4.EarthMJ2000Eq.Y A0_C4.EarthMJ2000Eq.Z A0_C4.EarthMJ2000Eq.VX A0_C4.EarthMJ2000Eq.VY A0_C4.EarthMJ2000Eq.VZ;
+%Report R5 A0_C5.ElapsedSecs A0_C5.EarthMJ2000Eq.X A0_C5.EarthMJ2000Eq.Y A0_C5.EarthMJ2000Eq.Z A0_C5.EarthMJ2000Eq.VX A0_C5.EarthMJ2000Eq.VY A0_C5.EarthMJ2000Eq.VZ;
+EndFor;

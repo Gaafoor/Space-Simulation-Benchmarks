@@ -1,0 +1,33 @@
+date,simulator,version,operator,run_id,status,notes
+2026-06-08,GMAT,R2026a,user,a3_gmat_raan_061,pass,RAAN 61 selected from RAAN trade; GMAT state/contact export plus Python FOV post-processing
+
+benchmark_specific_metric,value,unit,comment
+selected_raan,61,deg,Only tested RAAN case with one imaging opportunity inside 5 deg half-angle
+pass_count,2,count,GMAT ContactLocator spacecraft-to-Madrid contacts
+imaging_opportunity_count,1,count,Computed by Python FOV post-processing from GMAT state export
+imaging_sample_count,61,count,10 s samples inside 5 deg half-angle
+minimum_off_nadir_angle,2.1745760343264178,deg,Best GMAT/Python A3 geometry result
+best_pass_off_nadir_angle,2.1745760343264178,deg,Pass 2
+max_elevation_angle,87.65256132009452,deg,Pass 2
+camera_fov,10,deg,Full cone angle
+camera_half_angle,5,deg,Imaging threshold
+rendered_image_output_supported,No,yes_no,A3 geometry only; C1 deferred
+sensor_geometry_native_support,Partial,qualitative,GMAT can define Imager/ConicalFOV but tested ContactLocator sensor workflow failed
+scenario_setup_time,180,minutes,Includes GMAT A3 script setup RAAN trade and sensor-contact probes
+required_custom_code_lines,900,lines,run_gmat_a3_analysis.py
+manual_configuration_steps,3,count,Edit RAAN in script; run GMAT GUI; run Python post-processor
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+Physics Fidelity,4,J2 propagation inherited from A2 Path B; A3 geometry uses GMAT state export and WGS84 Madrid target
+Performance,3,GMAT GUI run completed; RAAN trade requires repeated GUI/script runs plus post-processing
+Ease of Integration,3,Script export integrates with Python post-processor; native sensor-constrained contacts not available through tested ContactLocator syntax
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+Mission Capabilities,25,4,20,GMAT generated orbit state and Madrid contact windows; A3 imaging opportunity computed from exported state
+Dynamics and GNC,20,3,12,J2 orbit propagation stable; no attitude/GNC control exercised in A3
+Robotics and AI,20,N/A,N/A,Not applicable to A3 GMAT geometry benchmark
+Ease of Use,10,3,6,GUI/script workflow works but RAAN trade and FOV analysis require external Python
+Documentation,10,3,6,ContactLocator behavior documented by tested errors; sensor-constrained access API not found in this workflow
+Visualization,10,4,8,OpenFrames/GroundTrack plus generated off-nadir plot from post-processing
+Extensibility,5,3,3,State export supports custom Python trade studies; native camera access workflow not verified
+TOTAL,100,partial,55,GMAT A3 closed for selected RAAN 61; Basilisk and Orekit closed; STK deferred

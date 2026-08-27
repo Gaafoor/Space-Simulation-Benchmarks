@@ -1,0 +1,110 @@
+<mujoco model="cubesat_1u_arm_docking_realistic">
+    <!--
+        Articulated CubeSat docking model for the LEO scenario.
+        Includes mesh docking interfaces, additional contact geoms, and an
+        initially inactive weld equality that the scenario can arm after capture.
+    -->
+    <compiler meshdir="meshes" angle="radian"/>
+    <option gravity="0 0 0" integrator="implicitfast">
+        <flag contact="enable"/>
+    </option>
+
+    <default>
+        <geom friction="0.4 0.005 0.0001"
+              solref="0.01 0.5" solimp="0.95 0.99 0.001"/>
+    </default>
+
+    <asset>
+        <mesh name="docking_receptacle_mesh" file="docking_receptacle.obj"/>
+        <mesh name="docking_probe_mesh" file="docking_probe.obj"/>
+    </asset>
+
+    <worldbody>
+        <body name="hub_1">
+            <freejoint/>
+            <inertial pos="0 0 0" mass="1.13" diaginertia="0.0020 0.0021 0.0023"/>
+            <geom name="hub_1_chassis" type="box" size="0.05 0.05 0.05"
+                  rgba="0.6 0.6 0.6 1" contype="1" conaffinity="2"/>
+            <!-- Docking face pads / ring on the +X face. -->
+            <geom name="hub_1_dock_pad_ypos" type="box" size="0.004 0.012 0.008" pos="0.054 0.025 0"
+                  rgba="0.75 0.75 0.2 1" contype="1" conaffinity="2"/>
+            <geom name="hub_1_dock_pad_yneg" type="box" size="0.004 0.012 0.008" pos="0.054 -0.025 0"
+                  rgba="0.75 0.75 0.2 1" contype="1" conaffinity="2"/>
+            <geom name="hub_1_dock_pad_zpos" type="box" size="0.004 0.008 0.012" pos="0.054 0 0.025"
+                  rgba="0.75 0.75 0.2 1" contype="1" conaffinity="2"/>
+            <geom name="hub_1_dock_pad_zneg" type="box" size="0.004 0.008 0.012" pos="0.054 0 -0.025"
+                  rgba="0.75 0.75 0.2 1" contype="1" conaffinity="2"/>
+            <geom name="hub_1_dock_ring" type="cylinder" size="0.022 0.004" pos="0.055 0 0"
+                  xyaxes="0 1 0 0 0 1"
+                  rgba="0.85 0.85 0.35 1" contype="1" conaffinity="2"/>
+            <geom name="hub_1_dock_receptacle" type="mesh" mesh="docking_receptacle_mesh"
+                  pos="0.055 0 0" rgba="0.9 0.7 0.2 1" contype="1" conaffinity="2"/>
+            <site name="hub_1_contact_point" pos="0.05 0 0" size="0.01" rgba="1 0 0 1"/>
+            <site name="hub_1_dock_site" pos="0.058 0 0" size="0.006" rgba="1 0.4 0 1"/>
+            <site name="hub_1_com"/>
+        </body>
+
+        <body name="hub_2">
+            <freejoint/>
+            <inertial pos="0 0 0" mass="0.90" diaginertia="0.0016 0.0017 0.0018"/>
+            <geom name="hub_2_chassis" type="box" size="0.05 0.05 0.05"
+                  rgba="0.4 0.6 0.8 1" contype="2" conaffinity="1"/>
+            <site name="hub_2_contact_point" pos="-0.05 0 0" size="0.01" rgba="0 1 0 1"/>
+            <site name="hub_2_com"/>
+
+            <body name="arm_1" pos="-0.05 0 0">
+                <joint name="arm_1_joint" type="hinge" axis="0 1 0" damping="0.002"/>
+                <inertial pos="0 0 0" mass="0.05" diaginertia="0.00002 0.00002 0.00001"/>
+                <geom name="arm_1_link" type="capsule" fromto="0 0 0 -0.10 0 0" size="0.01"
+                      rgba="0.85 0.2 0.2 1" contype="2" conaffinity="1"/>
+
+                <body name="arm_2" pos="-0.10 0 0">
+                    <joint name="arm_2_joint" type="hinge" axis="0 1 0" damping="0.002"/>
+                    <inertial pos="0 0 0" mass="0.05" diaginertia="0.00002 0.00002 0.00001"/>
+                    <geom name="arm_2_link" type="capsule" fromto="0 0 0 -0.10 0 0" size="0.01"
+                          rgba="0.9 0.25 0.25 1" contype="2" conaffinity="1"/>
+
+                    <body name="arm_3" pos="-0.10 0 0">
+                        <joint name="arm_3_joint" type="hinge" axis="0 1 0" damping="0.002"/>
+                        <inertial pos="0 0 0" mass="0.05" diaginertia="0.00002 0.00002 0.00001"/>
+                        <geom name="arm_3_link" type="capsule" fromto="0 0 0 -0.10 0 0" size="0.01"
+                              rgba="0.95 0.3 0.3 1" contype="2" conaffinity="1"/>
+
+                        <body name="arm_tip" pos="-0.10 0 0">
+                            <joint name="arm_tip_joint" type="hinge" axis="0 1 0" damping="0.002"/>
+                            <inertial pos="0 0 0" mass="0.08" diaginertia="0.00003 0.00003 0.00002"/>
+                            <geom name="arm_tip_sphere" type="sphere" size="0.015"
+                                  rgba="0.95 0.6 0.2 1" contype="2" conaffinity="1"/>
+                            <geom name="arm_tip_collar" type="cylinder" size="0.012 0.006" pos="-0.01 0 0"
+                                  xyaxes="0 1 0 0 0 1"
+                                  rgba="0.8 0.35 0.1 1" contype="2" conaffinity="1"/>
+                            <geom name="arm_tip_probe" type="mesh" mesh="docking_probe_mesh"
+                                  pos="-0.015 0 0" rgba="1.0 0.45 0.1 1" contype="2" conaffinity="1"/>
+                            <site name="arm_tip_contact_point" pos="-0.02 0 0" size="0.008" rgba="1 1 0 1"/>
+                            <site name="arm_tip_dock_site" pos="-0.03 0 0" size="0.005" rgba="1 0.8 0 1"/>
+                        </body>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <motor name="hub_1_thruster" site="hub_1_com" gear="1 0 0 0 0 0"/>
+        <motor name="hub_2_thruster" site="hub_2_com" gear="-1 0 0 0 0 0"/>
+        <motor name="arm_1_motor" joint="arm_1_joint" gear="1"/>
+        <motor name="arm_2_motor" joint="arm_2_joint" gear="1"/>
+        <motor name="arm_3_motor" joint="arm_3_joint" gear="1"/>
+        <motor name="arm_tip_motor" joint="arm_tip_joint" gear="1"/>
+    </actuator>
+
+    <equality>
+        <!-- Armed by the scenario after tip capture. -->
+        <weld name="dock_capture"
+              site1="hub_1_dock_site"
+              site2="arm_tip_dock_site"
+              active="false"
+              solref="0.02 1"
+              solimp="0.95 0.99 0.001"/>
+    </equality>
+</mujoco>

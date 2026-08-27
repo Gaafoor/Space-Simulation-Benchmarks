@@ -1,0 +1,33 @@
+date,simulator,version,operator,run_id,status,notes
+2026-06-03,GMAT,R2026a (64-bit),user,a2_gmat_001,pass,Path B: JGM-2 deg2 ord0; Basilisk uses GGM03S J2-only; propagation cross-check indicative; mission metrics valid
+
+benchmark_specific_metric,value,unit,comment
+observation_window_count,4,count,Madrid
+avg_observation_window_duration,5.530095845041667,minutes,
+total_contact_time,22.12038338016667,minutes,
+eclipse_time_percent,14.82968180025463,percent,GMAT total eclipse events (15 orbits)
+eclipse_time_percent_umbra_only,13.373548423634261,percent,GMAT Umbra segments summed
+coverage_revisit_time,94.18241666666667,minutes,minimum between pass starts
+position_difference_vs_reference,N/A,meters,J2 A2 - no two-body pass/fail
+velocity_difference_vs_reference,N/A,m_per_s,J2 A2 - no two-body pass/fail
+simulated_duration,24,hours,
+wall_clock_runtime,1.376,seconds,GMAT GUI with live plots
+runtime_ratio,62790.69767441861,sim_time_over_wall_time,
+scenario_setup_time,90,minutes,estimate incl. event locators
+required_custom_code_lines,0,lines,mission in GMAT script; post-process optional
+manual_configuration_steps,1,count,run script in GMAT GUI
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+Physics Fidelity,4,J2 RK89 + SPICE contact/eclipse locators
+Performance,4,24 h mission ~0.76 s GUI with plots
+Ease of Integration,3,Script + GUI; Python post-process for CSV metrics
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+Mission Capabilities,25,5,25,Native ContactLocator/EclipseLocator + ground track Madrid
+Dynamics and GNC,20,4,16,J2 JGM2 degree 2 stable 24 h
+Robotics and AI,20,N/A,N/A,Not applicable
+Ease of Use,10,4,8,GUI live plots; script replayable
+Documentation,10,4,8,Event location tutorial applied
+Visualization,10,5,10,OpenFrames 3D + ground track during run
+Extensibility,5,3,3,Scriptable; cross-tool compare via Python
+TOTAL,100,partial,70,GMAT A2 weighted partial; pair with Basilisk sheet

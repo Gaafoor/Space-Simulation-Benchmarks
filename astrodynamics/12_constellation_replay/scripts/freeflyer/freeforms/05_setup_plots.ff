@@ -1,0 +1,162 @@
+// =============================================================================
+// FreeForm 5 - Plot windows, DataTable debug log (create before propagation loop)
+// =============================================================================
+
+// --- Plot 1: Ground-station elevations ---
+PlotWindow PlotElevations;
+PlotScatterSeries ElevCairo;
+PlotScatterSeries ElevMadrid;
+PlotScatterSeries ElevParis;
+PlotScatterSeries ThrAcquire10;
+PlotScatterSeries ThrImageMin45;
+PlotScatterSeries ThrImageMax80;
+PlotScatterSeries CapMarkCairo;
+PlotScatterSeries CapMarkMadrid;
+PlotScatterSeries CapMarkParis;
+
+ElevCairo.MarkersColor = ColorTools.Red;
+ElevCairo.LineVisible = 1;
+ElevCairo.MarkersVisible = 0;
+ElevMadrid.MarkersColor = ColorTools.Green;
+ElevMadrid.LineVisible = 1;
+ElevMadrid.MarkersVisible = 0;
+ElevParis.MarkersColor = ColorTools.Blue;
+ElevParis.LineVisible = 1;
+ElevParis.MarkersVisible = 0;
+
+ThrAcquire10.MarkersColor = ColorTools.Gray;
+ThrAcquire10.LineVisible = 1;
+ThrAcquire10.MarkersVisible = 0;
+ThrImageMin45.MarkersColor = ColorTools.Orange;
+ThrImageMin45.LineVisible = 1;
+ThrImageMin45.MarkersVisible = 0;
+ThrImageMax80.MarkersColor = ColorTools.Orange;
+ThrImageMax80.LineVisible = 1;
+ThrImageMax80.MarkersVisible = 0;
+
+CapMarkCairo.MarkersColor = ColorTools.Red;
+CapMarkCairo.MarkersStyle = 5;
+CapMarkCairo.MarkersVisible = 1;
+CapMarkCairo.LineVisible = 0;
+CapMarkMadrid.MarkersColor = ColorTools.Green;
+CapMarkMadrid.MarkersStyle = 5;
+CapMarkMadrid.MarkersVisible = 1;
+CapMarkMadrid.LineVisible = 0;
+CapMarkParis.MarkersColor = ColorTools.Blue;
+CapMarkParis.MarkersStyle = 5;
+CapMarkParis.MarkersVisible = 1;
+CapMarkParis.LineVisible = 0;
+
+PlotElevations.AddSeries(ElevCairo);
+PlotElevations.AddSeries(ElevMadrid);
+PlotElevations.AddSeries(ElevParis);
+PlotElevations.AddSeries(ThrAcquire10);
+PlotElevations.AddSeries(ThrImageMin45);
+PlotElevations.AddSeries(ThrImageMax80);
+PlotElevations.AddSeries(CapMarkCairo);
+PlotElevations.AddSeries(CapMarkMadrid);
+PlotElevations.AddSeries(CapMarkParis);
+
+PlotElevations.WindowTitle = "Plot 1 - City Elevations";
+PlotElevations.PlotTitle.Text = "Ground-Station Elevation vs Time";
+PlotElevations.SetAxisTitles("Elapsed Time (hr)", "Elevation (deg)");
+PlotElevations.MaxPoints = 35000;
+PlotElevations.ShowGridLines = 1;
+PlotElevations.Legend.Visible = 1;
+PlotElevations.Legend.Location = 1;
+PlotElevations.HighQualityRendering = 1;
+PlotElevations.SetSeriesColorPalette("Classic");
+
+// --- Plot 2: Boresight error ---
+PlotWindow PlotBoresight;
+PlotScatterSeries BoresightZ;
+PlotScatterSeries ThrSettle2;
+
+BoresightZ.MarkersColor = ColorTools.Purple;
+BoresightZ.LineVisible = 1;
+BoresightZ.MarkersVisible = 0;
+ThrSettle2.MarkersColor = ColorTools.Orange;
+ThrSettle2.LineVisible = 1;
+ThrSettle2.MarkersVisible = 0;
+
+PlotBoresight.AddSeries(BoresightZ);
+PlotBoresight.AddSeries(ThrSettle2);
+
+PlotBoresight.WindowTitle = "Plot 2 - Boresight Error";
+PlotBoresight.PlotTitle.Text = "Camera Boresight Error (body +Z vs target)";
+PlotBoresight.SetAxisTitles("Elapsed Time (hr)", "Boresight error (deg)");
+PlotBoresight.MaxPoints = 35000;
+PlotBoresight.ShowGridLines = 1;
+PlotBoresight.Legend.Visible = 1;
+PlotBoresight.HighQualityRendering = 1;
+
+// --- Plot 3: Pointing mode ---
+PlotWindow PlotPointingMode;
+PlotScatterSeries SeriesPointingMode;
+PlotScatterSeries SeriesInShadow;
+
+SeriesPointingMode.MarkersColor = ColorTools.Blue;
+SeriesPointingMode.LineVisible = 1;
+SeriesPointingMode.MarkersVisible = 0;
+SeriesInShadow.MarkersColor = ColorTools.Gray;
+SeriesInShadow.LineVisible = 1;
+SeriesInShadow.MarkersVisible = 0;
+
+PlotPointingMode.AddSeries(SeriesPointingMode);
+PlotPointingMode.AddSeries(SeriesInShadow);
+
+PlotPointingMode.WindowTitle = "Plot 3 - Pointing Mode";
+PlotPointingMode.PlotTitle.Text = "Attitude mode (0=Sun, 1=Earth, 2=Ground) and InShadow";
+PlotPointingMode.SetAxisTitles("Elapsed Time (hr)", "Mode / shadow flag");
+PlotPointingMode.MaxPoints = 35000;
+PlotPointingMode.ShowGridLines = 1;
+PlotPointingMode.Legend.Visible = 1;
+PlotPointingMode.HighQualityRendering = 1;
+
+// --- Plot 6: Capture flags ---
+PlotWindow PlotCaptureFlags;
+PlotScatterSeries FlagCairo;
+PlotScatterSeries FlagMadrid;
+PlotScatterSeries FlagParis;
+
+FlagCairo.MarkersColor = ColorTools.Red;
+FlagCairo.LineVisible = 1;
+FlagCairo.MarkersVisible = 0;
+FlagMadrid.MarkersColor = ColorTools.Green;
+FlagMadrid.LineVisible = 1;
+FlagMadrid.MarkersVisible = 0;
+FlagParis.MarkersColor = ColorTools.Blue;
+FlagParis.LineVisible = 1;
+FlagParis.MarkersVisible = 0;
+
+PlotCaptureFlags.AddSeries(FlagCairo);
+PlotCaptureFlags.AddSeries(FlagMadrid);
+PlotCaptureFlags.AddSeries(FlagParis);
+
+PlotCaptureFlags.WindowTitle = "Plot 6 - Capture Flags";
+PlotCaptureFlags.PlotTitle.Text = "City image captured (0/1); Madrid/Paris offset for clarity";
+PlotCaptureFlags.SetAxisTitles("Elapsed Time (hr)", "Captured (offset series)");
+PlotCaptureFlags.MaxPoints = 35000;
+PlotCaptureFlags.ShowGridLines = 1;
+PlotCaptureFlags.Legend.Visible = 1;
+PlotCaptureFlags.HighQualityRendering = 1;
+
+// --- DataTable debug log (one row per step) ---
+DataTableWindow MissionDebugLog({
+	CubeSat.ElapsedTime.ToHours(),
+	pointingMode,
+	activeStationIndex,
+	Cairo.Elevation(CubeSat),
+	Madrid.Elevation(CubeSat),
+	Paris.Elevation(CubeSat),
+	slewError,
+	quatErr,
+	cairoCaptured,
+	madridCaptured,
+	parisCaptured,
+	CubeSat.InShadow()
+});
+
+MissionDebugLog.WindowTitle = "Mission Debug Log";
+
+Report "Plots and MissionDebugLog ready. MaxPoints=35000 per plot." to Console;

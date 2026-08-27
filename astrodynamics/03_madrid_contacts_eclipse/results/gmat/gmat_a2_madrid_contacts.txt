@@ -1,0 +1,13 @@
+Target: CubeSat_A2
+
+Observer: Madrid_GS
+Start Time (UTC)            Stop Time (UTC)               Duration (s)         
+02 Jun 2026 06:26:14.361    02 Jun 2026 06:32:31.612      377.25124473    
+02 Jun 2026 08:00:25.306    02 Jun 2026 08:05:34.815      309.50932346    
+02 Jun 2026 19:27:56.024    02 Jun 2026 19:34:44.148      408.12372174    
+02 Jun 2026 21:02:41.625    02 Jun 2026 21:06:33.963      232.33871288    
+
+
+Number of events : 4
+
+

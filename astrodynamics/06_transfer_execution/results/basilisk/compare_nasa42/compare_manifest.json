@@ -1,0 +1,24 @@
+{
+  "basilisk_label": "Basilisk dynamic_solar",
+  "nasa42_label": "NASA 42 N9 full",
+  "spiral_start_s": 2829.282859351952,
+  "spiral_end_s": 4534018.798747798,
+  "zoom_window_days": [
+    0.0,
+    7.032746329390648
+  ],
+  "zoom_span_days": 7.0,
+  "basilisk_thrust_samples": 415613,
+  "nasa42_output_samples": 1273,
+  "nasa42_output_interval_s": 3600.0,
+  "notes": [
+    "Basilisk eclipse_factor and power are from thrust_history (spiral only, ~10 s cadence).",
+    "NASA 42 Power.42 is thruster available power [kW]; Eclipse.42 is binary.",
+    "Hourly interpolation aligns Basilisk dense logs to NASA 42 output cadence in full-mission plot."
+  ],
+  "outputs": {
+    "full_mission_png": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/compare_nasa42/basilisk_vs_nasa42_compare.png",
+    "spiral_zoom_png": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/compare_nasa42/basilisk_vs_nasa42_compare_spiral_zoom.png",
+    "sma_compare_png": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/compare_nasa42/basilisk_nasa42_gmat_sma_compare.png"
+  }
+}

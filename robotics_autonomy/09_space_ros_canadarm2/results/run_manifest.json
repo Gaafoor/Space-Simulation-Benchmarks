@@ -1,0 +1,12 @@
+{
+  "case": "isaac_sim",
+  "title": "Isaac Sim contact / perception / RL servicing benchmark",
+  "cwd": "/home/mahmedext/isaacsim",
+  "command": [
+    "#",
+    "launch the custom servicing scene using canadarm_isaac and ROS2 bridge"
+  ],
+  "artifact_dir": "/home/mahmedext/Downloads/robotics_autonomy_benchmark/results/isaac_sim",
+  "notes": "Focus: contact, collision, perception, and RL for a servicing workflow.",
+  "created_at": "2026-07-22T11:01:28.637240Z"
+}

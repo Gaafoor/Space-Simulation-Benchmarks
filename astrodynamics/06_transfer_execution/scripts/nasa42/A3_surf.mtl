@@ -1,0 +1,11 @@
+# A3 surface — tuned for GMAT-like SRP (Cr ~ 1.8 spherical)
+newmtl A3_SURFACE
+Ns 0.0
+d 1.0
+illum 2
+Kd 0.9 0.9 0.9
+Ka 0.9 0.9 0.9
+Ks 0.9 0.9 0.9
+Ke 0.0 0.0 0.0
+SpecFrac 0.85
+DiffFrac 0.15

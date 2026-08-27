@@ -1,0 +1,32 @@
+date,simulator,version,operator,run_id,status,notes
+2026-06-03,Basilisk,2.10.2,user,a2_basilisk_001,pass,A2 J2 propagation with Madrid access and eclipse via SPICE
+
+benchmark_specific_metric,value,unit,comment
+observation_window_count,4,count,Madrid access windows
+avg_observation_window_duration,5.458333333333333,minutes,mean pass duration
+total_contact_time,21.833333333333332,minutes,sum of pass durations
+eclipse_time_percent,15.24305555555555,percent,shadowFactor threshold
+coverage_revisit_time,94.16666666666667,minutes,minimum time between pass starts
+position_difference_vs_reference,N/A,meters,A2 uses J2; two-body analytical reference not applicable as pass/fail
+velocity_difference_vs_reference,N/A,m_per_s,A2 uses J2; two-body analytical reference not applicable as pass/fail
+simulated_duration,24,hours,
+wall_clock_runtime,0.39267490000929683,seconds,propagation only
+runtime_ratio,220029.34233370767,sim_time_over_wall_time,
+scenario_setup_time,180,minutes,estimate incl. SPICE setup learning
+required_custom_code_lines,413,lines,run_basilisk_a2_mission_analysis.py
+manual_configuration_steps,1,count,run script with Basilisk venv Python
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+Physics Fidelity,4,J2 + SPICE eclipse/access; Madrid passes and eclipse metrics exported
+Performance,5,24 h J2+SPICE sim in ~0.46 s propagation time
+Ease of Integration,4,Python runner with matplotlib plots; Vizard optional for 3D
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+Mission Capabilities,25,4,16,Madrid passes revisit eclipse computed in custom runner
+Dynamics and GNC,20,4,16,J2 propagation stable over 24 h
+Robotics and AI,20,N/A,N/A,Not applicable to A2
+Ease of Use,10,3,6,Requires custom Python; SPICE kernels needed
+Documentation,10,3,6,Examples helped; mission viz not one-click
+Visualization,10,3,3,matplotlib timeline/orbit plots saved; no built-in GUI like GMAT OpenFrames
+Extensibility,5,4,4,Full control via Python modules and plot pipeline
+TOTAL,100,partial,51,A2 closed; mission metrics match GMAT; see A2_COMPARISON_REPORT.md

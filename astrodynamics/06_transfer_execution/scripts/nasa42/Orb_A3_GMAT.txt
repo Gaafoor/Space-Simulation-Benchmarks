@@ -1,0 +1,47 @@
+<<<<<<<<<<<<<<<<<  42: Orbit Description File   >>>>>>>>>>>>>>>>>
+GMAT A3 LEO-GEO reference (SPLINE from a3_reference.bsp)  !  Description
+CENTRAL                       !  Orbit Type (ZERO, FLIGHT, CENTRAL, THREE_BODY)
+::::::::::::::  Use these lines if ZERO           :::::::::::::::::
+EARTH                         !  World
+FALSE                         ! Use Polyhedron Gravity
+::::::::::::::  Use these lines if FLIGHT         :::::::::::::::::
+0                             !  Region Number
+FALSE                         ! Use Polyhedron Gravity
+::::::::::::::  Use these lines if CENTRAL        :::::::::::::::::
+EARTH                         !  Orbit Center
+FALSE                         !  Secular Orbit Drift Due to J2
+FILE                          !  Use Keplerian elements (KEP) or (RV) or FILE
+PA                            !  Use Peri/Apoapsis (PA) or min alt/ecc (AE)
+500.0   500.0                 !  Periapsis & Apoapsis Altitude, km (unused)
+200.0  0.0                    !  Min Altitude (km), Eccentricity (unused)
+28.5                          !  Inclination (deg) (unused)
+0.0                           !  RAAN (deg)
+0.0                           !  Arg of Periapsis (deg)
+0.0                           !  True Anomaly (deg)
+6878.137  0.0  0.0            !  RV Initial Position (km) (unused)
+0.0  6.690090332  3.632423    !  RV Initial Velocity (km/sec) (unused)
+SPLINE                        !  TLE, TRV, or SPLINE file format
+"a3_gmat_spline.txt"          !  File name
+"A3_GMAT"                     !  Label (unused for SPLINE)
+:::::::::::::  Use these lines if THREE_BODY      ::::::::::::::::
+SUNEARTH                      !  Lagrange system
+LAGDOF_MODES                  !  Propagate using LAGDOF_MODES or LAGDOF_COWELL or LAGDOF_SPLINE
+MODES                         !  Initialize with MODES or XYZ or FILE
+L2                            !  Libration point (L1, L2, L3, L4, L5)
+800000.0                      !  XY Semi-major axis, km
+45.0                          !  Initial XY Phase, deg
+CW                            !  Sense (CW, CCW), viewed from +Z
+0.0                           !  Second XY Mode Semi-major Axis, km (L4, L5 only)
+0.0                           !  Second XY Mode Initial Phase, deg (L4, L5 only)
+CW                            !  Sense (CW, CCW), viewed from +Z (L4, L5 only)
+400000.0                      !  Z Semi-axis, km
+60.0                          !  Initial Z Phase, deg
+1.05  0.5  0.0                !  Initial X, Y, Z (Non-dimensional)
+0.0   0.0  0.0                !  Initial Xdot, Ydot, Zdot (Non-dimensional)
+TRV  "ORB_ID"                 !  TLE, TRV or SPLINE format, Label to find in file
+"TRV.txt"                     !  File name
+******************* Formation Frame Parameters ************************
+N                             !  Formation Frame Fixed in [NL]
+0.0  0.0  0.0  123            !  Euler Angles (deg) and Sequence
+N                             !  Formation Origin expressed in [NL]
+0.0  0.0  0.0                 !  Formation Origin wrt Ref Orbit (m)

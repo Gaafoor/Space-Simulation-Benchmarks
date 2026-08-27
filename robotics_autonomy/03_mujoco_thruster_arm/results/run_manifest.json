@@ -1,0 +1,12 @@
+{
+  "case": "basilisk_roboticarm",
+  "title": "Basilisk manipulator reaction baseline",
+  "cwd": "/home/mahmedext/Downloads/basilisk-develop2/examples",
+  "command": [
+    "python3",
+    "scenarioRoboticArm.py"
+  ],
+  "artifact_dir": "/home/mahmedext/Downloads/robotics_autonomy_benchmark/results/basilisk_roboticarm",
+  "notes": "Focus: manipulator reaction forces on a free-flying hub.",
+  "created_at": "2026-07-22T11:01:28.636770Z"
+}

@@ -1,0 +1,56 @@
+{
+  "benchmark": "B2",
+  "simulator": "Basilisk",
+  "case_id": "b2a",
+  "run_id": "b2_basilisk_b2a",
+  "status": "pass",
+  "force_model": {
+    "j2_enabled": true,
+    "drag_enabled": false,
+    "srp_enabled": false,
+    "gravity_gradient_enabled": false,
+    "sun_sensor_ideal": true
+  },
+  "controller": {
+    "type": "MRP feedback + locationPointing Sun guidance (attGuid direct)",
+    "K": 0.0006999999999999999,
+    "P": 0.005999999999999999,
+    "Ki": -1.0,
+    "note": "Basilisk-tuned gains frozen for Basilisk B2 runs; scaled from I=900.0 kg/u00b7m/u00b2 reference"
+  },
+  "implementation_notes": {
+    "integration_step_s": 1.0,
+    "output_sample_s": 10.0,
+    "reaction_wheel_model": "BCT_RWP015 with per-wheel u_max override to frozen torque limit",
+    "guidance_module": "locationPointing + ephemerisConverter(SPICE Sun); cHat_B=(0.0, 1.0, 0.0); useBoresightRateDamping=1",
+    "mrp_gain_scaling": "K=0.000700, P=0.006000 (reference K=3.5, P=30.0 at I=900.0 kg/u00b7m/u00b2)",
+    "sun_sensor": "coarseSunSensor ideal (applySensorErrors=0)",
+    "attitude_error_note": "sigma_BR[2] ~ 0 is expected: locationPointing embeds 2-DOF pointing error; sigma_0/sigma_1 are in-plane tilt, not body X/Y axes"
+  },
+  "metrics": {
+    "battery_soc_initial_percent": 40.0,
+    "battery_soc_final_percent": 100.0,
+    "battery_soc_delta_percent": 60.0,
+    "charging_time_to_target_soc_s": 4960.0,
+    "generated_power_peak_w": 20.022712639942988,
+    "generated_power_mean_sunlit_w": 20.00810670650177,
+    "eclipse_duration_s": 870.0000000000005,
+    "eclipse_fraction": 0.12066574202496533,
+    "pointing_error_mean_sunlit_deg": 0.2638625235655426,
+    "pointing_error_max_sunlit_deg": 30.000341370972745,
+    "control_effort_rms_nm": 5.360380631242584e-06,
+    "wheel_saturation_fraction": 0.0
+  },
+  "basilisk_version": "2.10.2",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "runtime_s": {
+    "simulation": 0.42379208900092635,
+    "runtime_ratio": 16989.46296277905
+  },
+  "artifacts": {
+    "history_csv": "benchmarks/benchmark_b/results/basilisk_b2/b2a/b2_history.csv",
+    "timeseries_plot": "data/benchmark_b/b2_attitude_gnc/basilisk/b2a/b2_timeseries.png",
+    "gnc_plots": "data/benchmark_b/b2_attitude_gnc/basilisk/b2a/b2_gnc_plots.png",
+    "vizard_bin": "data/benchmark_b/b2_attitude_gnc/basilisk/b2a/b2_b2a_UnityViz.bin"
+  }
+}

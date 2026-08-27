@@ -1,0 +1,52 @@
+{
+  "benchmark": "B1",
+  "simulator": "Orekit",
+  "run_id": "b1_orekit_case2_j2",
+  "case_id": "b1_case2_j2",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "force_model": {
+    "gravity_harmonics_degree": 2,
+    "gravity_harmonics_order": 0,
+    "drag_enabled": false,
+    "atmosphere_model": null,
+    "srp_enabled": false,
+    "third_body_bodies": []
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+  },
+  "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+  "runtime_s": {
+    "propagation": 0.06835483299801126,
+    "runtime_ratio": 1263992.5548865544
+  },
+  "drift_metrics_vs_case1": {
+    "position_drift_vs_case1_m": 474085.595893742,
+    "ground_track_lon_drift_deg": -12.168730730916558,
+    "raan_change_deg": 0.9889729820765312,
+    "altitude_change_m": -18607.309066576883,
+    "along_track_phase_drift_deg": 4.076541819184484,
+    "final_altitude_m": 481392.6909334231,
+    "final_semi_major_axis_m": 6859529.690933423
+  },
+  "orekit_perturbation_documentation": {
+    "enabled_orekit_force_models": [
+      "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)"
+    ],
+    "increment_vs_previous_case": "Adds J2 via gravity harmonics 2x0 (replaces 0x0 central-only gravity).",
+    "previous_case_id": "b1_case1_twobody"
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/altitude_vs_time.png"
+  }
+}

@@ -1,0 +1,13 @@
+************************* Fields of View ***************************
+1                                 !  Number of FOVs
+--------------------------------------------------------------------
+"Sun CSS"                         !  Label
+4   0.15                          !  Number of Sides, Length [m]
+90.0  90.0                        !  H Width, V Height [deg]
+1.0  0.8  0.0  0.35               !  Color RGB+Alpha
+SOLID                             !  WIREFRAME, SOLID, VECTOR, or PLANE 
+TRUE  FALSE                       !  Draw Near Field, Draw Far Field
+0  0                              !  SC, Body 
+0.0  0.0  0.0                     !  Position in Body [m]
+0.0  0.0  0.0  123                !  Euler Angles [deg], Sequence
+Z_AXIS                            !  Boresight Axis X_AXIS, Y_AXIS, or Z_AXIS

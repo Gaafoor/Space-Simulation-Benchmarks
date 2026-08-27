@@ -1,0 +1,188 @@
+{
+  "task_id": "gmat_basilisk_gnc_handoff",
+  "execution_mode": "finite_thrust",
+  "mission_mode": "electric_spiral",
+  "force_mode": "gmat_match",
+  "fidelity": "mission_realistic",
+  "fidelity_flags": {
+    "dynamic_solar": true,
+    "facet_physics": true,
+    "full_sensors": true
+  },
+  "force_model": {
+    "gravity": "JGM2-equivalent GGM2BData 20x20",
+    "atmosphere": "NRLMSISE-00 (MsisAtmosphere)",
+    "drag": true,
+    "srp": true,
+    "geometry": "facet",
+    "third_bodies": [
+      "Sun",
+      "Moon"
+    ]
+  },
+  "validation_passed": false,
+  "converged": true,
+  "final_sma_km": 50227.10042335358,
+  "final_ecc": 0.02833438961625879,
+  "final_inc_deg": 28.383404959083325,
+  "max_ephemeris_position_error_m": 92189999.75995499,
+  "max_burn_start_error_s": 0.0,
+  "fuel_used_kg": 3.969209897360569,
+  "gmat_reference": {
+    "mission_mode": "electric_spiral",
+    "gmat_targeting": [
+      "sma_only"
+    ],
+    "converged_sma": true,
+    "converged_ecc": false,
+    "converged_inc": false,
+    "converged": true,
+    "final_sma_km": 42163.86468184531,
+    "final_ecc": 0.05500945849706693,
+    "final_inc_deg": 28.30705368775069,
+    "spiral_start_s": 2829.282859351952,
+    "spiral_end_s": 4534018.798747798,
+    "equator_trim_end_s": 4538697.44383553,
+    "mission_end_s": 4592697.44374972,
+    "fuel_mass_kg": 3.7656984886015508
+  },
+  "gnc_mode": "rw_mtb_velocity_pointing_hardware_nav",
+  "gnc_gains": {
+    "K": 0.13323965941470634,
+    "P": 0.26860617188192726
+  },
+  "nav_noise": {
+    "enabled": true,
+    "attitude_noise_sigma_deg": 0.001,
+    "rate_noise_sigma_deg_s": 0.0005,
+    "attitude_error_3sigma_deg": 0.01,
+    "rate_error_3sigma_deg_s": 0.005
+  },
+  "propulsion_model": {
+    "thrust_model": "ThrustMassPolynomial",
+    "nominal_power_kw": 0.7910273390619846,
+    "dynamic_solar": true,
+    "nominal_thrust_n": 0.014849284046216283,
+    "nominal_mdot_kg_s": 8.310617941265244e-07
+  },
+  "burns_applied": [
+    {
+      "id": "spiral_to_geo",
+      "time_s": 2829.282859351952,
+      "gmat_start_s": 2829.282859351952,
+      "duration_s": 4531189.515888446,
+      "type": "electric_spiral",
+      "thrust_n": 0.014849284046216283,
+      "thrust_model": "ThrustMassPolynomial",
+      "input_power_kw": 0.8238930108247411,
+      "nominal_thrust_n": 0.01765349397226872,
+      "mass_after_kg": 13.03079010263943,
+      "stop_reason": "gmat_end",
+      "stop_mode": "gmat_end_s"
+    },
+    {
+      "id": "post_spiral_equator_trim",
+      "time_s": 4538697.44383553,
+      "gmat_start_s": 4538697.44383553,
+      "duration_s": 53999.9999141898,
+      "type": "coast_trim",
+      "thrust_n": 0.0,
+      "mass_after_kg": 13.03079010263943
+    }
+  ],
+  "pointing_error_history": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/pointing_error_history.csv",
+  "rw_diagnostics": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/rw_diagnostics.csv",
+  "att_guidance_debug": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/att_guidance_debug.csv",
+  "mtb_diagnostics": "data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/mtb_diagnostics.csv",
+  "vizard_bin": "/media/windows/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/gmat_handoff_UnityViz.bin",
+  "vizard_reference_overlay": true,
+  "validation_checks": {
+    "attitude_pointing": {
+      "passed": false,
+      "value_deg": NaN,
+      "limit_deg": 5.0,
+      "scope": "during_burns"
+    },
+    "fuel_usage": {
+      "passed": true,
+      "value_kg": 3.969209897360569,
+      "gmat_reference_kg": 3.7656984886015508,
+      "relative_error": 0.05404346879470838,
+      "limit_fraction": 0.25
+    },
+    "burn_schedule_timing": {
+      "passed": true,
+      "value_s": 0.0,
+      "limit_s": 120.0
+    },
+    "ephemeris_envelope": {
+      "passed": false,
+      "value_m": 92189999.75995499,
+      "limit_m": 500000.0
+    },
+    "orbit_sma": {
+      "passed": false,
+      "value_m": 8063100.423353575,
+      "limit_m": 1000.0,
+      "informational": true
+    },
+    "orbit_ecc": {
+      "passed": true,
+      "value": 0.02833438961625879,
+      "limit": 0.05,
+      "informational": true
+    },
+    "orbit_inc": {
+      "passed": false,
+      "value_deg": 28.383404959083325,
+      "limit_deg": 0.1,
+      "informational": true
+    }
+  },
+  "execution_validation_checks": {
+    "attitude_pointing": {
+      "passed": false,
+      "value_deg": NaN,
+      "limit_deg": 5.0,
+      "scope": "during_burns"
+    },
+    "fuel_usage": {
+      "passed": true,
+      "value_kg": 3.969209897360569,
+      "gmat_reference_kg": 3.7656984886015508,
+      "relative_error": 0.05404346879470838,
+      "limit_fraction": 0.25
+    },
+    "burn_schedule_timing": {
+      "passed": true,
+      "value_s": 0.0,
+      "limit_s": 120.0
+    },
+    "ephemeris_envelope": {
+      "passed": false,
+      "value_m": 92189999.75995499,
+      "limit_m": 500000.0
+    }
+  },
+  "informational_checks": {
+    "orbit_sma": {
+      "passed": false,
+      "value_m": 8063100.423353575,
+      "limit_m": 1000.0,
+      "informational": true
+    },
+    "orbit_ecc": {
+      "passed": true,
+      "value": 0.02833438961625879,
+      "limit": 0.05,
+      "informational": true
+    },
+    "orbit_inc": {
+      "passed": false,
+      "value_deg": 28.383404959083325,
+      "limit_deg": 0.1,
+      "informational": true
+    }
+  },
+  "pointing_error_plot": "../../data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/pointing_error_history.png"
+}

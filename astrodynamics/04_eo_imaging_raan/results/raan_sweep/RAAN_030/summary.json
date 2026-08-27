@@ -1,0 +1,61 @@
+{
+  "RAAN": 30.0,
+  "epoch": "2026-06-02T00:00:00",
+  "pass_count": 4,
+  "minimum_off_nadir_angle_deg": 0.46663498005249365,
+  "minimum_off_nadir_time_s": 78780.00108220149,
+  "imaging_opportunity_count": 0,
+  "imaging_sample_count": 64,
+  "all_pass_metrics": [
+    {
+      "pass_index": 1,
+      "start_s": 28943.891,
+      "stop_s": 29182.38,
+      "duration_s": 238.48884422,
+      "duration_min": 3.9748140703333332,
+      "utc_start": "02 Jun 2026 08:02:23.891",
+      "utc_stop": "02 Jun 2026 08:06:22.380",
+      "min_off_nadir_deg": 63.66807059369048,
+      "max_elevation_deg": 14.669806988033418
+    },
+    {
+      "pass_index": 2,
+      "start_s": 34455.473,
+      "stop_s": 34867.086,
+      "duration_s": 411.61248966,
+      "duration_min": 6.860208161,
+      "utc_start": "02 Jun 2026 09:34:15.473",
+      "utc_stop": "02 Jun 2026 09:41:07.086",
+      "min_off_nadir_deg": 49.62579553490085,
+      "max_elevation_deg": 34.67720210872726
+    },
+    {
+      "pass_index": 3,
+      "start_s": 75806.741,
+      "stop_s": 76115.447,
+      "duration_s": 308.70630465,
+      "duration_min": 5.1451050775,
+      "utc_start": "02 Jun 2026 21:03:26.741",
+      "utc_stop": "02 Jun 2026 21:08:35.447",
+      "min_off_nadir_deg": 61.44859492025397,
+      "max_elevation_deg": 18.650795702853436
+    },
+    {
+      "pass_index": 4,
+      "start_s": 81392.655,
+      "stop_s": 81763.779,
+      "duration_s": 371.1244178,
+      "duration_min": 6.1854069633333335,
+      "utc_start": "02 Jun 2026 22:36:32.655",
+      "utc_stop": "02 Jun 2026 22:42:43.779",
+      "min_off_nadir_deg": 56.86408268453169,
+      "max_elevation_deg": 25.413095091647715
+    }
+  ],
+  "artifacts": {
+    "off_nadir_plot": "results//RAAN_030//off_nadir_angle_vs_time.png",
+    "source_state_file": "gmat//gmat_a3_state.csv",
+    "source_contact_file": "gmat//gmat_a3_madrid_contacts.txt",
+    "source_script_file": "gmat//benchmark_a3_gmat.script"
+  }
+}

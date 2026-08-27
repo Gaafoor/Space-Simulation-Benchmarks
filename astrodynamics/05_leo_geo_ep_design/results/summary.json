@@ -1,0 +1,34 @@
+{
+  "task_id": "a3_leo_geo_transfer",
+  "tool": "gmat",
+  "gmat_version": "R2026a",
+  "implementation_mode": "native_mcs_dc",
+  "burn_model": "finite_burn_burns_1_2_impulsive_burn_3",
+  "solver_iterations": 50,
+  "implementation_source": "native",
+  "reference_examples": [
+    "Ex_OFI_GEOTransfer.script",
+    "Tut_SimpleOrbitTransfer.script",
+    "Ex_TargetFiniteBurn_CenterPeriapsisDuration.script"
+  ],
+  "implementation_notes": "FiniteBurn+DC for perigee raise and apogee circularize; impulsive plane change at Z=0 node.",
+  "converged": false,
+  "residual_sma_m": 0.461961954832077,
+  "residual_ecc": 0.02983668899013291,
+  "residual_inc_deg": 0.002576157959596214,
+  "final_sma_km": 42164.00046196196,
+  "final_ecc": 0.02983668899013291,
+  "final_inc_deg": 0.002576157959596214,
+  "burn1_duration_s": 3296.165078782511,
+  "burn2_duration_s": 753.0475849344832,
+  "plane_change_v_km_s": -0.3827304679347181,
+  "plane_change_n_km_s": 1.508478784901381,
+  "fuel_mass_kg": 11.20603696901782,
+  "viz_mode": "native_gui",
+  "viz_timing": "online_realtime",
+  "viz_interactivity": "interactive_3d",
+  "evidence_plots": {
+    "elements": "evidence/a3_elements_vs_time.png",
+    "control": "evidence/a3_control_vs_time.png"
+  }
+}

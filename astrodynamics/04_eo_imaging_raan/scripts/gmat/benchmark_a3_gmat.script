@@ -1,0 +1,364 @@
+% Benchmark A3 - GMAT imaging opportunity analysis
+% Purpose: export dense 10 s spacecraft states and Madrid contact intervals.
+% After running this script in GMAT GUI, A3 imaging/FOV metrics will be
+% analyzed from the exported state CSV and contact report.
+% The script creates a camera/imager hardware object for setup evidence, but
+% ContactLocator is still spacecraft-to-ground-station access. Sensor-
+% constrained imaging access is not assumed unless verified separately in GMAT.
+%
+% Sensor capability test policy:
+% 1. Run the script as-is to keep the proven spacecraft contact + state export.
+% 2. To test whether this GMAT version supports sensor-constrained contacts,
+%    uncomment ONE experimental block in the "Sensor contact syntax probes"
+%    section below and re-run the script.
+% 3. If GMAT refuses to interpret the script, record the error as evidence that
+%    this syntax is not supported in GMAT R2026a or is not the correct API.
+% Do NOT set ReportFile.Add - use mission Report commands only.
+
+
+%----------------------------------------
+%---------- User-Modified Default Celestial Bodies
+%----------------------------------------
+
+Earth.EquatorialRadius = 6378.1366;
+Earth.Flattening = 0.00335281310845547;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CubeSat_A3;
+CubeSat_A3.DateFormat = UTCGregorian;
+CubeSat_A3.Epoch = '02 Jun 2026 00:00:00.000';
+CubeSat_A3.CoordinateSystem = EarthMJ2000Eq;
+CubeSat_A3.DisplayStateType = Keplerian;
+CubeSat_A3.SMA = 6878.136999999987;
+CubeSat_A3.ECC = 0;
+CubeSat_A3.INC = 97.40000000000001;
+CubeSat_A3.RAAN = 61;
+CubeSat_A3.AOP = 0;
+CubeSat_A3.TA = 0;
+CubeSat_A3.DryMass = 12;
+CubeSat_A3.Cd = 2.2;
+CubeSat_A3.Cr = 1.8;
+CubeSat_A3.DragArea = 0.01;
+CubeSat_A3.SRPArea = 1;
+CubeSat_A3.SPADDragScaleFactor = 1;
+CubeSat_A3.SPADSRPScaleFactor = 1;
+CubeSat_A3.AtmosDensityScaleFactor = 1;
+CubeSat_A3.ExtendedMassPropertiesModel = 'None';
+CubeSat_A3.NAIFId = -10002001;
+CubeSat_A3.NAIFIdReferenceFrame = -9002001;
+CubeSat_A3.OrbitColor = Red;
+CubeSat_A3.TargetColor = Teal;
+CubeSat_A3.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+CubeSat_A3.CdSigma = 1e+70;
+CubeSat_A3.CrSigma = 1e+70;
+CubeSat_A3.Id = 'SatId';
+CubeSat_A3.Attitude = CoordinateSystemFixed;
+CubeSat_A3.SPADSRPInterpolationMethod = Bilinear;
+CubeSat_A3.SPADSRPScaleFactorSigma = 1e+70;
+CubeSat_A3.SPADDragInterpolationMethod = Bilinear;
+CubeSat_A3.SPADDragScaleFactorSigma = 1e+70;
+CubeSat_A3.AtmosDensityScaleFactorSigma = 1e+70;
+CubeSat_A3.AddHardware = {A3_Camera};
+CubeSat_A3.ModelFile = 'aura.3ds';
+CubeSat_A3.ModelOffsetX = 0;
+CubeSat_A3.ModelOffsetY = 0;
+CubeSat_A3.ModelOffsetZ = 0;
+CubeSat_A3.ModelRotationX = 0;
+CubeSat_A3.ModelRotationY = 0;
+CubeSat_A3.ModelRotationZ = 0;
+CubeSat_A3.ModelScale = 1;
+CubeSat_A3.AttitudeDisplayStateType = 'Quaternion';
+CubeSat_A3.AttitudeRateDisplayStateType = 'AngularVelocity';
+CubeSat_A3.AttitudeCoordinateSystem = EarthMJ2000Eq;
+CubeSat_A3.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware Components
+%----------------------------------------
+
+Create Imager A3_Camera;
+
+% Direction vectors are hardware-frame setup placeholders for GMAT visualization
+% and object attachment evidence. The reproducible A3 imaging gate is computed
+% after the run using the exported spacecraft state and the documented nadir
+% pointing assumption.
+A3_Camera.DirectionX = 1;
+A3_Camera.DirectionY = 0;
+A3_Camera.DirectionZ = 0;
+A3_Camera.SecondDirectionX = 0;
+A3_Camera.SecondDirectionY = 1;
+A3_Camera.SecondDirectionZ = 0;
+A3_Camera.HWOriginInBCSX = 0;
+A3_Camera.HWOriginInBCSY = 0;
+A3_Camera.HWOriginInBCSZ = 0;
+A3_Camera.FieldOfView = A3_Camera_FOV;
+
+%----------------------------------------
+%---------- A3 camera / imager hardware
+%----------------------------------------
+
+% A3 nominal camera FOV: 10 deg full cone angle.
+% Post-run analysis will use 10 deg full cone / 5 deg half-angle geometry.
+% This GMAT hardware object records that a sensor can be attached to the
+% spacecraft, but this script does not use it as the ContactLocator target.
+Create ConicalFOV A3_Camera_FOV;
+A3_Camera_FOV.Color = [0 0 0];
+A3_Camera_FOV.Alpha = 255;
+A3_Camera_FOV.FieldOfViewAngle = 10;
+
+%----------------------------------------
+%---------- Ground station context
+%----------------------------------------
+
+Create GroundStation Madrid_GS_A3;
+Madrid_GS_A3.OrbitColor = Thistle;
+Madrid_GS_A3.TargetColor = DarkGray;
+Madrid_GS_A3.CentralBody = Earth;
+Madrid_GS_A3.StateType = Spherical;
+Madrid_GS_A3.HorizonReference = Ellipsoid;
+% Spherical: Location1=Latitude, Location2=Longitude, Location3=Altitude [km]
+Madrid_GS_A3.Location1 = 40.4168;
+Madrid_GS_A3.Location2 = 356.2962;
+Madrid_GS_A3.Location3 = 0.667;
+Madrid_GS_A3.Id = 'Madrid';
+Madrid_GS_A3.IonosphereModel = 'None';
+Madrid_GS_A3.TroposphereModel = 'None';
+Madrid_GS_A3.DataSource = 'Constant';
+Madrid_GS_A3.Temperature = 295.1;
+Madrid_GS_A3.Pressure = 1013.5;
+Madrid_GS_A3.Humidity = 55;
+Madrid_GS_A3.MinimumElevationAngle = 10;
+
+
+
+%----------------------------------------
+%---------- ForceModel (A2 Path B policy)
+%----------------------------------------
+
+Create ForceModel A3Prop_ForceModel;
+A3Prop_ForceModel.CentralBody = Earth;
+A3Prop_ForceModel.PrimaryBodies = {Earth};
+A3Prop_ForceModel.Drag = None;
+A3Prop_ForceModel.SRP = Off;
+A3Prop_ForceModel.RelativisticCorrection = Off;
+A3Prop_ForceModel.ErrorControl = RSSStep;
+A3Prop_ForceModel.GravityField.Earth.Degree = 2;
+A3Prop_ForceModel.GravityField.Earth.Order = 0;
+A3Prop_ForceModel.GravityField.Earth.StmLimit = 100;
+A3Prop_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+A3Prop_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagator
+%----------------------------------------
+
+Create Propagator A3Prop;
+A3Prop.FM = A3Prop_ForceModel;
+A3Prop.Type = RungeKutta89;
+A3Prop.InitialStepSize = 10;
+A3Prop.Accuracy = 1e-12;
+A3Prop.MinStep = 0.001;
+A3Prop.MaxStep = 60;
+A3Prop.MaxStepAttempts = 50;
+A3Prop.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Optional contact context
+%----------------------------------------
+
+% This contact report is useful as an A2-style visibility reference. It is not
+% the final A3 imaging-opportunity table because it does not enforce the 10 deg
+% camera FOV. The FOV-constrained result will be computed from gmat_a3_state.csv.
+Create ContactLocator A3_Madrid_Contacts;
+A3_Madrid_Contacts.Target = CubeSat_A3;
+A3_Madrid_Contacts.Filename = 'gmat_a3_madrid_contacts.txt';
+A3_Madrid_Contacts.InputEpochFormat = 'TAIModJulian';
+A3_Madrid_Contacts.InitialEpoch = '21545';
+A3_Madrid_Contacts.StepSize = 10;
+A3_Madrid_Contacts.FinalEpoch = '21545.138';
+A3_Madrid_Contacts.UseLightTimeDelay = false;
+A3_Madrid_Contacts.UseStellarAberration = false;
+A3_Madrid_Contacts.WriteReport = true;
+A3_Madrid_Contacts.RunMode = Automatic;
+A3_Madrid_Contacts.UseEntireInterval = true;
+A3_Madrid_Contacts.Observers = {Madrid_GS_A3};
+A3_Madrid_Contacts.LightTimeDirection = Transmit;
+A3_Madrid_Contacts.LeftJustified = false;
+A3_Madrid_Contacts.ReportPrecision = 6;
+A3_Madrid_Contacts.ReportFormat = 'Legacy';
+A3_Madrid_Contacts.IntervalStepSize = 0;
+A3_Madrid_Contacts.ReportTimeFormat = 'UTCGregorian';
+
+%----------------------------------------
+%---------- Sensor contact syntax probes
+%----------------------------------------
+
+% The working ContactLocator above reports spacecraft-to-Madrid visibility. It
+% does NOT enforce A3_Camera_FOV. The blocks below are intentionally commented
+% because GMAT sensor-contact support is version/API dependent. Uncomment only
+% one block at a time when testing in the GMAT GUI.
+
+% Probe A: Test whether ContactLocator accepts an Imager hardware object as the
+% contact target. Expected outcome is unknown. If GMAT rejects this object type,
+% keep that error message as evidence for the A3 report.
+%
+%Create ContactLocator A3_Camera_Contacts;
+%A3_Camera_Contacts.Target = A3_Camera;
+%A3_Camera_Contacts.Observers = {Madrid_GS_A3};
+%A3_Camera_Contacts.Filename = 'gmat_a3_camera_contacts_probe_a.txt';
+%A3_Camera_Contacts.RunMode = Automatic;
+%A3_Camera_Contacts.WriteReport = true;
+%A3_Camera_Contacts.StepSize = 10;
+%A3_Camera_Contacts.UseEntireInterval = true;
+%A3_Camera_Contacts.UseLightTimeDelay = false;
+%A3_Camera_Contacts.UseStellarAberration = false;
+%
+% Probe B: Test whether ContactLocator exposes a camera/sensor property while
+% keeping the spacecraft as the target. This is a syntax probe, not confirmed
+% GMAT syntax. Uncomment only if Probe A is rejected and you want to test
+% whether this version has a sensor assignment field.
+%
+% Create ContactLocator A3_Sensor_Assigned_Contacts;
+% A3_Sensor_Assigned_Contacts.Target = CubeSat_A3;
+% A3_Sensor_Assigned_Contacts.Observers = {Madrid_GS_A3};
+% A3_Sensor_Assigned_Contacts.Sensor = A3_Camera;
+% A3_Sensor_Assigned_Contacts.Filename = 'gmat_a3_camera_contacts_probe_b.txt';
+% A3_Sensor_Assigned_Contacts.RunMode = Automatic;
+% A3_Sensor_Assigned_Contacts.WriteReport = true;
+% A3_Sensor_Assigned_Contacts.StepSize = 10;
+% A3_Sensor_Assigned_Contacts.UseEntireInterval = true;
+% A3_Sensor_Assigned_Contacts.UseLightTimeDelay = false;
+% A3_Sensor_Assigned_Contacts.UseStellarAberration = false;
+%
+% Probe C: Search GMAT's object list/docs for a dedicated SensorLocator or
+% EventLocator object. If GMAT supports a dedicated object, replace this comment
+% section with the verified syntax and keep the spacecraft ContactLocator above
+% as the baseline comparison.
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OpenFramesInterface A3_OrbitView;
+A3_OrbitView.SolverIterations = Current;
+A3_OrbitView.UpperLeft = [ 0 0 ];
+A3_OrbitView.Size = [ 0.5988235294117648 0.5980746089049338 ];
+A3_OrbitView.RelativeZOrder = 490;
+A3_OrbitView.Maximized = false;
+A3_OrbitView.Add = {CubeSat_A3, Earth, Sun, Madrid_GS_A3};
+A3_OrbitView.View = {A3_OrbitView_View};
+A3_OrbitView.CoordinateSystem = EarthMJ2000Eq;
+A3_OrbitView.DrawObject = [ true true true true ];
+A3_OrbitView.DrawTrajectory = [ true true true true ];
+A3_OrbitView.DrawAxes = [ false false false false ];
+A3_OrbitView.DrawXYPlane = [ false false false false ];
+A3_OrbitView.DrawLabel = [ true true true true ];
+A3_OrbitView.DrawUsePropLabel = [ false false false false ];
+A3_OrbitView.DrawCenterPoint = [ true true true true ];
+A3_OrbitView.DrawEndPoints = [ true true true true ];
+A3_OrbitView.DrawVelocity = [ false false false false ];
+A3_OrbitView.DrawGrid = [ false false false false ];
+A3_OrbitView.DrawLineWidth = [ 2 2 2 2 ];
+A3_OrbitView.DrawMarkerSize = [ 10 10 10 10 ];
+A3_OrbitView.DrawFontSize = [ 20 20 20 20 ];
+A3_OrbitView.Axes = On;
+A3_OrbitView.AxesLength = 12756.2726;
+A3_OrbitView.AxesLabels = On;
+A3_OrbitView.FrameLabel = Off;
+A3_OrbitView.XYPlane = On;
+A3_OrbitView.EclipticPlane = Off;
+A3_OrbitView.EnableStars = On;
+A3_OrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+A3_OrbitView.StarCount = 40000;
+A3_OrbitView.MinStarMag = -2;
+A3_OrbitView.MaxStarMag = 6;
+A3_OrbitView.MinStarPixels = 1;
+A3_OrbitView.MaxStarPixels = 10;
+A3_OrbitView.MinStarDimRatio = 0.5;
+A3_OrbitView.ShowPlot = true;
+A3_OrbitView.ShowToolbar = true;
+A3_OrbitView.SolverIterLastN = 1;
+A3_OrbitView.ShowVR = false;
+A3_OrbitView.PlaybackTimeScale = 3600;
+A3_OrbitView.MultisampleAntiAliasing = On;
+A3_OrbitView.MSAASamples = 2;
+A3_OrbitView.DrawFontPosition = {'Top-Right', 'Top-Right', 'Top-Right', 'Top-Right'};
+
+Create GroundTrack A3_GroundTrack;
+A3_GroundTrack.SolverIterations = Current;
+A3_GroundTrack.UpperLeft = [ 0.42 0.5090252707581228 ];
+A3_GroundTrack.Size = [ 0.5 0.4500601684717208 ];
+A3_GroundTrack.RelativeZOrder = 479;
+A3_GroundTrack.Maximized = false;
+A3_GroundTrack.CentralBody = Earth;
+A3_GroundTrack.Add = {CubeSat_A3, Madrid_GS_A3};
+A3_GroundTrack.DataCollectFrequency = 1;
+A3_GroundTrack.UpdatePlotFrequency = 50;
+A3_GroundTrack.NumPointsToRedraw = 0;
+A3_GroundTrack.MaxPlotPoints = 20000;
+A3_GroundTrack.ShowPlot = true;
+
+%----------------------------------------
+%---------- Dense state report
+%----------------------------------------
+
+Create ReportFile A3_State_Report;
+A3_State_Report.SolverIterations = Current;
+A3_State_Report.UpperLeft = [ 0.0611764705882353 0.1251504211793021 ];
+A3_State_Report.Size = [ 0.5994117647058823 0.7990373044524669 ];
+A3_State_Report.RelativeZOrder = 19;
+A3_State_Report.Maximized = false;
+A3_State_Report.Filename = 'gmat_a3_state.csv';
+A3_State_Report.Precision = 16;
+A3_State_Report.WriteHeaders = true;
+A3_State_Report.LeftJustify = On;
+A3_State_Report.ZeroFill = Off;
+A3_State_Report.FixedWidth = true;
+A3_State_Report.Delimiter = ' ';
+A3_State_Report.ColumnWidth = 23;
+A3_State_Report.WriteReport = true;
+A3_State_Report.AppendToExistingFile = false;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable i stepSec;
+i = 0;
+stepSec = 10;
+
+
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView A3_OrbitView_View;
+A3_OrbitView_View.ViewFrame = CoordinateSystem;
+A3_OrbitView_View.ViewTrajectory = Off;
+A3_OrbitView_View.InertialFrame = Off;
+A3_OrbitView_View.SetDefaultLocation = On;
+A3_OrbitView_View.DefaultEye = [ 30000 0 0 ];
+A3_OrbitView_View.DefaultCenter = [ 0 0 0 ];
+A3_OrbitView_View.DefaultUp = [ 0 0 1 ];
+A3_OrbitView_View.SetCurrentLocation = On;
+A3_OrbitView_View.CurrentEye = [ 9141.789085471468 13720.08893536328 25063.65599673116 ];
+A3_OrbitView_View.CurrentCenter = [ -1.818989403545856e-12 3.637978807091713e-12 1.091393642127514e-11 ];
+A3_OrbitView_View.CurrentUp = [ -0.5235528724467281 -0.652327287728925 0.548052460478926 ];
+A3_OrbitView_View.FOVy = 45;
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Report A3_State_Report CubeSat_A3.ElapsedSecs CubeSat_A3.EarthMJ2000Eq.X CubeSat_A3.EarthMJ2000Eq.Y CubeSat_A3.EarthMJ2000Eq.Z CubeSat_A3.EarthMJ2000Eq.VX CubeSat_A3.EarthMJ2000Eq.VY CubeSat_A3.EarthMJ2000Eq.VZ;
+For i = 1:1:8640;
+   Propagate A3Prop(CubeSat_A3) {CubeSat_A3.ElapsedSecs = stepSec};
+   Report A3_State_Report CubeSat_A3.ElapsedSecs CubeSat_A3.EarthMJ2000Eq.X CubeSat_A3.EarthMJ2000Eq.Y CubeSat_A3.EarthMJ2000Eq.Z CubeSat_A3.EarthMJ2000Eq.VX CubeSat_A3.EarthMJ2000Eq.VY CubeSat_A3.EarthMJ2000Eq.VZ;
+EndFor;
+% ContactLocator RunMode=Automatic runs event search at mission end.
+
+

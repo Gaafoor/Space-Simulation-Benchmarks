@@ -1,0 +1,237 @@
+{
+  "schema": "catec_gmat_basilisk_handoff_v6",
+  "mission_mode": "electric_spiral",
+  "execution_mode": "finite_thrust",
+  "pipeline": {
+    "design_authority": "GMAT",
+    "execution_authority": "Basilisk",
+    "description": "GMAT designs; Basilisk executes without retargeting."
+  },
+  "source_tool": "gmat",
+  "source_dir": "catec_ws/data/benchmark_a/gmat/a3_leo_geo_transfer",
+  "reference_ephemeris": {
+    "path": "/media/windows/Users/mahmed.ext/Downloads/Intern_ws/catec_ws/data/benchmark_a/gmat/a3_leo_geo_transfer/a3_reference.bsp",
+    "format": "naif-spk-bsp",
+    "coordinate_system": "EarthMJ2000Eq",
+    "spice_ref": "J2000",
+    "spice_observer": "EARTH",
+    "naif_id": "-10008001",
+    "mission_epoch_utc_iso": "2026-06-15T12:00:00.000Z",
+    "interpolation": "gmat_spk_hermite",
+    "bsp_coverage_start_s": 2829.282859351952
+  },
+  "mission_epoch_utc_iso": "2026-06-15T12:00:00.000Z",
+  "spice_epoch_utc": "2026 JUN 15 12:00:00.000 (UTC)",
+  "dynamics": {
+    "step_s": 10.0,
+    "mission_end_s": 4592697.44374972,
+    "post_spiral_coast_s": 43200.0,
+    "gmat_propagator": {
+      "type": "RungeKutta89",
+      "initial_step_s": 10.0,
+      "min_step_s": 0.001,
+      "max_step_s": 2700.0,
+      "accuracy": 1e-10
+    },
+    "integrator_fidelity": "schedule_step_copied_from_gmat_initial_step"
+  },
+  "initial_state": {
+    "r_m": [
+      6878137.000000003,
+      0.0,
+      0.0
+    ],
+    "v_m_s": [
+      0.0,
+      6690.0903321018895,
+      3632.422676910724
+    ],
+    "mass_kg": 17.0
+  },
+  "propulsion": {
+    "dry_mass_kg": 12.0,
+    "initial_fuel_mass_kg": 5.0,
+    "initial_mass_kg": 17.0,
+    "max_thrust_n": 0.05,
+    "isp_s": 2500.0,
+    "thruster_position_body_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "thruster_direction_body": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "gmat_fuel_used_kg": 3.7656984886015508,
+    "gmat_mass_after_burn2_kg": 13.23430151139845,
+    "constant_thrust_n": 0.05,
+    "thrust_model": "ThrustMassPolynomial",
+    "electric_model": {
+      "duty_cycle": 1.0,
+      "thrust_scale_factor": 1.0,
+      "thrust_coeff_mn": [
+        -5.19082,
+        2.96519,
+        -14.4789,
+        54.05382,
+        -0.00100092
+      ],
+      "mass_flow_coeff_mgps": [
+        -0.004776,
+        0.05717,
+        -0.09956,
+        0.03211,
+        2.13781
+      ],
+      "maximum_usable_power_kw": 7.266,
+      "minimum_usable_power_kw": 0.638,
+      "thrust_power_curve_samples": [
+        {
+          "input_power_kw": 0.638,
+          "thrust_n": 0.004844712634107073,
+          "mass_flow_kg_s": 3.537145966436802e-07
+        },
+        {
+          "input_power_kw": 1.584857142857143,
+          "thrust_n": 0.17831201935772392,
+          "mass_flow_kg_s": 1.3451023743666437e-05
+        },
+        {
+          "input_power_kw": 2.5317142857142856,
+          "thrust_n": 0.7866145787457847,
+          "mass_flow_kg_s": 8.784984512574054e-05
+        },
+        {
+          "input_power_kw": 3.4785714285714286,
+          "thrust_n": 2.1050261449313816,
+          "mass_flow_kg_s": 0.000313361474756387
+        },
+        {
+          "input_power_kw": 4.425428571428571,
+          "thrust_n": 4.408801163551545,
+          "mass_flow_kg_s": 0.0008210371638537685
+        },
+        {
+          "input_power_kw": 5.372285714285714,
+          "thrust_n": 7.9731747717472485,
+          "mass_flow_kg_s": 0.0017831681188406904
+        },
+        {
+          "input_power_kw": 6.319142857142857,
+          "thrust_n": 13.0733627981634,
+          "mass_flow_kg_s": 0.003413285501344603
+        },
+        {
+          "input_power_kw": 7.266,
+          "thrust_n": 19.984561762948847,
+          "mass_flow_kg_s": 0.005966160428197591
+        }
+      ],
+      "solar_initial_max_power_kw": 1.2,
+      "solar_margin_percent": 5.0,
+      "solar_margin_frac": 0.05,
+      "solar_bus_coeff1": 0.3,
+      "solar_bus_coeff2": 0.0,
+      "solar_bus_coeff3": 0.0,
+      "solar_coeffs": [
+        1.32077,
+        -0.10848,
+        -0.11665,
+        0.10843,
+        -0.01279
+      ],
+      "bus_coeffs": [
+        0.3,
+        0.0,
+        0.0
+      ],
+      "annual_decay_rate_frac": 0.05,
+      "solar_annual_decay_rate_frac": 0.05,
+      "solar_initial_epoch_utc": "2026-06-15T12:00:00.000Z",
+      "solar_shadow_active": true,
+      "effective_power_kw": 0.7910273390619846
+    },
+    "gmat_spiral_mass_flow_kg_s": 8.310617941265247e-07,
+    "nominal_power_kw": 0.7910273390619846,
+    "nominal_thrust_n": 0.014849284046216283
+  },
+  "target": {
+    "semi_major_axis_m": 42164000.0,
+    "ecc_max": 0.001,
+    "inclination_deg": 0.0,
+    "sma_tolerance_m": 1000.0,
+    "inc_tolerance_deg": 0.1,
+    "max_pointing_error_deg": 5.0,
+    "max_fuel_error_fraction": 0.25,
+    "max_ephemeris_position_error_m": 500000.0,
+    "max_burn_start_error_s": 120.0
+  },
+  "execution_validation": {
+    "checks": [
+      "attitude_pointing",
+      "fuel_usage",
+      "burn_schedule_timing",
+      "ephemeris_envelope"
+    ],
+    "informational_checks": [
+      "orbit_sma",
+      "orbit_ecc",
+      "orbit_inc"
+    ]
+  },
+  "burns": [
+    {
+      "id": "spiral_to_geo",
+      "type": "electric_spiral",
+      "start_s": 2829.282859351952,
+      "gmat_start_s": 2829.282859351952,
+      "duration_s": 4531189.515888446,
+      "gmat_end_s": 4534018.798747798,
+      "thrust_n": 0.014849284046216283,
+      "constant_thrust": false,
+      "thrust_model": "ThrustMassPolynomial",
+      "pointing_frame": "VNB",
+      "pointing_direction": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "stop_condition": {
+        "mode": "gmat_end_s",
+        "semi_major_axis_m": 42164000.0,
+        "gmat_targeting": [
+          "sma_only"
+        ]
+      }
+    },
+    {
+      "id": "post_spiral_equator_trim",
+      "type": "coast_trim",
+      "start_s": 4538697.44383553,
+      "gmat_start_s": 4538697.44383553,
+      "duration_s": 53999.9999141898,
+      "gmat_end_s": 4592697.44374972,
+      "target_event": "equator_crossing_z0"
+    }
+  ],
+  "gmat_reference": {
+    "mission_mode": "electric_spiral",
+    "gmat_targeting": [
+      "sma_only"
+    ],
+    "converged_sma": true,
+    "converged_ecc": false,
+    "converged_inc": false,
+    "converged": true,
+    "final_sma_km": 42163.86468184531,
+    "final_ecc": 0.05500945849706693,
+    "final_inc_deg": 28.30705368775069,
+    "spiral_start_s": 2829.282859351952,
+    "spiral_end_s": 4534018.798747798,
+    "equator_trim_end_s": 4538697.44383553,
+    "mission_end_s": 4592697.44374972,
+    "fuel_mass_kg": 3.7656984886015508
+  }
+}

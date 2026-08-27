@@ -1,0 +1,54 @@
+<<<<<<<<<<<<<<<<<  42: The Mostly Harmless Simulator  >>>>>>>>>>>>>>>>>
+************************** Simulation Control **************************
+FAST                            !  Time Mode (FAST, REAL, or EXTERNAL)
+7200.0      1.0                !  Sim Duration, Step Size [sec]
+10.0                            !  File Output Interval [sec]
+42                              !  RNG Seed (frozen B2 MC seed)
+TRUE                            !  Graphics Front End?
+Inp_Cmd.txt                     !  Command Script File Name
+**************************  Reference Orbits  **************************
+1                               !  Number of Reference Orbits
+TRUE   Orb_B2A_LEO.txt          !  Input file name for Orb 0
+*****************************  Spacecraft  *****************************
+1                               !  Number of Spacecraft
+TRUE 0 SC_B2A_CubeSat.txt       !  Existence, RefOrb, Input file for SC 0
+***************************** Environment  *****************************
+06 02 2026                      !  Date (UTC) (Month, Day, Year)
+00 00 00.00                     !  Time (UTC) (Hr,Min,Sec)
+37.0                            !  Leap Seconds (sec)
+USER                            !  F10.7, Ap (USER, NOMINAL or TWOSIGMA)
+230.0                           !  If USER_DEFINED, enter desired F10.7 value
+100.0                           !  If USER_DEFINED, enter desired AP value
+IGRF                            !  Magfield (NONE,DIPOLE,IGRF)
+8   8                           !  IGRF Degree and Order (<=10)
+2   0                           !  Earth Gravity Model N and M (<=18) J2-only
+2   0                           !  Mars Gravity Model N and M (<=18)
+2   0                           !  Luna Gravity Model N and M (<=18)
+FALSE   FALSE                   !  Aerodynamic Forces & Torques (Shadows)
+FALSE                           !  Gravity Gradient Torques
+FALSE   FALSE                   !  Solar Pressure Forces & Torques (Shadows)
+FALSE                           !  Residual Magnetic Moment Torques
+FALSE                           !  Gravity Perturbation Forces
+FALSE                           !  Thruster Plume Forces & Torques
+FALSE                           !  Contact Forces and Torques
+FALSE                           !  CFD Slosh Forces and Torques
+FALSE                           !  Albedo Effect on CSS Measurements
+FALSE                           !  Output Environmental Torques to Files
+********************* Celestial Bodies of Interest *********************
+DE430                           !  Ephem Option (MEAN or DE430)
+TRUE                            !  Mercury
+TRUE                            !  Venus
+TRUE                            !  Earth and Luna
+FALSE                           !  Mars and its moons
+FALSE                           !  Jupiter and its moons
+FALSE                           !  Saturn and its moons
+FALSE                           !  Uranus and its moons
+FALSE                           !  Neptune and its moons
+FALSE                           !  Pluto and its moons
+FALSE                           !  Asteroids and Comets
+***************** Lagrange Point Systems of Interest ******************
+FALSE                           !  Earth-Moon
+FALSE                           !  Sun-Earth
+FALSE                           !  Sun-Jupiter
+************************* Ground Stations ***************************
+0                                            ! Number of Ground Stations

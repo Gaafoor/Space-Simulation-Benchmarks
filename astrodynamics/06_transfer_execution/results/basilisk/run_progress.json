@@ -1,0 +1,42 @@
+{
+  "status": "completed",
+  "checkpoint_time_s": 4592697.44374972,
+  "checkpoint_utc": "2026-07-13T20:14:39Z",
+  "progress_fraction": 1.0,
+  "mission_end_s": 4592697.44374972,
+  "final_sma_km": 50227.102982946366,
+  "final_ecc": 0.028334334883659888,
+  "final_inc_deg": 28.383402152667852,
+  "fuel_used_kg": 3.969209897360569,
+  "max_ephemeris_position_error_m": 92189999.75995499,
+  "max_burn_start_error_s": 0.0,
+  "max_pointing_error_deg": 2.3106294210333242,
+  "state_samples": 76545,
+  "thrust_samples": 415613,
+  "burns_applied": [
+    {
+      "id": "spiral_to_geo",
+      "time_s": 2829.282859351952,
+      "gmat_start_s": 2829.282859351952,
+      "duration_s": 4531189.515888446,
+      "type": "electric_spiral",
+      "thrust_n": 0.014849284046216283,
+      "thrust_model": "ThrustMassPolynomial",
+      "input_power_kw": 0.8238930108247411,
+      "nominal_thrust_n": 0.01765349397226872,
+      "mass_after_kg": 13.03079010263943,
+      "stop_reason": "gmat_end",
+      "stop_mode": "gmat_end_s"
+    },
+    {
+      "id": "post_spiral_equator_trim",
+      "time_s": 4538697.44383553,
+      "gmat_start_s": 4538697.44383553,
+      "duration_s": 53999.9999141898,
+      "type": "coast_trim",
+      "thrust_n": 0.0,
+      "mass_after_kg": 13.03079010263943
+    }
+  ],
+  "vizard_bin": "/media/windows/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff_mission_realistic_full_rerun/gmat_handoff_UnityViz.bin"
+}

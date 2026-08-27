@@ -1,0 +1,362 @@
+{
+  "benchmark": "B1",
+  "simulator": "GMAT",
+  "status": "pass",
+  "cases": [
+    "b1_case1_twobody",
+    "b1_case2_j2",
+    "b1_case3_j2_drag",
+    "b1_case4_j2_drag_srp",
+    "b1_case5_all_supported"
+  ],
+  "summaries": [
+    {
+      "benchmark": "B1",
+      "simulator": "GMAT",
+      "run_id": "b1_gmat_case1_twobody",
+      "case_id": "b1_case1_twobody",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "expected_sample_count": 145,
+      "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case1_twobody_state.csv",
+      "raw_gmat_csv_rows_parsed": 1009,
+      "force_model": {
+        "gravity_potential_file": "JGM2.cof",
+        "gravity_harmonics_degree": 0,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+      },
+      "drift_metrics_vs_case1": {},
+      "gmat_perturbation_documentation": {
+        "enabled_gmat_force_models": [
+          "Earth central gravity via JGM-2, degree 0, order 0 (point-mass Earth)"
+        ],
+        "increment_vs_previous_case": "Baseline case. Point-mass Earth gravity only (JGM-2 deg 0).",
+        "previous_case_id": null
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case1_twobody/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case1_twobody/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case1_twobody/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "GMAT",
+      "run_id": "b1_gmat_case2_j2",
+      "case_id": "b1_case2_j2",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "expected_sample_count": 145,
+      "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case2_j2_state.csv",
+      "raw_gmat_csv_rows_parsed": 1009,
+      "force_model": {
+        "gravity_potential_file": "JGM2.cof",
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474085.4333391307,
+        "ground_track_lon_drift_deg": -12.168721640592096,
+        "raan_change_deg": 0.9889728325948232,
+        "altitude_change_m": -18607.29279111419,
+        "along_track_phase_drift_deg": 4.076540455563929,
+        "final_altitude_m": 481392.70203216746,
+        "final_semi_major_axis_m": 6859529.702032167
+      },
+      "gmat_perturbation_documentation": {
+        "enabled_gmat_force_models": [
+          "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)"
+        ],
+        "increment_vs_previous_case": "Adds J2 via JGM-2 degree 2, order 0.",
+        "previous_case_id": "b1_case1_twobody"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "GMAT",
+      "run_id": "b1_gmat_case3_j2_drag",
+      "case_id": "b1_case3_j2_drag",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "expected_sample_count": 145,
+      "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case3_j2_drag_state.csv",
+      "raw_gmat_csv_rows_parsed": 1009,
+      "force_model": {
+        "gravity_potential_file": "JGM2.cof",
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE-00 with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474459.47246216756,
+        "ground_track_lon_drift_deg": -12.18169771439014,
+        "raan_change_deg": 0.9889746508713491,
+        "altitude_change_m": -18612.69746873714,
+        "along_track_phase_drift_deg": 4.079663892210078,
+        "final_altitude_m": 481387.2973545445,
+        "final_semi_major_axis_m": 6859524.2973545445
+      },
+      "gmat_perturbation_documentation": {
+        "enabled_gmat_force_models": [
+          "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+          "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+          "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)"
+        ],
+        "increment_vs_previous_case": "Adds native atmospheric drag (NRLMSISE-00).",
+        "previous_case_id": "b1_case2_j2"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case3_j2_drag/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case3_j2_drag/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case3_j2_drag/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "GMAT",
+      "run_id": "b1_gmat_case4_j2_drag_srp",
+      "case_id": "b1_case4_j2_drag_srp",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "expected_sample_count": 145,
+      "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case4_j2_drag_srp_state.csv",
+      "raw_gmat_csv_rows_parsed": 1009,
+      "force_model": {
+        "gravity_potential_file": "JGM2.cof",
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE-00 with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+        "srp_enabled": true,
+        "srp_model": "Spherical SRP",
+        "third_body_bodies": [],
+        "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474376.6507804141,
+        "ground_track_lon_drift_deg": -12.17900914926792,
+        "raan_change_deg": 0.9890159271908672,
+        "altitude_change_m": -18612.724027984776,
+        "along_track_phase_drift_deg": 4.078983386208336,
+        "final_altitude_m": 481387.2707952969,
+        "final_semi_major_axis_m": 6859524.270795297
+      },
+      "gmat_perturbation_documentation": {
+        "enabled_gmat_force_models": [
+          "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+          "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+          "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+          "Spherical solar radiation pressure with Cr=1.8, SRPArea=1.0 m\u00b2"
+        ],
+        "increment_vs_previous_case": "Adds spherical solar radiation pressure.",
+        "previous_case_id": "b1_case3_j2_drag"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "GMAT",
+      "run_id": "b1_gmat_case5_all_supported",
+      "case_id": "b1_case5_all_supported",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "expected_sample_count": 145,
+      "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case5_all_supported_state.csv",
+      "raw_gmat_csv_rows_parsed": 1009,
+      "force_model": {
+        "gravity_potential_file": "JGM2.cof",
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE-00 with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+        "srp_enabled": true,
+        "srp_model": "Spherical SRP",
+        "third_body_bodies": [
+          "Sun",
+          "Luna"
+        ],
+        "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474461.1043520755,
+        "ground_track_lon_drift_deg": -12.18188207635518,
+        "raan_change_deg": 0.9887912415114194,
+        "altitude_change_m": -18612.676273415796,
+        "along_track_phase_drift_deg": 4.079658875918142,
+        "final_altitude_m": 481387.31854986586,
+        "final_semi_major_axis_m": 6859524.318549866
+      },
+      "gmat_perturbation_documentation": {
+        "enabled_gmat_force_models": [
+          "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+          "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+          "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+          "Spherical solar radiation pressure with Cr=1.8, SRPArea=1.0 m\u00b2",
+          "Sun and Luna point-mass third-body gravity"
+        ],
+        "increment_vs_previous_case": "Adds Sun and Luna point-mass third-body gravity. Inherits all force models from Case 4.",
+        "previous_case_id": "b1_case4_j2_drag_srp",
+        "all_supported_gmat_definition": {
+          "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The GMAT-specific definition is below.",
+          "inherits_from_case": "b1_case4_j2_drag_srp",
+          "added_in_case5_vs_case4": [
+            "Sun point-mass gravity",
+            "Luna (Moon) point-mass gravity"
+          ],
+          "full_force_stack": [
+            "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+            "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+            "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+            "Spherical solar radiation pressure with Cr=1.8, SRPArea=1.0 m\u00b2",
+            "Sun and Luna point-mass third-body gravity"
+          ],
+          "not_added_in_case5": [
+            "Higher-degree/order gravity field (beyond J2-only policy)",
+            "Solid Earth tides or ocean tides on gravity field",
+            "Additional planets as third bodies",
+            "Relativistic corrections",
+            "Earth albedo / infrared radiation pressure",
+            "SPAD or facet SRP models"
+          ]
+        }
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case5_all_supported/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case5_all_supported/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case5_all_supported/altitude_vs_time.png"
+      }
+    }
+  ],
+  "metrics_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/benchmark_b/B1_METRICS_COMPARISON.csv",
+  "parameter_table": "data/benchmark_b/B1_PARAMETER_TABLE.md",
+  "gmat_version": "R2026a GmatConsole",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "python_version": "3.13.9",
+  "input_dir": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1",
+  "gmat_case5_all_supported_definition": {
+    "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The GMAT-specific definition is below.",
+    "inherits_from_case": "b1_case4_j2_drag_srp",
+    "added_in_case5_vs_case4": [
+      "Sun point-mass gravity",
+      "Luna (Moon) point-mass gravity"
+    ],
+    "full_force_stack": [
+      "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+      "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+      "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+      "Spherical solar radiation pressure with Cr=1.8, SRPArea=1.0 m\u00b2",
+      "Sun and Luna point-mass third-body gravity"
+    ],
+    "not_added_in_case5": [
+      "Higher-degree/order gravity field (beyond J2-only policy)",
+      "Solid Earth tides or ocean tides on gravity field",
+      "Additional planets as third bodies",
+      "Relativistic corrections",
+      "Earth albedo / infrared radiation pressure",
+      "SPAD or facet SRP models"
+    ]
+  },
+  "gmat_b1_physics_scope": {
+    "covered_in_this_b1_run": [
+      "Numerical propagation (Runge-Kutta 89)",
+      "JGM-2 central gravity and J2-only harmonics policy",
+      "NRLMSISE-00 atmospheric drag with CSSI space-weather file",
+      "Spherical solar radiation pressure",
+      "Sun and Luna third-body point-mass gravity",
+      "7-day LEO state history export and drift metrics"
+    ],
+    "gmat_native_but_not_in_b1": [
+      "Full gravity field to high degree/order (e.g. EGM96, tides)",
+      "Alternative atmosphere models (MSISE90, JacchiaRoberts, exponential)",
+      "SPAD file-based or facet SRP models",
+      "Third-body perturbations from additional solar-system bodies",
+      "Relativistic correction force models",
+      "Attitude-dependent drag and SRP (requires attitude dynamics, B2 scope)",
+      "Maneuver modeling and event detection beyond fixed-force propagation"
+    ],
+    "conclusion": "GMAT B1 demonstrates a staged perturbation ladder using native GMAT force models aligned with the frozen cross-tool benchmark. It does not claim to exercise every physics feature GMAT supports."
+  },
+  "runtime_s": {
+    "post_processing": 1.3551115709997248,
+    "gmat_gui_total_no_plots_s": 13.867,
+    "gmat_gui_total_with_plots_s": null,
+    "gmat_gui_per_case_no_plots_s": 2.7734,
+    "gmat_gui_per_case_with_plots_s": null
+  }
+}

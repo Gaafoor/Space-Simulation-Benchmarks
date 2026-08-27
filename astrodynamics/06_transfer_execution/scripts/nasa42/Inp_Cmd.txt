@@ -1,0 +1,9 @@
+<<<<<<<<<<<<<<<<<  42:  Command Script File  >>>>>>>>>>>>>>>>>
+% A3 LEO-GEO full mission — auto-generated from burn_schedule.json (N9)
+0.0 SC[0] FswTag = PROTOTYPE_FSW
+0.0 Point SC[0].B[0] Primary Vector [0.0 0.0 -1.0] at EARTH
+0.0 Point SC[0].B[0] Secondary Vector [1.0 0.0 0.0] at VELOCITY
+0 SC[0].AC.Thr[0].ThrustLevelCmd = 0.0
+2829.28285935195 SC[0].AC.Thr[0].ThrustLevelCmd = 1.0
+4534018.7987478 SC[0].AC.Thr[0].ThrustLevelCmd = 0.0
+EOF

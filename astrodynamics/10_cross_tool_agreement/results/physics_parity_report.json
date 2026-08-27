@@ -1,0 +1,34 @@
+{
+  "baseline_dir": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff",
+  "parity_dir": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff_physics_parity",
+  "gmat_spiral_end_day": 52.47706970055514,
+  "baseline": {
+    "force_model": null,
+    "final_sma_km": 42162.493052229634,
+    "fuel_used_kg": 1.2356143603656768,
+    "max_ephemeris_error_km": 72164.46610693261,
+    "sma_42164_day": 17.240972222222222,
+    "stop_reason": "sma_target_coast"
+  },
+  "parity": {
+    "force_model": {
+      "gravity": "JGM2-equivalent GGM2BData 20x20",
+      "atmosphere": "NRLMSISE-00 (MsisAtmosphere)",
+      "drag": true,
+      "srp": true,
+      "third_bodies": [
+        "Sun",
+        "Moon"
+      ]
+    },
+    "final_sma_km": 42018.79595317907,
+    "fuel_used_kg": 1.2364204903028888,
+    "max_ephemeris_error_km": 74829.08663056369,
+    "sma_42164_day": 17.252083333333335,
+    "stop_reason": "sma_target_coast"
+  },
+  "plots": {
+    "sma_vs_time": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff_physics_parity/physics_parity_sma_vs_time.png",
+    "ephemeris_error": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/pipeline_handoff/basilisk/gmat_gnc_handoff_physics_parity/physics_parity_ephemeris_error.png"
+  }
+}

@@ -1,0 +1,4 @@
+eventCode                 A3_SC.ElapsedSecs         A3_SC.TotalMass           A3_SC.Earth.SMA           A3_SC.Earth.ECC           A3_SC.EarthMJ2000Eq.INC   
+1                         0                         17                        6878.137000000008         8.582647785749977e-16     28.5                      
+eventCode                 A3_SC.ElapsedSecs         A3_SC.TotalMass           A3_SC.Earth.SMA           A3_SC.Earth.ECC           A3_SC.EarthMJ2000Eq.INC   
+10                        2829.282859666273         17                        6878.020188626627         0.00235334060880621       28.49927261056657         

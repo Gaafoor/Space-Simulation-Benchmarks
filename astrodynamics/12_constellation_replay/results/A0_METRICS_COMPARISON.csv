@@ -1,0 +1,6 @@
+simulator,run_id,case_id,wall_clock_runtime_s,runtime_ratio,drag_enabled,srp_enabled,third_body_enabled,high_degree_gravity
+Basilisk,a0_basilisk_case1_twobody,a0_case1_twobody,12.483698739999909,692102.5715172027,False,False,False,False
+Basilisk,a0_basilisk_case2_j2,a0_case2_j2,12.733345200000258,678533.3990631013,False,False,False,False
+Basilisk,a0_basilisk_case3_j2_drag,a0_case3_j2_drag,14.556326481999804,593556.348896415,True,False,False,False
+Basilisk,a0_basilisk_case4_j2_drag_srp,a0_case4_j2_drag_srp,15.104746473999967,572005.6284871888,True,True,False,False
+Basilisk,a0_basilisk_case5_all_supported,a0_case5_all_supported,18.747191245000067,460869.0383048348,True,True,True,True

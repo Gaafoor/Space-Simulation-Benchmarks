@@ -1,0 +1,18 @@
+metric,unit,gmat_a3_raan_061,basilisk_a3,orekit_a3,stk_a3,notes
+selected_raan,deg,61,61,61,,Matched scenario for cross-tool A3 comparison
+pass_count,count,2,,,,GMAT ContactLocator spacecraft-to-Madrid contacts only
+imaging_opportunity_count,count,1,1,1,,Post-processed with same 10 deg full-cone camera model
+minimum_off_nadir_angle,deg,2.1745760343265856,2.109545164729093,2.174549790167907,,Inside 5 deg half-angle requirement
+camera_fov,deg,10,10,10,,Full cone angle
+camera_half_angle,deg,5,5,5,,A3 imaging threshold
+coverage_percentage_madrid_box,percent,67.03,67.93,67.03,,Regional grid coverage over lat [40.2-40.7] and lon [-4.2 to -3.2]
+coverage_max_count,samples,2,2,2,,Maximum visit count per 100x100 regional cell
+runtime_scope_definition,qualitative,Post-processing only,Not available in current environment,Full pipeline propagation plus post-processing,,Use this row before comparing runtimes
+runtime_total_reported,seconds,2.5528055509996648,,9.056462703999841,,Do not compare directly without scope normalization
+runtime_propagation_component,seconds,,,6.369036804000189,,Available from Orekit summary only
+runtime_post_processing_component,seconds,2.5528055509996648,,2.68624329100021,,Closest comparable post-processing metric where available
+implementation_workflow,qualitative,GMAT propagation plus Python post-processing,Basilisk simulation plus Python post-processing,Orekit numerical propagation plus Python post-processing,,Use for implementation-difficulty narrative
+setup_overhead,qualitative,Low to medium,Low to medium,High JVM plus orekit-data plus Python bridge,,Orekit initial setup has extra dependency steps
+coverage_heatmap_source,qualitative,Custom Python in run_gmat_a3_analysis.py,Custom Python in run_basilisk_a3_imaging_analysis.py,Custom Python in run_orekit_a3_imaging_analysis.py,,Not a native simulator coverage API in these A3 runs
+native_sensor_contact_support,qualitative,Not supported through tested ContactLocator syntax,Not used explicit Python FOV geometry,Not used explicit Python FOV geometry,,GMAT Imager/ConicalFOV exists but sensor-constrained ContactLocator failed
+rendered_image_output_supported,yes_no,No,No,No,,A3 geometry only; C1 deferred

@@ -1,0 +1,104 @@
+{
+  "RAAN": 61.0,
+  "epoch": "2026-06-02T00:00:00",
+  "pass_count": 2,
+  "minimum_off_nadir_angle_deg": 2.1745760343265856,
+  "minimum_off_nadir_time_s": 40350.00055428827,
+  "imaging_opportunity_count": 1,
+  "imaging_sample_count": 61,
+  "all_pass_metrics": [
+    {
+      "pass_index": 1,
+      "start_s": 1971.194,
+      "stop_s": 2365.5,
+      "duration_s": 394.30664313,
+      "duration_min": 6.5717773855,
+      "utc_start": "02 Jun 2026 00:32:51.194",
+      "utc_stop": "02 Jun 2026 00:39:25.500",
+      "min_off_nadir_deg": 52.48675686788727,
+      "max_elevation_deg": 31.172167503307247
+    },
+    {
+      "pass_index": 2,
+      "start_s": 40129.185,
+      "stop_s": 40571.768,
+      "duration_s": 442.58347813,
+      "duration_min": 7.376391302166667,
+      "utc_start": "02 Jun 2026 11:08:49.185",
+      "utc_stop": "02 Jun 2026 11:16:11.768",
+      "min_off_nadir_deg": 2.1745760343265856,
+      "max_elevation_deg": 87.65256132009438
+    }
+  ],
+  "aggregate_metrics": {
+    "imaging_opportunity_count": 1,
+    "avg_imaging_opportunity_duration_min": 0.166666668956168,
+    "total_imaging_time_min": 0.166666668956168,
+    "min_revisit_time_min": 0.0,
+    "camera_fov_deg": 10.0,
+    "camera_half_angle_deg": 5.0,
+    "ground_footprint_diameter_km": 87.48866352592401,
+    "minimum_boresight_angle_deg": 2.1745760343265856,
+    "maximum_target_elevation_deg": 87.65256132009438,
+    "rendered_image_output_supported": "No - A3 geometry only; C1 deferred"
+  },
+  "revisit_windows": [],
+  "imaging_windows": [
+    {
+      "start_s": 40350.00055428827,
+      "stop_s": 40360.00055442564,
+      "duration_s": 10.00000013737008,
+      "duration_min": 0.166666668956168
+    }
+  ],
+  "artifacts": {
+    "off_nadir_plot": "results/RAAN_061/off_nadir_angle_vs_time.png",
+    "elevation_plot": "results/RAAN_061/elevation_vs_time.png",
+    "ground_track_map": "results/RAAN_061/ground_track_madrid_imaging_map.png",
+    "camera_footprint_plot": "results/RAAN_061/camera_footprint_best_instant.png",
+    "coverage_heatmap": "results/RAAN_061/coverage_heatmap.png",
+    "coverage_statistics_csv": "results/RAAN_061/madrid_coverage_statistics.csv",
+    "coverage_percentage_json": "results/RAAN_061/coverage_percentage.json",
+    "revisit_windows_csv": "results/RAAN_061/revisit_windows.csv",
+    "imaging_timeline_csv": "results/RAAN_061/imaging_timeline.csv",
+    "imaging_windows_csv": "results/RAAN_061/imaging_windows.csv",
+    "source_state_file": "gmat/gmat_a3_state.csv",
+    "source_contact_file": "gmat/gmat_a3_madrid_contacts.txt",
+    "source_script_file": "gmat/benchmark_a3_gmat.script"
+  },
+  "madrid_regional_coverage": {
+    "region": {
+      "lat_min_deg": 40.2,
+      "lat_max_deg": 40.7,
+      "lon_min_deg": -4.2,
+      "lon_max_deg": -3.2
+    },
+    "grid": {
+      "lat_divisions": 100,
+      "lon_divisions": 100,
+      "total_cells": 10000
+    },
+    "coverage": {
+      "covered_cells": 6703,
+      "coverage_percentage": 67.03,
+      "max_coverage_count": 2,
+      "mean_coverage_count": 0.7767,
+      "footprint_radius_km": 43.744331762962005
+    },
+    "artifacts": {
+      "coverage_heatmap": "results/RAAN_061/coverage_heatmap.png",
+      "coverage_statistics_csv": "results/RAAN_061/madrid_coverage_statistics.csv"
+    }
+  },
+  "runtime_seconds": {
+    "load_inputs": 0.01277658099979817,
+    "compute_geometry": 0.13463151299993115,
+    "save_outputs": 2.4053974569999355,
+    "total_post_processing": 2.5528055509996648
+  },
+  "implementation_notes": {
+    "workflow_type": "GMAT propagation/export + Python geometry post-processing",
+    "coverage_method": "Computed in Python from exported ECI state history and camera footprint model",
+    "native_gmat_sensor_contact": "Not supported via tested ContactLocator syntax"
+  }
+}

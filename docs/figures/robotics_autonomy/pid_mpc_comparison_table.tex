@@ -1,0 +1,21 @@
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{l l r r r r r}
+\toprule
+Spacecraft & Run & RMSE $\|e\|$ [m] & Peak $\|e\|$ [m] & $\max\|F\|$ [N] & $\int\|F\|dt$ [N\,s] & $\int\|T\|dt$ [N\,m\,s]\\
+\midrule
+leaderSc & PID & 0.1795 & 0.6420 & 0.5766 & 5.6018 & 0.1530\\
+leaderSc & MPC & 0.1266 & 0.6402 & 2.1449 & 10.6244 & 1.4597\\
+\addlinespace
+followerSc\_1 & PID & 0.1793 & 0.6411 & 0.5766 & 5.5621 & 0.0000\\
+followerSc\_1 & MPC & 0.1295 & 0.6399 & 2.3350 & 11.3292 & 1.4354\\
+\addlinespace
+followerSc\_2 & PID & 0.1794 & 0.6403 & 0.5763 & 5.4321 & 0.0000\\
+followerSc\_2 & MPC & 0.1281 & 0.6402 & 1.9957 & 11.6037 & 1.4320\\
+\addlinespace
+\bottomrule
+\end{tabular}
+\caption{PID vs MPC closed-loop tracking and control-effort metrics from bag replay.}
+\label{tab:pid-mpc-compare}
+\end{table}

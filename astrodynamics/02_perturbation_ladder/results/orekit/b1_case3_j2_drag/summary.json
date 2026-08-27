@@ -1,0 +1,54 @@
+{
+  "benchmark": "B1",
+  "simulator": "Orekit",
+  "run_id": "b1_orekit_case3_j2_drag",
+  "case_id": "b1_case3_j2_drag",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "force_model": {
+    "gravity_harmonics_degree": 2,
+    "gravity_harmonics_order": 0,
+    "drag_enabled": true,
+    "atmosphere_model": "NRLMSISE00 + CssiSpaceWeatherData",
+    "srp_enabled": false,
+    "third_body_bodies": []
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+  },
+  "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+  "runtime_s": {
+    "propagation": 0.7583406910016492,
+    "runtime_ratio": 113932.9605086589
+  },
+  "drift_metrics_vs_case1": {
+    "position_drift_vs_case1_m": 474348.80726545537,
+    "ground_track_lon_drift_deg": -12.177861366237408,
+    "raan_change_deg": 0.9889742615627104,
+    "altitude_change_m": -18611.106847645715,
+    "along_track_phase_drift_deg": 4.078739767815875,
+    "final_altitude_m": 481388.8931523543,
+    "final_semi_major_axis_m": 6859525.893152354
+  },
+  "orekit_perturbation_documentation": {
+    "enabled_orekit_force_models": [
+      "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+      "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+      "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)"
+    ],
+    "increment_vs_previous_case": "Adds atmospheric drag (NRLMSISE00 + isotropic drag model).",
+    "previous_case_id": "b1_case2_j2"
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/altitude_vs_time.png"
+  }
+}

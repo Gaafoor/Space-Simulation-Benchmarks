@@ -1,0 +1,211 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2026-06-02 16:50:27
+
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CubeSat_A1;
+CubeSat_A1.DateFormat = UTCGregorian;
+CubeSat_A1.Epoch = '02 Jun 2026 00:00:00.000';
+CubeSat_A1.CoordinateSystem = EarthMJ2000Eq;
+CubeSat_A1.DisplayStateType = Keplerian;
+CubeSat_A1.SMA = 6878.136999999989;
+CubeSat_A1.ECC = 2.452185081642847e-16;
+CubeSat_A1.INC = 97.40000000000001;
+CubeSat_A1.RAAN = 0;
+CubeSat_A1.AOP = 0;
+CubeSat_A1.TA = 0;
+CubeSat_A1.DryMass = 850;
+CubeSat_A1.Cd = 2.2;
+CubeSat_A1.Cr = 1.8;
+CubeSat_A1.DragArea = 15;
+CubeSat_A1.SRPArea = 1;
+CubeSat_A1.SPADDragScaleFactor = 1;
+CubeSat_A1.SPADSRPScaleFactor = 1;
+CubeSat_A1.AtmosDensityScaleFactor = 1;
+CubeSat_A1.ExtendedMassPropertiesModel = 'None';
+CubeSat_A1.NAIFId = -10002001;
+CubeSat_A1.NAIFIdReferenceFrame = -9002001;
+CubeSat_A1.OrbitColor = Red;
+CubeSat_A1.TargetColor = Teal;
+CubeSat_A1.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+CubeSat_A1.CdSigma = 1e+70;
+CubeSat_A1.CrSigma = 1e+70;
+CubeSat_A1.Id = 'SatId';
+CubeSat_A1.Attitude = CoordinateSystemFixed;
+CubeSat_A1.SPADSRPInterpolationMethod = Bilinear;
+CubeSat_A1.SPADSRPScaleFactorSigma = 1e+70;
+CubeSat_A1.SPADDragInterpolationMethod = Bilinear;
+CubeSat_A1.SPADDragScaleFactorSigma = 1e+70;
+CubeSat_A1.AtmosDensityScaleFactorSigma = 1e+70;
+CubeSat_A1.ModelFile = 'aura.3ds';
+CubeSat_A1.ModelOffsetX = 0;
+CubeSat_A1.ModelOffsetY = 0;
+CubeSat_A1.ModelOffsetZ = 0;
+CubeSat_A1.ModelRotationX = 0;
+CubeSat_A1.ModelRotationY = 0;
+CubeSat_A1.ModelRotationZ = 0;
+CubeSat_A1.ModelScale = 1;
+CubeSat_A1.AttitudeDisplayStateType = 'Quaternion';
+CubeSat_A1.AttitudeRateDisplayStateType = 'AngularVelocity';
+CubeSat_A1.AttitudeCoordinateSystem = EarthMJ2000Eq;
+CubeSat_A1.EulerAngleSequence = '321';
+
+
+
+
+
+%----------------------------------------
+%---------- ForceModels
+%----------------------------------------
+
+Create ForceModel DefaultProp_ForceModel;
+DefaultProp_ForceModel.CentralBody = Earth;
+DefaultProp_ForceModel.PrimaryBodies = {Earth};
+DefaultProp_ForceModel.Drag = None;
+DefaultProp_ForceModel.SRP = Off;
+DefaultProp_ForceModel.RelativisticCorrection = Off;
+DefaultProp_ForceModel.ErrorControl = RSSStep;
+DefaultProp_ForceModel.GravityField.Earth.Degree = 0;
+DefaultProp_ForceModel.GravityField.Earth.Order = 0;
+DefaultProp_ForceModel.GravityField.Earth.StmLimit = 100;
+DefaultProp_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+DefaultProp_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagators
+%----------------------------------------
+
+Create Propagator DefaultProp;
+DefaultProp.FM = DefaultProp_ForceModel;
+DefaultProp.Type = RungeKutta89;
+DefaultProp.InitialStepSize = 10;
+DefaultProp.Accuracy = 1e-12;
+DefaultProp.MinStep = 0.001;
+DefaultProp.MaxStep = 60;
+DefaultProp.MaxStepAttempts = 50;
+DefaultProp.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Subscribers
+%----------------------------------------
+
+Create OpenFramesInterface DefaultOrbitView;
+DefaultOrbitView.SolverIterations = Current;
+DefaultOrbitView.UpperLeft = [ -0.00411764705882353 -0.007220216606498195 ];
+DefaultOrbitView.Size = [ 0.5994117647058823 0.5992779783393501 ];
+DefaultOrbitView.RelativeZOrder = 213;
+DefaultOrbitView.Maximized = false;
+DefaultOrbitView.Add = {CubeSat_A1, Earth};
+DefaultOrbitView.View = {DefaultOrbitView_View};
+DefaultOrbitView.CoordinateSystem = EarthMJ2000Eq;
+DefaultOrbitView.DrawObject = [ true true ];
+DefaultOrbitView.DrawTrajectory = [ true true ];
+DefaultOrbitView.DrawAxes = [ false false ];
+DefaultOrbitView.DrawXYPlane = [ false false ];
+DefaultOrbitView.DrawLabel = [ true true ];
+DefaultOrbitView.DrawUsePropLabel = [ false false ];
+DefaultOrbitView.DrawCenterPoint = [ true true ];
+DefaultOrbitView.DrawEndPoints = [ true true ];
+DefaultOrbitView.DrawVelocity = [ false false ];
+DefaultOrbitView.DrawGrid = [ false false ];
+DefaultOrbitView.DrawLineWidth = [ 2 2 ];
+DefaultOrbitView.DrawMarkerSize = [ 10 10 ];
+DefaultOrbitView.DrawFontSize = [ 20 20 ];
+DefaultOrbitView.Axes = On;
+DefaultOrbitView.AxesLength = 12756.2726;
+DefaultOrbitView.AxesLabels = On;
+DefaultOrbitView.FrameLabel = Off;
+DefaultOrbitView.XYPlane = On;
+DefaultOrbitView.EclipticPlane = Off;
+DefaultOrbitView.EnableStars = On;
+DefaultOrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+DefaultOrbitView.StarCount = 40000;
+DefaultOrbitView.MinStarMag = -2;
+DefaultOrbitView.MaxStarMag = 6;
+DefaultOrbitView.MinStarPixels = 1;
+DefaultOrbitView.MaxStarPixels = 10;
+DefaultOrbitView.MinStarDimRatio = 0.5;
+DefaultOrbitView.ShowPlot = true;
+DefaultOrbitView.ShowToolbar = true;
+DefaultOrbitView.SolverIterLastN = 1;
+DefaultOrbitView.ShowVR = false;
+DefaultOrbitView.PlaybackTimeScale = 3600;
+DefaultOrbitView.MultisampleAntiAliasing = On;
+DefaultOrbitView.MSAASamples = 2;
+DefaultOrbitView.DrawFontPosition = {'Top-Right', 'Top-Right'};
+
+Create GroundTrack DefaultGroundTrackPlot;
+DefaultGroundTrackPlot.SolverIterations = Current;
+DefaultGroundTrackPlot.UpperLeft = [ 0.3629411764705882 0.5367027677496992 ];
+DefaultGroundTrackPlot.Size = [ 0.5 0.4500601684717208 ];
+DefaultGroundTrackPlot.RelativeZOrder = 218;
+DefaultGroundTrackPlot.Maximized = false;
+DefaultGroundTrackPlot.CentralBody = Earth;
+DefaultGroundTrackPlot.Add = {CubeSat_A1};
+DefaultGroundTrackPlot.DataCollectFrequency = 1;
+DefaultGroundTrackPlot.UpdatePlotFrequency = 50;
+DefaultGroundTrackPlot.NumPointsToRedraw = 0;
+DefaultGroundTrackPlot.MaxPlotPoints = 20000;
+DefaultGroundTrackPlot.ShowPlot = true;
+
+Create ReportFile A1_State_Report;
+A1_State_Report.SolverIterations = Current;
+A1_State_Report.UpperLeft = [ 0 0 ];
+A1_State_Report.Size = [ 0 0 ];
+A1_State_Report.RelativeZOrder = 0;
+A1_State_Report.Maximized = false;
+A1_State_Report.Filename = 'gmat_a1_state.csv';
+A1_State_Report.Precision = 16;
+A1_State_Report.WriteHeaders = true;
+A1_State_Report.LeftJustify = On;
+A1_State_Report.ZeroFill = Off;
+A1_State_Report.FixedWidth = true;
+A1_State_Report.Delimiter = ' ';
+A1_State_Report.ColumnWidth = 23;
+A1_State_Report.WriteReport = true;
+A1_State_Report.AppendToExistingFile = false;
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable i tStop stepSec I;
+i = 0;
+tStop = 0;
+stepSec = 600;
+
+
+
+
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView DefaultOrbitView_View;
+DefaultOrbitView_View.ViewFrame = CoordinateSystem;
+DefaultOrbitView_View.ViewTrajectory = Off;
+DefaultOrbitView_View.InertialFrame = Off;
+DefaultOrbitView_View.SetDefaultLocation = On;
+DefaultOrbitView_View.DefaultEye = [ 30000 0 0 ];
+DefaultOrbitView_View.DefaultCenter = [ 0 0 0 ];
+DefaultOrbitView_View.DefaultUp = [ 0 0 1 ];
+DefaultOrbitView_View.SetCurrentLocation = On;
+DefaultOrbitView_View.CurrentEye = [ 3291.37450368819 47417.30895339185 18576.77562374798 ];
+DefaultOrbitView_View.CurrentCenter = [ 0 0 -3.637978807091713e-12 ];
+DefaultOrbitView_View.CurrentUp = [ 0.03626904901619053 -0.3667185041237924 0.929624706436242 ];
+DefaultOrbitView_View.FOVy = 45;
+
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Report A1_State_Report CubeSat_A1.ElapsedSecs CubeSat_A1.EarthMJ2000Eq.X CubeSat_A1.EarthMJ2000Eq.Y CubeSat_A1.EarthMJ2000Eq.Z CubeSat_A1.EarthMJ2000Eq.VX CubeSat_A1.EarthMJ2000Eq.VY CubeSat_A1.EarthMJ2000Eq.VZ;
+For i = 1:1:144;
+   Propagate DefaultProp(CubeSat_A1) {CubeSat_A1.ElapsedSecs = stepSec};
+   Report A1_State_Report CubeSat_A1.ElapsedSecs CubeSat_A1.EarthMJ2000Eq.X CubeSat_A1.EarthMJ2000Eq.Y CubeSat_A1.EarthMJ2000Eq.Z CubeSat_A1.EarthMJ2000Eq.VX CubeSat_A1.EarthMJ2000Eq.VY CubeSat_A1.EarthMJ2000Eq.VZ;
+EndFor;

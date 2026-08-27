@@ -1,0 +1,542 @@
+%General Mission Analysis Tool(GMAT) Script
+%Created: 2026-06-29 08:20:46
+
+
+%----------------------------------------
+%---------- User-Modified Default Celestial Bodies
+%----------------------------------------
+
+Earth.EquatorialRadius = 6378.1366;
+Earth.Flattening = 0.00335281310845547;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+Create Spacecraft A3_SC;
+
+A3_SC.DateFormat = UTCGregorian;
+A3_SC.Epoch = '15 Jun 2025 12:00:00.000';
+A3_SC.CoordinateSystem = EarthMJ2000Eq;
+A3_SC.DisplayStateType = Keplerian;
+A3_SC.SMA = 6878.137000000008;
+A3_SC.ECC = 8.582647785749977e-16;
+A3_SC.INC = 28.5;
+A3_SC.RAAN = 0;
+A3_SC.AOP = 0;
+A3_SC.TA = 0;
+A3_SC.DryMass = 12;
+A3_SC.Cd = 2.2;
+A3_SC.Cr = 1.8;
+A3_SC.DragArea = 0.08;
+A3_SC.SRPArea = 0.1;
+A3_SC.SPADDragScaleFactor = 1;
+A3_SC.SPADSRPScaleFactor = 1;
+A3_SC.AtmosDensityScaleFactor = 1;
+A3_SC.ExtendedMassPropertiesModel = 'None';
+A3_SC.Tanks = {A3_Tank};
+A3_SC.Thrusters = {A3_Engine};
+A3_SC.PowerSystem = SolarPowerSystem1;
+A3_SC.NAIFId = -10008001;
+A3_SC.NAIFIdReferenceFrame = -9008001;
+A3_SC.OrbitColor = Yellow;
+A3_SC.TargetColor = Teal;
+A3_SC.OrbitErrorCovariance = [ 1e+70 0 0 0 0 0 ; 0 1e+70 0 0 0 0 ; 0 0 1e+70 0 0 0 ; 0 0 0 1e+70 0 0 ; 0 0 0 0 1e+70 0 ; 0 0 0 0 0 1e+70 ];
+A3_SC.CdSigma = 1e+70;
+A3_SC.CrSigma = 1e+70;
+A3_SC.Id = 'SatId';
+A3_SC.Attitude = CoordinateSystemFixed;
+A3_SC.SPADSRPInterpolationMethod = Bilinear;
+A3_SC.SPADSRPScaleFactorSigma = 1e+70;
+A3_SC.SPADDragInterpolationMethod = Bilinear;
+A3_SC.SPADDragScaleFactorSigma = 1e+70;
+A3_SC.AtmosDensityScaleFactorSigma = 1e+70;
+A3_SC.ModelFile = '/home/mahmedext/Downloads/GMAT/R2026a/data/vehicle/models/aura.3ds';
+A3_SC.ModelOffsetX = 0;
+A3_SC.ModelOffsetY = 0;
+A3_SC.ModelOffsetZ = 0;
+A3_SC.ModelRotationX = 0;
+A3_SC.ModelRotationY = 0;
+A3_SC.ModelRotationZ = 0;
+A3_SC.ModelScale = 1;
+A3_SC.AttitudeDisplayStateType = 'Quaternion';
+A3_SC.AttitudeRateDisplayStateType = 'AngularVelocity';
+A3_SC.AttitudeCoordinateSystem = EarthMJ2000Eq;
+A3_SC.EulerAngleSequence = '321';
+
+%----------------------------------------
+%---------- Hardware
+%----------------------------------------
+
+Create ElectricTank A3_Tank;
+A3_Tank.DirectionX = 0;
+A3_Tank.DirectionY = 0;
+A3_Tank.DirectionZ = 1;
+A3_Tank.SecondDirectionX = 0;
+A3_Tank.SecondDirectionY = -1;
+A3_Tank.SecondDirectionZ = 0;
+A3_Tank.HWOriginInBCSX = 0;
+A3_Tank.HWOriginInBCSY = 0;
+A3_Tank.HWOriginInBCSZ = 0;
+A3_Tank.AllowNegativeFuelMass = false;
+A3_Tank.FuelMass = 5;
+A3_Tank.FuelCenterOfMassX = 0;
+A3_Tank.FuelCenterOfMassY = 0;
+A3_Tank.FuelCenterOfMassZ = 0;
+A3_Tank.FuelMomentOfInertiaXX = 0.01;
+A3_Tank.FuelMomentOfInertiaXY = 0;
+A3_Tank.FuelMomentOfInertiaXZ = 0;
+A3_Tank.FuelMomentOfInertiaYY = 0.01;
+A3_Tank.FuelMomentOfInertiaYZ = 0;
+A3_Tank.FuelMomentOfInertiaZZ = 0.01;
+
+Create ElectricThruster A3_Engine;
+A3_Engine.HWOriginInBCSX = 0;
+A3_Engine.HWOriginInBCSY = 0;
+A3_Engine.HWOriginInBCSZ = 0;
+A3_Engine.CoordinateSystem = Local;
+A3_Engine.Origin = Earth;
+A3_Engine.Axes = VNB;
+A3_Engine.ThrustDirection1 = 1;
+A3_Engine.ThrustDirection2 = 0;
+A3_Engine.ThrustDirection3 = 0;
+A3_Engine.DutyCycle = 1;
+A3_Engine.ThrustScaleFactor = 1;
+A3_Engine.DecrementMass = true;
+A3_Engine.Tank = {A3_Tank};
+A3_Engine.MixRatio = [ 1 ];
+A3_Engine.GravitationalAccel = 9.81;
+A3_Engine.ThrustModel = ConstantThrustAndIsp;
+A3_Engine.MaximumUsablePower = 7.266;
+A3_Engine.MinimumUsablePower = 0.638;
+A3_Engine.ThrustCoeff1 = -5.19082;
+A3_Engine.ThrustCoeff2 = 2.96519;
+A3_Engine.ThrustCoeff3 = -14.4789;
+A3_Engine.ThrustCoeff4 = 54.05382;
+A3_Engine.ThrustCoeff5 = -0.00100092;
+A3_Engine.MassFlowCoeff1 = -0.004776;
+A3_Engine.MassFlowCoeff2 = 0.05717;
+A3_Engine.MassFlowCoeff3 = -0.09956;
+A3_Engine.MassFlowCoeff4 = 0.03211;
+A3_Engine.MassFlowCoeff5 = 2.13781;
+A3_Engine.FixedEfficiency = 0.7;
+A3_Engine.Isp = 2500;
+A3_Engine.ConstantThrust = 0.05;
+
+Create SolarPowerSystem SolarPowerSystem1;
+SolarPowerSystem1.EpochFormat = 'UTCGregorian';
+SolarPowerSystem1.InitialEpoch = ''15 Jun 2026 12:00:00.000'';
+SolarPowerSystem1.InitialMaxPower = 1.2;
+SolarPowerSystem1.AnnualDecayRate = 5;
+SolarPowerSystem1.Margin = 5;
+SolarPowerSystem1.BusCoeff1 = 0.3;
+SolarPowerSystem1.BusCoeff2 = 0;
+SolarPowerSystem1.BusCoeff3 = 0;
+SolarPowerSystem1.ShadowModel = 'DualCone';
+SolarPowerSystem1.ShadowBodies = {'Earth'};
+SolarPowerSystem1.SolarCoeff1 = 1.32077;
+SolarPowerSystem1.SolarCoeff2 = -0.10848;
+SolarPowerSystem1.SolarCoeff3 = -0.11665;
+SolarPowerSystem1.SolarCoeff4 = 0.10843;
+SolarPowerSystem1.SolarCoeff5 = -0.01279;
+
+
+%----------------------------------------
+%---------- Ground station + contact
+%----------------------------------------
+Create GroundStation Madrid;
+Madrid.OrbitColor = Thistle;
+Madrid.TargetColor = DarkGray;
+
+Madrid.CentralBody = Earth;
+Madrid.StateType = Spherical;
+Madrid.HorizonReference = Ellipsoid;
+Madrid.Location1 = 40.4168;
+Madrid.Location2 = 356.2962;
+Madrid.Location3 = 0.667;
+Madrid.Id = 'StationId';
+Madrid.IonosphereModel = 'None';
+Madrid.TroposphereModel = 'None';
+Madrid.DataSource = 'Constant';
+Madrid.Temperature = 295.1;
+Madrid.Pressure = 1013.5;
+Madrid.Humidity = 55;
+Madrid.MinimumElevationAngle = 10;
+
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- Force model (A-0 case 5 pattern)
+%----------------------------------------
+Create ForceModel A3_FM;
+
+A3_FM.CentralBody = Earth;
+A3_FM.PrimaryBodies = {Earth};
+A3_FM.PointMasses = {Sun, Luna};
+A3_FM.SRP = On;
+A3_FM.RelativisticCorrection = Off;
+A3_FM.ErrorControl = RSSStep;
+A3_FM.GravityField.Earth.Degree = 20;
+A3_FM.GravityField.Earth.Order = 20;
+A3_FM.GravityField.Earth.StmLimit = 100;
+A3_FM.GravityField.Earth.PotentialFile = 'JGM2.cof';
+A3_FM.GravityField.Earth.TideModel = 'None';
+A3_FM.SRP.Flux = 1367;
+A3_FM.SRP.SRPModel = Spherical;
+A3_FM.SRP.Nominal_Sun = 149597870.691;
+A3_FM.Drag.AtmosphereModel = NRLMSISE00;
+A3_FM.Drag.HistoricWeatherSource = 'CSSISpaceWeatherFile';
+A3_FM.Drag.PredictedWeatherSource = 'CSSISpaceWeatherFile';
+A3_FM.Drag.CSSISpaceWeatherFile = 'SpaceWeather-All-v1.2.txt';
+A3_FM.Drag.SchattenFile = 'SchattenPredict.txt';
+A3_FM.Drag.F107 = 150;
+A3_FM.Drag.F107A = 150;
+A3_FM.Drag.MagneticIndex = 3;
+A3_FM.Drag.SchattenErrorModel = 'Nominal';
+A3_FM.Drag.SchattenTimingModel = 'NominalCycle';
+A3_FM.Drag.DragModel = 'Spherical';
+
+%----------------------------------------
+%---------- Propagator
+%----------------------------------------
+Create Propagator A3_Prop;
+
+A3_Prop.FM = A3_FM;
+A3_Prop.Type = RungeKutta89;
+A3_Prop.InitialStepSize = 10;
+A3_Prop.Accuracy = 1e-10;
+A3_Prop.MinStep = 0.001;
+A3_Prop.MaxStep = 2700;
+A3_Prop.MaxStepAttempts = 50;
+A3_Prop.StopIfAccuracyIsViolated = false;
+
+%----------------------------------------
+%---------- Burns
+%----------------------------------------
+
+Create FiniteBurn A3_FB;
+
+A3_FB.Thrusters = {A3_Engine};
+A3_FB.ThrottleLogicAlgorithm = 'MaxNumberOfThrusters';
+
+Create ImpulsiveBurn A3_PlaneChange;
+
+A3_PlaneChange.CoordinateSystem = Local;
+A3_PlaneChange.Origin = Earth;
+A3_PlaneChange.Axes = VNB;
+A3_PlaneChange.Element1 = 0;
+A3_PlaneChange.Element2 = 0;
+A3_PlaneChange.Element3 = 0;
+A3_PlaneChange.DecrementMass = false;
+A3_PlaneChange.Isp = 300;
+A3_PlaneChange.GravitationalAccel = 9.81;
+
+%----------------------------------------
+%---------- EventLocators
+%----------------------------------------
+
+Create ContactLocator A3_Contacts;
+
+A3_Contacts.Target = A3_SC;
+A3_Contacts.Filename = '/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/catec_ws/data/benchmark_a/gmat/a3_leo_geo_transfer/madrid_contacts.txt';
+A3_Contacts.InputEpochFormat = 'UTCGregorian';
+A3_Contacts.InitialEpoch = '15 Jun 2026 12:00:00.000';
+A3_Contacts.StepSize = 60;
+A3_Contacts.FinalEpoch = '20 Jun 2026 12:00:00.000';
+A3_Contacts.UseLightTimeDelay = true;
+A3_Contacts.UseStellarAberration = true;
+A3_Contacts.WriteReport = true;
+A3_Contacts.RunMode = Automatic;
+A3_Contacts.UseEntireInterval = true;
+A3_Contacts.Observers = {Madrid};
+A3_Contacts.LightTimeDirection = Transmit;
+A3_Contacts.LeftJustified = false;
+A3_Contacts.ReportPrecision = 6;
+A3_Contacts.ReportFormat = 'Legacy';
+A3_Contacts.IntervalStepSize = 0;
+A3_Contacts.ReportTimeFormat = 'UTCGregorian';
+
+%----------------------------------------
+%---------- Solvers
+%----------------------------------------
+Create DifferentialCorrector A3_DC1;
+
+A3_DC1.ShowProgress = true;
+A3_DC1.ReportStyle = Normal;
+A3_DC1.ReportFile = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/dc_burn1.data';
+A3_DC1.MaximumIterations = 100;
+A3_DC1.DerivativeMethod = ForwardDifference;
+A3_DC1.Algorithm = NewtonRaphson;
+
+Create DifferentialCorrector A3_DC2;
+
+A3_DC2.ShowProgress = true;
+A3_DC2.ReportStyle = Normal;
+A3_DC2.ReportFile = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/dc_burn2.data';
+A3_DC2.MaximumIterations = 50;
+A3_DC2.DerivativeMethod = ForwardDifference;
+A3_DC2.Algorithm = NewtonRaphson;
+
+Create DifferentialCorrector A3_DC3;
+
+A3_DC3.ShowProgress = true;
+A3_DC3.ReportStyle = Normal;
+A3_DC3.ReportFile = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/dc_burn3.data';
+A3_DC3.MaximumIterations = 50;
+A3_DC3.DerivativeMethod = ForwardDifference;
+A3_DC3.Algorithm = NewtonRaphson;
+
+Create DifferentialCorrector A3_DC2_5;
+A3_DC2_5.ShowProgress = true;
+A3_DC2_5.ReportStyle = Normal;
+A3_DC2_5.ReportFile = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/dc_burn2_5.data';
+A3_DC2_5.MaximumIterations = 50;
+A3_DC2_5.DerivativeMethod = ForwardDifference;
+A3_DC2_5.Algorithm = NewtonRaphson;
+%----------------------------------------
+%---------- Reports
+%----------------------------------------
+Create ReportFile A3_StateHist;
+A3_StateHist.SolverIterations = Current;
+A3_StateHist.UpperLeft = [ 0.1529411764705882 0.3128760529482551 ];
+A3_StateHist.Size = [ 0.5994117647058823 0.7990373044524669 ];
+A3_StateHist.RelativeZOrder = 1551;
+A3_StateHist.Maximized = false;
+
+A3_StateHist.Filename = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/gmat_state.csv';
+A3_StateHist.Precision = 16;
+A3_StateHist.WriteHeaders = true;
+A3_StateHist.LeftJustify = On;
+A3_StateHist.ZeroFill = Off;
+A3_StateHist.FixedWidth = true;
+A3_StateHist.Delimiter = ' ';
+A3_StateHist.ColumnWidth = 23;
+A3_StateHist.WriteReport = true;
+A3_StateHist.AppendToExistingFile = false;
+
+Create ReportFile A3_ManeuverLog;
+A3_ManeuverLog.SolverIterations = Current;
+A3_ManeuverLog.UpperLeft = [ 0.1376470588235294 0.2815884476534296 ];
+A3_ManeuverLog.Size = [ 0.5994117647058823 0.7990373044524669 ];
+A3_ManeuverLog.RelativeZOrder = 1552;
+A3_ManeuverLog.Maximized = false;
+
+A3_ManeuverLog.Filename = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/maneuver_log.txt';
+A3_ManeuverLog.Precision = 16;
+A3_ManeuverLog.WriteHeaders = true;
+A3_ManeuverLog.LeftJustify = On;
+A3_ManeuverLog.ZeroFill = Off;
+A3_ManeuverLog.FixedWidth = true;
+A3_ManeuverLog.Delimiter = ' ';
+A3_ManeuverLog.ColumnWidth = 23;
+A3_ManeuverLog.WriteReport = true;
+A3_ManeuverLog.AppendToExistingFile = false;
+
+Create ReportFile A3_FinalReport;
+A3_FinalReport.SolverIterations = Current;
+A3_FinalReport.UpperLeft = [ 0.1223529411764706 0.2503008423586041 ];
+A3_FinalReport.Size = [ 0.5994117647058823 0.7990373044524669 ];
+A3_FinalReport.RelativeZOrder = 1553;
+A3_FinalReport.Maximized = false;
+
+A3_FinalReport.Filename = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/gmat_final.txt';
+A3_FinalReport.Precision = 16;
+A3_FinalReport.WriteHeaders = true;
+A3_FinalReport.LeftJustify = On;
+A3_FinalReport.ZeroFill = Off;
+A3_FinalReport.FixedWidth = true;
+A3_FinalReport.Delimiter = ' ';
+A3_FinalReport.ColumnWidth = 23;
+A3_FinalReport.WriteReport = true;
+A3_FinalReport.AppendToExistingFile = false;
+
+Create ReportFile A3_SpiralEvents;
+A3_SpiralEvents.SolverIterations = Current;
+A3_SpiralEvents.UpperLeft = [ 0.1 0.2 ];
+A3_SpiralEvents.Size = [ 0.55 0.4 ];
+A3_SpiralEvents.RelativeZOrder = 1554;
+A3_SpiralEvents.Maximized = false;
+A3_SpiralEvents.Filename = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/spiral_events.txt';
+A3_SpiralEvents.Precision = 16;
+A3_SpiralEvents.WriteHeaders = true;
+A3_SpiralEvents.LeftJustify = On;
+A3_SpiralEvents.ZeroFill = Off;
+A3_SpiralEvents.FixedWidth = true;
+A3_SpiralEvents.Delimiter = ' ';
+A3_SpiralEvents.ColumnWidth = 23;
+A3_SpiralEvents.WriteReport = true;
+A3_SpiralEvents.AppendToExistingFile = false;
+
+Create EphemerisFile A3_Ephem;
+A3_Ephem.UpperLeft = [ 0 0 ];
+A3_Ephem.Size = [ 0 0 ];
+A3_Ephem.RelativeZOrder = 0;
+A3_Ephem.Maximized = false;
+A3_Ephem.Spacecraft = A3_SC;
+A3_Ephem.Filename = '../../../../data/benchmark_a/gmat/a3_leo_geo_transfer/a3_reference.bsp';
+A3_Ephem.FileFormat = SPK;
+A3_Ephem.EpochFormat = UTCGregorian;
+A3_Ephem.InitialEpoch = 15 Jun 2026 12:00:00.000;
+A3_Ephem.FinalEpoch = FinalSpacecraftEpoch;
+A3_Ephem.StepSize = IntegratorSteps;
+A3_Ephem.Interpolator = Hermite;
+A3_Ephem.InterpolationOrder = 7;
+A3_Ephem.CoordinateSystem = EarthMJ2000Eq;
+A3_Ephem.OutputFormat = LittleEndian;
+A3_Ephem.IncludeCovariance = None;
+A3_Ephem.WriteEphemeris = true;
+
+Create OpenFramesInterface OrbitView1;
+OrbitView1.SolverIterations = Current;
+OrbitView1.UpperLeft = [ 0 0 ];
+OrbitView1.Size = [ 0.3905882352941176 0.5102286401925391 ];
+OrbitView1.RelativeZOrder = 239;
+OrbitView1.Maximized = false;
+OrbitView1.Add = {A3_SC, Earth};
+OrbitView1.View = {OrbitView1_View};
+OrbitView1.CoordinateSystem = EarthMJ2000Eq;
+OrbitView1.DrawObject = [ true true ];
+OrbitView1.DrawTrajectory = [ true true ];
+OrbitView1.DrawAxes = [ false false ];
+OrbitView1.DrawXYPlane = [ false false ];
+OrbitView1.DrawLabel = [ true true ];
+OrbitView1.DrawUsePropLabel = [ false false ];
+OrbitView1.DrawCenterPoint = [ true true ];
+OrbitView1.DrawEndPoints = [ true true ];
+OrbitView1.DrawVelocity = [ false false ];
+OrbitView1.DrawGrid = [ false false ];
+OrbitView1.DrawLineWidth = [ 2 2 ];
+OrbitView1.DrawMarkerSize = [ 10 10 ];
+OrbitView1.DrawFontSize = [ 20 20 ];
+OrbitView1.Axes = On;
+OrbitView1.AxesLength = 12756.2726;
+OrbitView1.AxesLabels = On;
+OrbitView1.FrameLabel = Off;
+OrbitView1.XYPlane = On;
+OrbitView1.EclipticPlane = On;
+OrbitView1.EnableStars = On;
+OrbitView1.StarCatalog = 'inp_StarsHYGv3.txt';
+OrbitView1.StarCount = 40000;
+OrbitView1.MinStarMag = -2;
+OrbitView1.MaxStarMag = 6;
+OrbitView1.MinStarPixels = 1;
+OrbitView1.MaxStarPixels = 10;
+OrbitView1.MinStarDimRatio = 0.5;
+OrbitView1.ShowPlot = true;
+OrbitView1.ShowToolbar = true;
+OrbitView1.SolverIterLastN = 1;
+OrbitView1.ShowVR = false;
+OrbitView1.PlaybackTimeScale = 3600;
+OrbitView1.MultisampleAntiAliasing = On;
+OrbitView1.MSAASamples = 2;
+OrbitView1.DrawFontPosition = {'Top-Right', 'Top-Right'};
+
+%----------------------------------------
+%---------- Arrays, Variables, Strings
+%----------------------------------------
+Create Variable burn1Duration burn2Duration i stepSec geoSmaKm geoEcc geoEccPhaseA geoIncDeg burn2_5Duration eventCode;
+burn1Duration = 300;
+burn2Duration = 300;
+i = 0;
+stepSec = 60;
+geoSmaKm = 42164;
+geoEcc = 0.001;
+geoEccPhaseA = 0.055;
+geoIncDeg = 0;
+burn2_5Duration = 5;
+eventCode = 0;
+
+
+
+
+
+
+
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView OrbitView1_View;
+OrbitView1_View.ViewFrame = CoordinateSystem;
+OrbitView1_View.ViewTrajectory = Off;
+OrbitView1_View.InertialFrame = Off;
+OrbitView1_View.SetDefaultLocation = On;
+OrbitView1_View.DefaultEye = [ 30000 0 0 ];
+OrbitView1_View.DefaultCenter = [ 0 0 0 ];
+OrbitView1_View.DefaultUp = [ 0 0 1 ];
+OrbitView1_View.SetCurrentLocation = On;
+OrbitView1_View.CurrentEye = [ 7461.323504196144 -38393.93610858089 -79905.36630754358 ];
+OrbitView1_View.CurrentCenter = [ 1.818989403545856e-12 -2.91038304567337e-11 1.455191522836685e-11 ];
+OrbitView1_View.CurrentUp = [ 0.341332996590487 0.8592631357666551 -0.3809969146213827 ];
+OrbitView1_View.FOVy = 45;
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+BeginMissionSequence;
+
+% Initial Reporting
+Report A3_StateHist A3_SC.ElapsedSecs A3_SC.EarthMJ2000Eq.X A3_SC.EarthMJ2000Eq.Y A3_SC.EarthMJ2000Eq.Z A3_SC.EarthMJ2000Eq.VX A3_SC.EarthMJ2000Eq.VY A3_SC.EarthMJ2000Eq.VZ;
+eventCode = 1;
+Report A3_SpiralEvents eventCode A3_SC.ElapsedSecs A3_SC.TotalMass A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC;
+
+% Propagate to start
+Propagate 'Prop To Perigee' A3_Prop(A3_SC) {A3_SC.Earth.Periapsis};
+
+% Continuous Low-Thrust Spiral to GEO
+eventCode = 10;
+Report A3_SpiralEvents eventCode A3_SC.ElapsedSecs A3_SC.TotalMass A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC;
+BeginFiniteBurn A3_FB(A3_SC);
+Propagate 'Spiral To GEO' A3_Prop(A3_SC) {A3_SC.Earth.SMA = 42164};
+EndFiniteBurn A3_FB(A3_SC);
+eventCode = 11;
+Report A3_SpiralEvents eventCode A3_SC.ElapsedSecs A3_SC.TotalMass A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC;
+
+% Trim to target eccentricity and inclination
+Propagate 'Prop To Equator' A3_Prop(A3_SC) {A3_SC.Z = 0, StopTolerance = 1e-05};
+eventCode = 12;
+Report A3_SpiralEvents eventCode A3_SC.ElapsedSecs A3_SC.TotalMass A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC;
+
+% Phase A only: converge SMA + ECC in full-force model.
+% ECC=0.001 is handled in a later phase; this phase uses reachable ECC cleanup.
+% Stage-1: trim ECC with radial component.
+Target 'Trim ECC' A3_DC3 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary A3_DC3(A3_PlaneChange.Element3 = 0, {Perturbation = 1e-03, Lower = -5.0, Upper = 5.0, MaxStep = 0.5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'ECC trim' A3_PlaneChange(A3_SC);
+   Propagate 'Settle after ECC trim' A3_Prop(A3_SC) {A3_SC.ElapsedSecs = 3600};
+   Achieve A3_DC3(A3_SC.Earth.ECC = geoEccPhaseA, {Tolerance = 5e-3});
+EndTarget;  % For targeter A3_DC3
+
+% Stage-2: trim SMA with tangential component.
+Target 'Trim SMA' A3_DC3 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary A3_DC3(A3_PlaneChange.Element1 = 0, {Perturbation = 1e-03, Lower = -5.0, Upper = 5.0, MaxStep = 0.5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'SMA trim' A3_PlaneChange(A3_SC);
+   Propagate 'Settle after SMA trim' A3_Prop(A3_SC) {A3_SC.ElapsedSecs = 3600};
+   Achieve A3_DC3(A3_SC.Earth.SMA = geoSmaKm, {Tolerance = 5});
+EndTarget;  % For targeter A3_DC3
+
+% Stage-3: coupled cleanup for SMA + ECC only.
+Target 'Cleanup SMA/ECC' A3_DC3 {SolveMode = Solve, ExitMode = SaveAndContinue, ShowProgressWindow = true};
+   Vary A3_DC3(A3_PlaneChange.Element1 = 0, {Perturbation = 5e-04, Lower = -5.0, Upper = 5.0, MaxStep = 0.5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Vary A3_DC3(A3_PlaneChange.Element3 = 0, {Perturbation = 5e-04, Lower = -5.0, Upper = 5.0, MaxStep = 0.5, AdditiveScaleFactor = 0.0, MultiplicativeScaleFactor = 1.0});
+   Maneuver 'Cleanup trim' A3_PlaneChange(A3_SC);
+   Propagate 'Settle after cleanup' A3_Prop(A3_SC) {A3_SC.ElapsedSecs = 3600};
+   Achieve A3_DC3(A3_SC.Earth.SMA = geoSmaKm, {Tolerance = 3});
+   Achieve A3_DC3(A3_SC.Earth.ECC = geoEccPhaseA, {Tolerance = 5e-3});
+EndTarget;  % For targeter A3_DC3
+eventCode = 13;
+Report A3_SpiralEvents eventCode A3_SC.ElapsedSecs A3_SC.TotalMass A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC;
+
+% Post-GEO Coasting
+For i = 1:1:720;
+   Propagate 'Post GEO Coast' A3_Prop(A3_SC) {A3_SC.ElapsedSecs = 60};
+   Report A3_StateHist A3_SC.ElapsedSecs A3_SC.EarthMJ2000Eq.X A3_SC.EarthMJ2000Eq.Y A3_SC.EarthMJ2000Eq.Z A3_SC.EarthMJ2000Eq.VX A3_SC.EarthMJ2000Eq.VY A3_SC.EarthMJ2000Eq.VZ;
+EndFor;
+
+Report A3_FinalReport A3_SC.ElapsedSecs A3_SC.Earth.SMA A3_SC.Earth.ECC A3_SC.EarthMJ2000Eq.INC A3_SC.TotalMass;

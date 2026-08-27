@@ -1,0 +1,28 @@
+{
+  "cases": {
+    "scenario_CNNAttOD": {
+      "runtime_s": 153.3337254524231,
+      "pos_rms_cnn": [
+        5.243131331751055,
+        2.7678692576051516
+      ],
+      "vel_rms_cnn": [
+        13.178306539655189,
+        9.677348625945285
+      ],
+      "image_method": "CNN"
+    },
+    "scenario_OpNavAttOD": {
+      "runtime_s": 65.87213730812073,
+      "pos_rms_circ": [
+        0.5495297881942929,
+        2.8539379077347515
+      ],
+      "vel_rms_circ": [
+        1.4133594401279168,
+        9.917453903055762
+      ],
+      "image_method": "Hough circles"
+    }
+  }
+}

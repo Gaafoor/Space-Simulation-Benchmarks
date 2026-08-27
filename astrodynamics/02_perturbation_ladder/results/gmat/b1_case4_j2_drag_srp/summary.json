@@ -1,0 +1,56 @@
+{
+  "benchmark": "B1",
+  "simulator": "GMAT",
+  "run_id": "b1_gmat_case4_j2_drag_srp",
+  "case_id": "b1_case4_j2_drag_srp",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "expected_sample_count": 145,
+  "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case4_j2_drag_srp_state.csv",
+  "raw_gmat_csv_rows_parsed": 1009,
+  "force_model": {
+    "gravity_potential_file": "JGM2.cof",
+    "gravity_harmonics_degree": 2,
+    "gravity_harmonics_order": 0,
+    "drag_enabled": true,
+    "atmosphere_model": "NRLMSISE-00 with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+    "srp_enabled": true,
+    "srp_model": "Spherical SRP",
+    "third_body_bodies": [],
+    "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+  },
+  "drift_metrics_vs_case1": {
+    "position_drift_vs_case1_m": 474376.6507804141,
+    "ground_track_lon_drift_deg": -12.17900914926792,
+    "raan_change_deg": 0.9890159271908672,
+    "altitude_change_m": -18612.724027984776,
+    "along_track_phase_drift_deg": 4.078983386208336,
+    "final_altitude_m": 481387.2707952969,
+    "final_semi_major_axis_m": 6859524.270795297
+  },
+  "gmat_perturbation_documentation": {
+    "enabled_gmat_force_models": [
+      "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)",
+      "Native drag with Cd=2.2, DragArea=0.01 m\u00b2",
+      "NRLMSISE-00 atmosphere with CSSISpaceWeatherFile (SpaceWeather-All-v1.2.txt)",
+      "Spherical solar radiation pressure with Cr=1.8, SRPArea=1.0 m\u00b2"
+    ],
+    "increment_vs_previous_case": "Adds spherical solar radiation pressure.",
+    "previous_case_id": "b1_case3_j2_drag"
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case4_j2_drag_srp/altitude_vs_time.png"
+  }
+}

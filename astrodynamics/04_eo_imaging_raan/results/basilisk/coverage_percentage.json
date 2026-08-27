@@ -1,0 +1,24 @@
+{
+  "region": {
+    "lat_min_deg": 40.2,
+    "lat_max_deg": 40.7,
+    "lon_min_deg": -4.2,
+    "lon_max_deg": -3.2
+  },
+  "grid": {
+    "lat_divisions": 100,
+    "lon_divisions": 100,
+    "total_cells": 10000
+  },
+  "coverage": {
+    "covered_cells": 6702,
+    "coverage_percentage": 67.02,
+    "max_coverage_count": 2,
+    "mean_coverage_count": 0.7765,
+    "footprint_radius_km": 43.744331762962005
+  },
+  "artifacts": {
+    "coverage_heatmap": "results/basilisk_a3/coverage_heatmap.png",
+    "coverage_statistics_csv": "results/basilisk_a3/madrid_coverage_statistics.csv"
+  }
+}

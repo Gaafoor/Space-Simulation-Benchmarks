@@ -1,0 +1,227 @@
+% Benchmark A2 - GMAT (frozen spec: J2, Madrid 10 deg min elev, 24 h)
+% Exports: gmat_a2_state.csv, gmat_a2_madrid_contacts.txt, gmat_a2_eclipse.txt
+% Do NOT set ReportFile.Add - use mission Report commands only (A1 lesson).
+
+% Align Earth shape with SPICE event locators (ContactLocator / EclipseLocator)
+Earth.EquatorialRadius = 6378.1366;
+Earth.Flattening = 0.00335281310845547;
+
+%----------------------------------------
+%---------- Spacecraft
+%----------------------------------------
+
+Create Spacecraft CubeSat_A2;
+CubeSat_A2.DateFormat = UTCGregorian;
+CubeSat_A2.Epoch = '02 Jun 2026 00:00:00.000';
+CubeSat_A2.CoordinateSystem = EarthMJ2000Eq;
+CubeSat_A2.DisplayStateType = Keplerian;
+CubeSat_A2.SMA = 6878.136999999989;
+CubeSat_A2.ECC = 2.452185081642847e-16;
+CubeSat_A2.INC = 97.40000000000001;
+CubeSat_A2.RAAN = 0;
+CubeSat_A2.AOP = 0;
+CubeSat_A2.TA = 0;
+CubeSat_A2.DryMass = 12;
+CubeSat_A2.Cd = 2.2;
+CubeSat_A2.Cr = 1.8;
+CubeSat_A2.DragArea = 0.01;
+CubeSat_A2.SRPArea = 1;
+CubeSat_A2.Attitude = CoordinateSystemFixed;
+CubeSat_A2.AttitudeCoordinateSystem = EarthMJ2000Eq;
+CubeSat_A2.OrbitColor = Red;
+CubeSat_A2.TargetColor = Teal;
+CubeSat_A2.ModelFile = 'aura.3ds';
+CubeSat_A2.ModelScale = 1;
+% 1. Define the separate conical FOV object structure first
+Create ConicalFOV MyConeFOV;
+MyConeFOV.FieldOfViewAngle = 20;   % Set your custom half-angle footprint in degrees
+
+% 2. Create your Imager payload and assign the FOV object to it
+Create Imager MySensor;
+MySensor.FieldOfView = MyConeFOV;  % This clears the 'UndefinedFieldOfView' error
+
+% 3. Define the Imager boresight direction and origin vectors
+MySensor.DirectionX = 1;
+MySensor.DirectionY = 0;
+MySensor.DirectionZ = 0;
+MySensor.SecondDirectionX = 0;
+MySensor.SecondDirectionY = 1;
+MySensor.SecondDirectionZ = 0;
+MySensor.HWOriginInBCSX = 0;       % Positioned at the satellite center of mass
+MySensor.HWOriginInBCSY = 0;
+MySensor.HWOriginInBCSZ = 0;
+
+% 4. Attach the finished hardware suite to your satellite structure
+CubeSat_A2.AddHardware = {MySensor};
+
+
+%----------------------------------------
+%---------- ForceModels (J2: degree 2, order 0; drag/SRP off)
+%----------------------------------------
+
+Create ForceModel A2Prop_ForceModel;
+A2Prop_ForceModel.CentralBody = Earth;
+A2Prop_ForceModel.PrimaryBodies = {Earth};
+A2Prop_ForceModel.Drag = None;
+A2Prop_ForceModel.SRP = Off;
+A2Prop_ForceModel.RelativisticCorrection = Off;
+A2Prop_ForceModel.ErrorControl = RSSStep;
+A2Prop_ForceModel.GravityField.Earth.Degree = 2;
+A2Prop_ForceModel.GravityField.Earth.Order = 0;
+A2Prop_ForceModel.GravityField.Earth.StmLimit = 100;
+A2Prop_ForceModel.GravityField.Earth.PotentialFile = 'JGM2.cof';
+A2Prop_ForceModel.GravityField.Earth.TideModel = 'None';
+
+%----------------------------------------
+%---------- Propagator
+%----------------------------------------
+
+Create Propagator A2Prop;
+A2Prop.FM = A2Prop_ForceModel;
+A2Prop.Type = RungeKutta89;
+A2Prop.InitialStepSize = 10;
+A2Prop.Accuracy = 1e-12;
+A2Prop.MinStep = 0.001;
+A2Prop.MaxStep = 60;
+A2Prop.MaxStepAttempts = 50;
+A2Prop.StopIfAccuracyIsViolated = true;
+
+%----------------------------------------
+%---------- Ground station (Madrid)
+%----------------------------------------
+
+Create GroundStation Madrid_GS;
+Madrid_GS.CentralBody = Earth;
+Madrid_GS.StateType = Spherical;
+Madrid_GS.HorizonReference = Ellipsoid;
+% Spherical: Location1=Latitude, Location2=Longitude, Location3=Altitude [km]
+Madrid_GS.Location1 = 40.4168;
+Madrid_GS.Location2 = -3.7038;
+Madrid_GS.Location3 = 0.667;
+Madrid_GS.MinimumElevationAngle = 10;
+Madrid_GS.Id = 'Madrid';
+
+%----------------------------------------
+%---------- Event locators
+%----------------------------------------
+
+Create ContactLocator A2_Madrid_Contacts;
+A2_Madrid_Contacts.Target = CubeSat_A2;
+A2_Madrid_Contacts.Observers = {Madrid_GS};
+A2_Madrid_Contacts.Filename = 'gmat_a2_madrid_contacts.txt';
+A2_Madrid_Contacts.RunMode = Automatic;
+A2_Madrid_Contacts.WriteReport = true;
+A2_Madrid_Contacts.StepSize = 600;
+A2_Madrid_Contacts.UseEntireInterval = true;
+A2_Madrid_Contacts.UseLightTimeDelay = false;
+A2_Madrid_Contacts.UseStellarAberration = false;
+
+Create EclipseLocator A2_Eclipse;
+A2_Eclipse.Spacecraft = CubeSat_A2;
+A2_Eclipse.OccultingBodies = {Earth};
+A2_Eclipse.EclipseTypes = {'Penumbra', 'Umbra'};
+A2_Eclipse.Filename = 'gmat_a2_eclipse.txt';
+A2_Eclipse.RunMode = Automatic;
+A2_Eclipse.WriteReport = true;
+A2_Eclipse.StepSize = 10;
+A2_Eclipse.UseEntireInterval = true;
+A2_Eclipse.UseLightTimeDelay = false;
+A2_Eclipse.UseStellarAberration = false;
+
+%----------------------------------------
+%---------- Subscribers (live plots - same pattern as A1, A2 extras)
+%----------------------------------------
+
+Create OpenFramesInterface A2_OrbitView;
+A2_OrbitView.SolverIterations = Current;
+A2_OrbitView.Add = {CubeSat_A2, Earth, Sun, Madrid_GS};
+A2_OrbitView.View = {A2_OrbitView_View};
+A2_OrbitView.CoordinateSystem = EarthMJ2000Eq;
+A2_OrbitView.DrawObject = [ true true true true ];
+A2_OrbitView.DrawTrajectory = [ true true true true ];
+A2_OrbitView.DrawAxes = [ false false false false ];
+A2_OrbitView.DrawXYPlane = [ false false false false ];
+A2_OrbitView.DrawLabel = [ true true true true ];
+A2_OrbitView.DrawUsePropLabel = [ false false false false ];
+A2_OrbitView.DrawCenterPoint = [ true true true true ];
+A2_OrbitView.DrawEndPoints = [ true true true true ];
+A2_OrbitView.DrawVelocity = [ false false false false ];
+A2_OrbitView.DrawGrid = [ false false false false ];
+A2_OrbitView.DrawLineWidth = [ 2 2 2 2 ];
+A2_OrbitView.DrawMarkerSize = [ 10 10 10 10 ];
+A2_OrbitView.DrawFontSize = [ 20 20 20 20 ];
+A2_OrbitView.Axes = On;
+A2_OrbitView.AxesLength = 12756.2726;
+A2_OrbitView.AxesLabels = On;
+A2_OrbitView.FrameLabel = Off;
+A2_OrbitView.XYPlane = On;
+A2_OrbitView.EclipticPlane = Off;
+A2_OrbitView.EnableStars = On;
+A2_OrbitView.StarCatalog = 'inp_StarsHYGv3.txt';
+A2_OrbitView.StarCount = 40000;
+A2_OrbitView.MinStarMag = -2;
+A2_OrbitView.MaxStarMag = 6;
+A2_OrbitView.ShowPlot = true;
+A2_OrbitView.ShowToolbar = true;
+A2_OrbitView.PlaybackTimeScale = 3600;
+A2_OrbitView.MultisampleAntiAliasing = On;
+A2_OrbitView.MSAASamples = 2;
+
+Create GroundTrack A2_GroundTrack;
+A2_GroundTrack.SolverIterations = Current;
+A2_GroundTrack.CentralBody = Earth;
+A2_GroundTrack.Add = {CubeSat_A2, Madrid_GS};
+A2_GroundTrack.DataCollectFrequency = 1;
+A2_GroundTrack.UpdatePlotFrequency = 50;
+A2_GroundTrack.MaxPlotPoints = 20000;
+A2_GroundTrack.ShowPlot = true;
+
+%----------------------------------------
+%---------- State report (sparse samples - no ReportFile.Add)
+%----------------------------------------
+
+Create ReportFile A2_State_Report;
+A2_State_Report.Filename = 'gmat_a2_state.csv';
+A2_State_Report.Precision = 16;
+A2_State_Report.WriteHeaders = true;
+A2_State_Report.LeftJustify = On;
+A2_State_Report.ZeroFill = Off;
+A2_State_Report.FixedWidth = true;
+A2_State_Report.Delimiter = ' ';
+A2_State_Report.ColumnWidth = 23;
+A2_State_Report.WriteReport = true;
+A2_State_Report.AppendToExistingFile = false;
+
+%----------------------------------------
+%---------- Variables
+%----------------------------------------
+
+Create Variable i stepSec;
+i = 0;
+stepSec = 600;
+
+%----------------------------------------
+%---------- User Objects
+%----------------------------------------
+
+Create OpenFramesView A2_OrbitView_View;
+A2_OrbitView_View.ViewFrame = CoordinateSystem;
+A2_OrbitView_View.ViewTrajectory = Off;
+A2_OrbitView_View.InertialFrame = Off;
+A2_OrbitView_View.SetDefaultLocation = On;
+A2_OrbitView_View.DefaultEye = [ 30000 0 0 ];
+A2_OrbitView_View.DefaultCenter = [ 0 0 0 ];
+A2_OrbitView_View.DefaultUp = [ 0 0 1 ];
+A2_OrbitView_View.FOVy = 45;
+
+%----------------------------------------
+%---------- Mission Sequence
+%----------------------------------------
+
+BeginMissionSequence;
+Report A2_State_Report CubeSat_A2.ElapsedSecs CubeSat_A2.EarthMJ2000Eq.X CubeSat_A2.EarthMJ2000Eq.Y CubeSat_A2.EarthMJ2000Eq.Z CubeSat_A2.EarthMJ2000Eq.VX CubeSat_A2.EarthMJ2000Eq.VY CubeSat_A2.EarthMJ2000Eq.VZ;
+For i = 1:1:144;
+   Propagate A2Prop(CubeSat_A2) {CubeSat_A2.ElapsedSecs = stepSec};
+   Report A2_State_Report CubeSat_A2.ElapsedSecs CubeSat_A2.EarthMJ2000Eq.X CubeSat_A2.EarthMJ2000Eq.Y CubeSat_A2.EarthMJ2000Eq.Z CubeSat_A2.EarthMJ2000Eq.VX CubeSat_A2.EarthMJ2000Eq.VY CubeSat_A2.EarthMJ2000Eq.VZ;
+EndFor;
+% ContactLocator / EclipseLocator RunMode=Automatic runs event search at mission end.

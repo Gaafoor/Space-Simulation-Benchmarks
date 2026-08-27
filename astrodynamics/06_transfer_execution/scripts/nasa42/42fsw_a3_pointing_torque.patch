@@ -1,0 +1,73 @@
+--- a/Source/42fsw.c
++++ b/Source/42fsw.c
+@@ -21,6 +21,8 @@
+ void GyroProcessing(struct AcType *AC);
+ void MagnetometerProcessing(struct AcType *AC);
+ void StarTrackerProcessing(struct AcType *AC);
++void WheelProcessing(struct AcType *AC);
++void MtbProcessing(struct AcType *AC);
+ void WriteToSocket(SOCKET Socket, char **Prefix, long Nprefix, long EchoEnabled);
+ void ReadFromSocket(SOCKET Socket, long EchoEnabled);
+ 
+@@ -1106,7 +1108,7 @@
+       double Tcmd[3],HxB[3],Fcmd;
+       static double RwKr[3],RwKp[3];
+       static long RwGainsInit = 1;
+-      static double Kunl = 60.0;
++      static double Kunl = 10000.0;
+       double Qdot[4];
++      double Hb[3];
+       long Ig,i,j,It,Iw;
+ 
+@@ -1207,28 +1209,47 @@
+          for(i=0;i<3;i++) C->werr[i] = AC->wbn[i] - Cmd->wrn[i];
+ 
+          if (AC->Nwhl >= 3) {
++            double pdScale;
++
+             /* RW-limited PD (ThreeAxis-style, tuned for A3 EP bus) */
+             if (RwGainsInit) {
+                for(i=0;i<3;i++) {
+-                  FindPDGains(AC->MOI[i][i],0.035,0.95,&RwKr[i],&RwKp[i]);
++                  FindPDGains(AC->MOI[i][i],0.052,0.95,&RwKr[i],&RwKp[i]);
+                }
+                RwGainsInit = 0;
+             }
++            pdScale = AC->StValid ? 1.0 : 0.25;
+             for(i=0;i<3;i++) {
+-               Tcmd[i] = -RwKr[i]*C->werr[i] - RwKp[i]*(1.5*AC->qbr[i]);
++               werr[i] = C->werr[i];
++               if (!AC->StValid) {
++                  werr[i] = Limit(werr[i],-0.05,0.05);
++               }
++               Tcmd[i] = -pdScale*(RwKr[i]*werr[i] + RwKp[i]*(1.5*AC->qbr[i]));
+             }
+-            /* Cancel thrust offset torque (body-frame r x F) */
++            for(i=0;i<3;i++) AC->IdealTrq[i] = 0.0;
+             for(It=0;It<AC->Nthr;It++) {
+-               Fcmd = AC->Thr[It].ThrustLevelCmd*AC->Thr[It].Fmax;
+-               for(i=0;i<3;i++) Tcmd[i] -= Fcmd*AC->Thr[It].rxA[i];
++               Fcmd = S->Thr[It].F;
++               for(i=0;i<3;i++) AC->IdealTrq[i] -= Fcmd*AC->Thr[It].rxA[i];
+             }
+             for(i=0;i<3;i++) {
+-               Tcmd[i] = Limit(Tcmd[i],-S->Whl[i].Tmax,S->Whl[i].Tmax);
+-               AC->Whl[i].Tcmd = -Tcmd[i];
++               AC->Tcmd[i] = Tcmd[i];
+             }
+-            for(i=0;i<3;i++) AC->IdealTrq[i] = 0.0;
++            WheelProcessing(AC);
+             if (AC->Nmtb >= 3 && AC->MagValid) {
+-               for(i=0;i<3;i++) Herr[i] = AC->Whl[i].H;
+-               VxV(Herr,AC->bvb,HxB);
+-               for(i=0;i<3;i++) AC->MTB[i].Mcmd = Kunl*HxB[i];
++               for(i=0;i<3;i++) {
++                  Hb[i] = 0.0;
++                  for(Iw=0;Iw<AC->Nwhl;Iw++)
++                     Hb[i] += AC->Whl[Iw].Axis[i]*AC->Whl[Iw].H;
++               }
++               VxV(Hb,AC->bvb,HxB);
++               for(i=0;i<3;i++) AC->Mcmd[i] = Kunl*HxB[i];
++               MtbProcessing(AC);
+             }
+          }

@@ -1,0 +1,130 @@
+<mujoco model="cubesat_1u_contact_rebound_realistic">
+    <!--
+        Realistic contact-only 1U CubeSat demonstration.
+        The external contact shells remain the collision surfaces, but each
+        CubeSat now includes a Basilisk-style internal reaction wheel and four
+        tank sub-bodies to better resemble the multi-body structure used in the
+        reaction-wheel and unbalanced-thruster examples.
+
+        The internal actuators are defined but driven with zero commands in the
+        scenario for now, so the contact experiment stays isolated while the
+        spacecraft structure becomes more realistic.
+    -->
+    <option gravity="0 0 0" integrator="implicitfast">
+        <flag contact="enable"/>
+    </option>
+
+    <default>
+        <default class="wheel_body">
+            <geom type="cylinder" density="1800" rgba="0.25 0.25 0.25 1" contype="0" conaffinity="0"/>
+        </default>
+        <default class="tank_body">
+            <geom type="capsule" density="1200" rgba="0.75 0.75 0.8 0.8" contype="0" conaffinity="0"/>
+        </default>
+    </default>
+
+    <worldbody>
+        <body name="hub_1">
+            <freejoint/>
+            <!-- Approximate total mass split across chassis + wheel + tanks. -->
+            <inertial pos="0 0 0" mass="0.82" diaginertia="0.0014 0.0015 0.0016"/>
+            <geom name="hub_1_chassis" type="box" size="0.05 0.05 0.05675"
+                  friction="0.4 0.005 0.0001"
+                  solref="0.01 0.1" solimp="0.99 0.99 0.001"
+                  rgba="0.6 0.6 0.6 0.5"/>
+            <site name="hub_1_contact_point" pos="0.05 0 0" size="0.01" rgba="1 0 0 1"/>
+            <site name="hub_1_com"/>
+
+            <body name="hub_1_wheel" pos="0 0 0" xyaxes="1 0 0 0 0 1">
+                <inertial pos="0 0 0" mass="0.08" diaginertia="0.00003 0.00003 0.00005"/>
+                <geom name="hub_1_wheel_geom" class="wheel_body" size="0.016 0.01"/>
+                <joint name="hub_1_wheel_joint" type="hinge" axis="0 0 1"/>
+            </body>
+
+            <body name="hub_1_tank_1" pos="0.025 0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_1_tank_1_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_1_tank_1_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_1_tank_2" pos="-0.025 0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_1_tank_2_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_1_tank_2_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_1_tank_3" pos="0.025 -0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_1_tank_3_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_1_tank_3_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_1_tank_4" pos="-0.025 -0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_1_tank_4_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_1_tank_4_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+        </body>
+
+        <body name="hub_2">
+            <freejoint/>
+            <inertial pos="0 0 0" mass="0.82" diaginertia="0.0014 0.0015 0.0016"/>
+            <geom name="hub_2_chassis" type="box" size="0.05 0.05 0.05675"
+                  friction="0.4 0.005 0.0001"
+                  solref="0.01 0.1" solimp="0.99 0.99 0.001"
+                  rgba="0.4 0.6 0.8 0.25"/>
+            <site name="hub_2_contact_point" pos="-0.05 0 0" size="0.01" rgba="0 1 0 1"/>
+            <site name="hub_2_com"/>
+
+            <body name="hub_2_wheel" pos="0 0 0" xyaxes="1 0 0 0 0 1">
+                <inertial pos="0 0 0" mass="0.08" diaginertia="0.00003 0.00003 0.00005"/>
+                <geom name="hub_2_wheel_geom" class="wheel_body" size="0.016 0.01"/>
+                <joint name="hub_2_wheel_joint" type="hinge" axis="0 0 1"/>
+            </body>
+
+            <body name="hub_2_tank_1" pos="0.025 0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_2_tank_1_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_2_tank_1_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_2_tank_2" pos="-0.025 0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_2_tank_2_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_2_tank_2_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_2_tank_3" pos="0.025 -0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_2_tank_3_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_2_tank_3_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+
+            <body name="hub_2_tank_4" pos="-0.025 -0.025 -0.03" zaxis="0 0 -1">
+                <inertial pos="0 0 0" mass="0.0575" diaginertia="0.00001 0.00001 0.00001"/>
+                <geom name="hub_2_tank_4_geom" class="tank_body" size="0.012 0.03"/>
+                <site name="hub_2_tank_4_thrust_point" pos="0 0 0.04" size="0.004"/>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <!-- Internal reaction wheels, kept at zero command by default. -->
+        <motor name="hub_1_wheel_motor" joint="hub_1_wheel_joint"/>
+        <motor name="hub_2_wheel_motor" joint="hub_2_wheel_joint"/>
+
+        <!-- Internal tank thrusters, also kept at zero command by default. -->
+        <motor name="hub_1_tank_1_thrust" site="hub_1_tank_1_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_1_tank_2_thrust" site="hub_1_tank_2_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_1_tank_3_thrust" site="hub_1_tank_3_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_1_tank_4_thrust" site="hub_1_tank_4_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_2_tank_1_thrust" site="hub_2_tank_1_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_2_tank_2_thrust" site="hub_2_tank_2_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_2_tank_3_thrust" site="hub_2_tank_3_thrust_point" gear="0 0 -1 0 0 0"/>
+        <motor name="hub_2_tank_4_thrust" site="hub_2_tank_4_thrust_point" gear="0 0 -1 0 0 0"/>
+
+        <!-- External approach thrusters used for the contact maneuver. -->
+        <motor name="hub_1_thruster" site="hub_1_com" gear="1 0 0 0 0 0"/>
+        <motor name="hub_2_thruster" site="hub_2_com" gear="-1 0 0 0 0 0"/>
+    </actuator>
+</mujoco>

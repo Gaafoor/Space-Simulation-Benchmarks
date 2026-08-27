@@ -1,0 +1,20 @@
+# A3 facet materials — SRP SpecFrac/DiffFrac aligned with Basilisk L1 facets
+newmtl A3_BUS
+d 1.0
+Ns 1.0
+Ka 0.2 0.2 0.2
+Kd 0.2 0.2 0.2
+Ks 0.0 0.0 0.0
+Ke 0.0 0.0 0.0
+SpecFrac 0.85
+DiffFrac 0.15
+
+newmtl A3_PANEL
+d 1.0
+Ns 50.0
+Ka 0.1 0.1 0.15
+Kd 0.1 0.1 0.15
+Ks 0.2 0.2 0.2
+Ke 0.0 0.0 0.0
+SpecFrac 0.80
+DiffFrac 0.20

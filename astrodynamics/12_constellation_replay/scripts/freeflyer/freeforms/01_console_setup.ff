@@ -1,0 +1,15 @@
+// =============================================================================
+// FreeForm 1 — Console Setup
+// Paste into a Mission Plan FreeForm block (run first).
+// =============================================================================
+
+Console.BackColor        = ColorTools.Black;
+Console.CurrentTextColor = ColorTools.Thistle;
+Console.Dimension        = 36;
+Console.WordWrap         = 1;
+Console.DockMode         = 3;
+Console.Show();
+
+Report "CubeSat Milestone 1: Cairo / Madrid / Paris imaging with Sun-pointing between passes." to Console;
+Report "Priority: image [45-80 deg elev, boresight settled] > track pass [>=10 deg] > Sun > Earth (eclipse)." to Console;
+Report "Capture order: any order (three flags). After all captured: Sun-only." + "\n" to Console;

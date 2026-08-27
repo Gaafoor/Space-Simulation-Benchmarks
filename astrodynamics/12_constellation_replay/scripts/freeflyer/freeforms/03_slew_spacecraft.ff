@@ -1,0 +1,46 @@
+// =============================================================================
+// FreeForm 3 — SlewSpacecraft Procedure (kinematic slew, US-example style)
+// performSlew: 0 = instant snap, 1 = rate-limited at slewRate deg/s
+// =============================================================================
+
+Define Procedure SlewSpacecraft(CoordinateSystem targetCS, Variable performSlew, Variable slewRate, Spacecraft sc);
+
+	Variable slewAngle;
+	Variable availableAngle;
+	Array slewAxis[3];
+	Array deltaQuat[4];
+
+	CoordinateSystem prevCS;
+	CoordinateSystem deltaCS;
+	CoordinateSystem newCS;
+
+	prevCS.Epoch   = sc.Epoch;
+	targetCS.Epoch = sc.Epoch;
+	deltaCS.Epoch  = sc.Epoch;
+	newCS.Epoch    = sc.Epoch;
+
+	If (performSlew == 1);
+		prevCS.BuildCoordinateSystem(sc);
+
+		deltaCS.SetAttitudeMatrix(targetCS.GetAttitudeMatrix()*prevCS.GetAttitudeMatrix().Inverse());
+
+		deltaQuat = deltaCS.GetQuaternion();
+
+		slewAngle = 2*acos(deltaQuat[3]);
+		slewAxis = {deltaQuat[0], deltaQuat[1], deltaQuat[2]}.Normalized();
+
+		availableAngle = rad(slewRate*sc.Propagator.StepSize.ToSeconds);
+
+		If (slewAngle >= availableAngle);
+			deltaQuat[3] = cos(availableAngle/2);
+			deltaQuat[0:2] = slewAxis*sqrt(1-deltaQuat[3]^2);
+			deltaCS.SetQuaternion(deltaQuat);
+		End;
+
+		newCS.SetAttitudeMatrix(deltaCS.GetAttitudeMatrix()*prevCS.GetAttitudeMatrix());
+		sc.SetOrientation(newCS);
+	Else;
+		sc.SetOrientation(targetCS);
+	End;
+
+EndProcedure;

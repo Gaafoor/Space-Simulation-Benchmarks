@@ -1,0 +1,372 @@
+{
+  "benchmark": "B1",
+  "simulator": "Basilisk",
+  "status": "pass",
+  "cases": [
+    "b1_case1_twobody",
+    "b1_case2_j2",
+    "b1_case3_j2_drag",
+    "b1_case4_j2_drag_srp",
+    "b1_case5_all_supported"
+  ],
+  "summaries": [
+    {
+      "benchmark": "B1",
+      "simulator": "Basilisk",
+      "run_id": "b1_basilisk_case1_twobody",
+      "case_id": "b1_case1_twobody",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_model": "Point-mass Earth (mu only, no harmonics)",
+        "j2_enabled": false,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "spice_enabled": false
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+      },
+      "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+      "basilisk_version": "2.11.0b0",
+      "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+      "runtime_s": {
+        "propagation": 0.1384778780011402,
+        "runtime_ratio": 623926.3718302255
+      },
+      "drift_metrics_vs_case1": {},
+      "basilisk_perturbation_documentation": {
+        "enabled_basilisk_force_models": [
+          "simIncludeGravBody.gravBodyFactory.createEarth() with point-mass gravity (mu only)"
+        ],
+        "increment_vs_previous_case": "Baseline case. Point-mass Earth gravity only.",
+        "previous_case_id": null
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case1_twobody/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case1_twobody/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case1_twobody/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Basilisk",
+      "run_id": "b1_basilisk_case2_j2",
+      "case_id": "b1_case2_j2",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_model": "GGM03S J2-only spherical harmonics (max degree 2)",
+        "j2_enabled": true,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "spice_enabled": false
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+      },
+      "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+      "basilisk_version": "2.11.0b0",
+      "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+      "runtime_s": {
+        "propagation": 0.1423684309993405,
+        "runtime_ratio": 606876.1128680293
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474127.6091874239,
+        "ground_track_lon_drift_deg": -12.160025171430235,
+        "raan_change_deg": 0.9887370813421351,
+        "altitude_change_m": -18596.143331131898,
+        "along_track_phase_drift_deg": 4.076752993188791,
+        "final_altitude_m": 481403.85666886903,
+        "final_semi_major_axis_m": 6859540.856668869
+      },
+      "basilisk_perturbation_documentation": {
+        "enabled_basilisk_force_models": [
+          "Earth gravity via GGM03S-J2-only.txt (max degree 2)"
+        ],
+        "increment_vs_previous_case": "Adds J2 via GGM03S-J2-only spherical harmonics.",
+        "previous_case_id": "b1_case1_twobody"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Basilisk",
+      "run_id": "b1_basilisk_case3_j2_drag",
+      "case_id": "b1_case3_j2_drag",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_model": "GGM03S J2-only spherical harmonics (max degree 2)",
+        "j2_enabled": true,
+        "drag_enabled": true,
+        "atmosphere_model": "ExponentialAtmosphere (simSetPlanetEnvironment.exponentialAtmosphere earth preset)",
+        "srp_enabled": false,
+        "srp_model": null,
+        "third_body_bodies": [],
+        "spice_enabled": false
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+      },
+      "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+      "basilisk_version": "2.11.0b0",
+      "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+      "runtime_s": {
+        "propagation": 0.14361455700054648,
+        "runtime_ratio": 601610.3228287034
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474127.6091874239,
+        "ground_track_lon_drift_deg": -12.160025171430235,
+        "raan_change_deg": 0.9887370813421351,
+        "altitude_change_m": -18596.143331131898,
+        "along_track_phase_drift_deg": 4.076752993188791,
+        "final_altitude_m": 481403.85666886903,
+        "final_semi_major_axis_m": 6859540.856668869
+      },
+      "basilisk_perturbation_documentation": {
+        "enabled_basilisk_force_models": [
+          "Earth gravity via GGM03S-J2-only.txt (max degree 2)",
+          "ExponentialAtmosphere + simSetPlanetEnvironment.exponentialAtmosphere('earth')",
+          "DragDynamicEffector (Cd=2.2, projected area=0.01 m\u00b2)"
+        ],
+        "increment_vs_previous_case": "Adds ExponentialAtmosphere + DragDynamicEffector.",
+        "previous_case_id": "b1_case2_j2"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case3_j2_drag/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case3_j2_drag/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case3_j2_drag/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Basilisk",
+      "run_id": "b1_basilisk_case4_j2_drag_srp",
+      "case_id": "b1_case4_j2_drag_srp",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_model": "GGM03S J2-only spherical harmonics (max degree 2)",
+        "j2_enabled": true,
+        "drag_enabled": true,
+        "atmosphere_model": "ExponentialAtmosphere (simSetPlanetEnvironment.exponentialAtmosphere earth preset)",
+        "srp_enabled": true,
+        "srp_model": "RadiationPressure cannonball model",
+        "third_body_bodies": [],
+        "spice_enabled": true
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+      },
+      "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+      "basilisk_version": "2.11.0b0",
+      "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+      "runtime_s": {
+        "propagation": 0.19059189499967033,
+        "runtime_ratio": 453324.6285218448
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 473914.730431324,
+        "ground_track_lon_drift_deg": -12.162906872796235,
+        "raan_change_deg": 0.9886395574376924,
+        "altitude_change_m": -18606.265233051032,
+        "along_track_phase_drift_deg": 4.075073378483239,
+        "final_altitude_m": 481393.7347669499,
+        "final_semi_major_axis_m": 6859530.73476695
+      },
+      "basilisk_perturbation_documentation": {
+        "enabled_basilisk_force_models": [
+          "Earth gravity via GGM03S-J2-only.txt (max degree 2)",
+          "ExponentialAtmosphere + simSetPlanetEnvironment.exponentialAtmosphere('earth')",
+          "DragDynamicEffector (Cd=2.2, projected area=0.01 m\u00b2)",
+          "RadiationPressure cannonball (Cr=1.8, area=1.0 m\u00b2)",
+          "SPICE sun ephemeris for SRP"
+        ],
+        "increment_vs_previous_case": "Adds RadiationPressure (cannonball) with SPICE Sun ephemeris.",
+        "previous_case_id": "b1_case3_j2_drag"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case4_j2_drag_srp/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case4_j2_drag_srp/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case4_j2_drag_srp/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Basilisk",
+      "run_id": "b1_basilisk_case5_all_supported",
+      "case_id": "b1_case5_all_supported",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_model": "GGM03S J2-only spherical harmonics (max degree 2)",
+        "j2_enabled": true,
+        "drag_enabled": true,
+        "atmosphere_model": "ExponentialAtmosphere (simSetPlanetEnvironment.exponentialAtmosphere earth preset)",
+        "srp_enabled": true,
+        "srp_model": "RadiationPressure cannonball model",
+        "third_body_bodies": [
+          "Sun",
+          "Moon"
+        ],
+        "spice_enabled": true
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+      },
+      "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+      "basilisk_version": "2.11.0b0",
+      "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+      "runtime_s": {
+        "propagation": 0.2629273060010746,
+        "runtime_ratio": 328607.9384985859
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 473999.1450014053,
+        "ground_track_lon_drift_deg": -12.165776992682247,
+        "raan_change_deg": 0.9884148713993117,
+        "altitude_change_m": -18606.217465920374,
+        "along_track_phase_drift_deg": 4.075748541727535,
+        "final_altitude_m": 481393.78253408056,
+        "final_semi_major_axis_m": 6859530.782534081
+      },
+      "basilisk_perturbation_documentation": {
+        "enabled_basilisk_force_models": [
+          "Earth gravity via GGM03S-J2-only.txt (max degree 2)",
+          "ExponentialAtmosphere + simSetPlanetEnvironment.exponentialAtmosphere('earth')",
+          "DragDynamicEffector (Cd=2.2, projected area=0.01 m\u00b2)",
+          "RadiationPressure cannonball (Cr=1.8, area=1.0 m\u00b2)",
+          "SPICE ephemerides (de430, naif0012, de_403_masses, pck00010)",
+          "Sun and Moon point-mass gravity via gravBodyFactory"
+        ],
+        "increment_vs_previous_case": "Adds Sun and Moon point-mass gravity bodies via gravBodyFactory. Inherits all force models from Case 4.",
+        "previous_case_id": "b1_case4_j2_drag_srp",
+        "all_supported_basilisk_definition": {
+          "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The Basilisk-specific definition is below.",
+          "inherits_from_case": "b1_case4_j2_drag_srp",
+          "added_in_case5_vs_case4": [
+            "Moon point-mass gravity via gravBodyFactory",
+            "Sun point-mass gravity via gravBodyFactory (in addition to SRP ephemeris use)"
+          ],
+          "full_force_stack": [
+            "Earth gravity via GGM03S-J2-only.txt (max degree 2)",
+            "ExponentialAtmosphere + simSetPlanetEnvironment.exponentialAtmosphere('earth')",
+            "DragDynamicEffector (Cd=2.2, projected area=0.01 m\u00b2)",
+            "RadiationPressure cannonball (Cr=1.8, area=1.0 m\u00b2)",
+            "SPICE ephemerides (de430, naif0012, de_403_masses, pck00010)",
+            "Sun and Moon point-mass gravity via gravBodyFactory"
+          ],
+          "not_added_in_case5": [
+            "Higher-degree/order gravity field (beyond frozen J2-only policy)",
+            "MsisAtmosphere or other atmosphere models",
+            "FacetSRPDynamicEffector or faceted drag models",
+            "Additional planetary third bodies beyond Sun and Moon",
+            "Attitude-dependent drag/SRP (B2 scope)"
+          ]
+        }
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case5_all_supported/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case5_all_supported/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case5_all_supported/altitude_vs_time.png"
+      }
+    }
+  ],
+  "metrics_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/benchmark_b/B1_METRICS_COMPARISON.csv",
+  "parameter_table": "data/benchmark_b/B1_PARAMETER_TABLE.md",
+  "basilisk_case5_all_supported_definition": {
+    "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The Basilisk-specific definition is below.",
+    "inherits_from_case": "b1_case4_j2_drag_srp",
+    "added_in_case5_vs_case4": [
+      "Moon point-mass gravity via gravBodyFactory",
+      "Sun point-mass gravity via gravBodyFactory (in addition to SRP ephemeris use)"
+    ],
+    "full_force_stack": [
+      "Earth gravity via GGM03S-J2-only.txt (max degree 2)",
+      "ExponentialAtmosphere + simSetPlanetEnvironment.exponentialAtmosphere('earth')",
+      "DragDynamicEffector (Cd=2.2, projected area=0.01 m\u00b2)",
+      "RadiationPressure cannonball (Cr=1.8, area=1.0 m\u00b2)",
+      "SPICE ephemerides (de430, naif0012, de_403_masses, pck00010)",
+      "Sun and Moon point-mass gravity via gravBodyFactory"
+    ],
+    "not_added_in_case5": [
+      "Higher-degree/order gravity field (beyond frozen J2-only policy)",
+      "MsisAtmosphere or other atmosphere models",
+      "FacetSRPDynamicEffector or faceted drag models",
+      "Additional planetary third bodies beyond Sun and Moon",
+      "Attitude-dependent drag/SRP (B2 scope)"
+    ]
+  },
+  "basilisk_b1_physics_scope": {
+    "covered_in_this_b1_run": [
+      "Spacecraft hub propagation with 10 s dynamics step",
+      "Point-mass Earth gravity (Case 1)",
+      "J2-only GGM03S gravity harmonics (Cases 2\u20135)",
+      "ExponentialAtmosphere drag with DragDynamicEffector",
+      "RadiationPressure cannonball SRP with SPICE Sun ephemeris",
+      "Sun and Moon point-mass third-body gravity (Case 5)",
+      "7-day LEO state history export and drift metrics"
+    ],
+    "basilisk_native_but_not_in_b1": [
+      "Full gravity field to high degree/order",
+      "MsisAtmosphere and other atmosphere models",
+      "Facet drag / facet SRP dynamic effectors",
+      "Additional third bodies or custom gravity bodies",
+      "Integrating custom Python force models via DynamicEffector",
+      "Attitude-dependent drag and SRP (B2 scope)",
+      "Maneuver and event-driven propagation workflows"
+    ],
+    "conclusion": "Basilisk B1 demonstrates the frozen cross-tool perturbation ladder with native Basilisk modules. It does not claim to exercise every physics feature Basilisk supports."
+  },
+  "runtime_s": {
+    "total_pipeline": 2.334178746001271
+  }
+}

@@ -1,0 +1,253 @@
+<<<<<<<<<<<<<<<<<  42: Spacecraft Description File   >>>>>>>>>>>>>>>>>
+A3 LEO-GEO EP — advanced E2E (4RW pyramid, facet mesh, EGM96 18x18)  !  Description
+"A3-RW"                       !  Label
+GenScSpriteAlpha.ppm          !  Sprite File Name
+PROTOTYPE_FSW                 !  Flight Software Identifier (RW path when Nwhl>=3)
+1.0                           !  FSW Sample Time, sec (must be >= Inp_Sim DTSIM)
+************************* Orbit Parameters ****************************
+COWELL                        !  Orbit Prop (FIXED, EULER_HILL, ENCKE, or COWELL)
+CM                            !  Pos of CM or ORIGIN, wrt F
+0.0  0.0  0.0                 !  Pos wrt Formation (m), expressed in F
+0.0  0.0  0.0                 !  Vel wrt Formation (m/s), expressed in F
+*************************** Initial Attitude ***************************
+NQN                           ! Ang Vel wrt [NL], Att [QA] wrt [NLF] — N=inertial rate, Q=quaternion, N=inertial att
+0.0    0.0    0.0             ! Ang Vel (deg/sec)
+0.60769204  0.36153875  0.60769218  0.36153883   ! qbn at epoch: +X||V, -Z||nadir
+! (placeholder line — skipped when AttParm=Q)
+***************************  Dynamics Flags  ***************************
+GAUSS_ELIM                    ! Solve Dynamics by GAUSS_ELIM or ORDER_N
+FALSE                         ! Compute Constraint Forces and Torques
+REFPT_CM                      ! Mass Props referenced to REFPT_CM or REFPT_JOINT
+FALSE                         ! Flex Active
+FALSE                         ! Include 2nd Order Flex Terms
+NONE                          ! Shaker File Name
+2.2                           ! Drag Coefficient (GMAT Cd)
+************************************************************************
+************************* Body Parameters ******************************
+************************************************************************
+1                             ! Number of Bodies
+================================ Body 0 ================================
+17.0                          ! Mass (kg) at mission start
+0.15  0.18  0.12              ! Moments of Inertia (kg-m^2) — Basilisk handoff
+0.0  0.0  0.0                 ! Products of Inertia (xy,xz,yz)
+0.0  0.0  0.0                 ! Location of mass center, m
+0.0  0.0  0.0                 ! Constant Embedded Momentum (Nms)
+0.0  0.0  0.0                 ! Constant Embedded Magnetic Dipole (A-m^2)
+A3_facet_L1.obj               ! Geometry Input File Name (L1 box + solar arrays; mesh aero/SRP)
+Nodes_A3_EP.txt               ! Node File Name (EP +Y offset; native r x F torque in dynamics)
+NONE                          ! Flex File Name
+************************************************************************
+*************************** Joint Parameters ***************************
+************************************************************************
+         (Number of Joints is Number of Bodies minus one)
+============================== Joint 0 ================================
+PASSIVE                       ! Type of joint (PASSIVE, ACTUATED, others)
+0 1                           ! Inner, outer body indices
+1   213   GIMBAL              ! RotDOF, Seq, GIMBAL or SPHERICAL
+0   123                       ! TrnDOF, Seq
+FALSE  FALSE  FALSE           ! RotDOF Locked
+FALSE  FALSE  FALSE           ! TrnDOF Locked
+0.0    0.0    0.0             ! Initial Angles [deg]
+0.0    0.0    0.0             ! Initial Rates, deg/sec
+0.0    0.0    0.0             ! Initial Displacements [m]
+0.0    0.0    0.0             ! Initial Displacement Rates, m/sec
+0.0   0.0  0.0  312           ! Bi to Gi Static Angles [deg] & Seq
+0.0   0.0  0.0  312           ! Go to Bo Static Angles [deg] & Seq
+0.0   0.0  0.0                ! Position wrt inner body origin, m
+0.0   0.0  0.0                ! Position wrt outer body origin, m
+NONE                          ! Parameter File Name
+*************************** Wheel Parameters ***************************
+FALSE                         ! Wheel Drag Active
+FALSE                         ! Wheel Jitter Active
+4                             ! Number of wheels (Basilisk pyramid: XYZ + body diagonal)
+=============================  Wheel 0  ================================
+0.0                           ! Initial Momentum, N-m-sec
+1.0   0.0   0.0               ! Wheel Axis Components, [X, Y, Z]
+0.015  0.150                  ! Max Torque (N-m), Momentum (N-m-sec)
+0.003                         ! Wheel Rotor Inertia, kg-m^2
+0                             ! Body
+0                             ! Node
+NONE                          ! Jitter Input File Name
+=============================  Wheel 1  ================================
+0.0                           ! Initial Momentum, N-m-sec
+0.0   1.0   0.0               ! Wheel Axis Components, [X, Y, Z]
+0.015  0.150                  ! Max Torque (N-m), Momentum (N-m-sec)
+0.003                         ! Wheel Rotor Inertia, kg-m^2
+0                             ! Body
+0                             ! Node
+NONE                          ! Jitter Input File Name
+=============================  Wheel 2  ================================
+0.0                           ! Initial Momentum, N-m-sec
+0.0   0.0   1.0               ! Wheel Axis Components, [X, Y, Z]
+0.015  0.150                  ! Max Torque (N-m), Momentum (N-m-sec)
+0.003                         ! Wheel Rotor Inertia, kg-m^2
+0                             ! Body
+0                             ! Node
+NONE                          ! Jitter Input File Name
+=============================  Wheel 3  ================================
+0.0                           ! Initial Momentum, N-m-sec
+0.577350269   0.577350269   0.577350269  ! Wheel Axis (+X,+Y,+Z body diagonal)
+0.015  0.150                  ! Max Torque (N-m), Momentum (N-m-sec)
+0.003                         ! Wheel Rotor Inertia, kg-m^2
+0                             ! Body
+0                             ! Node
+NONE                          ! Jitter Input File Name
+**************************** MTB Parameters ****************************
+3                             ! Number of MTBs
+==============================  MTB 0  =================================
+5.0                           ! Saturation (A-m^2)
+1.0   0.0   0.0               ! MTB Axis Components, [X, Y, Z]
+0                             ! Node
+==============================  MTB 1  =================================
+5.0                           ! Saturation (A-m^2)
+0.0   1.0   0.0               ! MTB Axis Components, [X, Y, Z]
+0                             ! Node
+==============================  MTB 2  =================================
+5.0                           ! Saturation (A-m^2)
+0.0   0.0   1.0               ! MTB Axis Components, [X, Y, Z]
+0                             ! Node
+************************* Thruster Parameters **************************
+1                             ! Number of Thrusters
+==============================  Thr 0  =================================
+PROPORTIONAL                  ! Mode (PULSED or PROPORTIONAL)
+0.05                          ! Thrust Force (N) — upper bound; polynomial model sets actual thrust
+1.0   0.0   0.0               ! Thrust Axis (+X body = along-track when aligned)
+0                             ! Body
+1                             ! Node (EP thruster at +Y offset per Nodes_A3_EP.txt)
+2500.0                        ! Isp [sec] for propellant mass depletion
+1                             ! Polynomial thrust model active
+-5.19082  2.96519  -14.4789  54.05382  -0.00100092   ! Thrust coeffs [mN], ascending powers of kW
+-0.004776  0.05717  -0.09956  0.03211  2.13781       ! Mass-flow coeffs [mg/s], ascending powers of kW
+0.638  7.266                  ! Minimum and maximum usable power [kW]
+1.2  5.0  0.3                 ! Solar max power at 1 AU [kW], margin [%], BusCoeff1 [kW]
+1.32077  -0.10848  -0.11665  0.10843  -0.01279   ! GMAT SolarCoeff1..5 (distance polynomial)
+5.0  0.0  0.0                  ! AnnualDecayRate [%/yr], BusCoeff2 [kW/AU], BusCoeff3 [kW/AU^2]
+1                             ! Solar shadow gate (0=full sun, 1=Earth DualCone via Eclipse flag)
+06  15  2026  12  00  00.00    ! Solar power initial epoch UTC (GMAT InitialEpoch)
+1.0  1.0                      ! Thrust scale factor, duty cycle
+******************************* Gyro ************************************
+3                             ! Number of Gyro Axes
+============================== Axis 0 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+1.0  0.0  0.0                 ! Axis expressed in Body Frame
+500.0                         ! Max Rate, deg/sec
+200.0                         ! Scale Factor Error, ppm
+0.05                          ! Quantization, arcsec
+0.05                          ! Angle Random Walk (deg/rt-hr)
+0.05  1.0                     ! Bias Stability (deg/hr) over timespan (hr)
+0.05                          ! Angle Noise, arcsec RMS
+0.05                          ! Initial Bias (deg/hr)
+0                             ! Node
+============================== Axis 1 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0  1.0  0.0                 ! Axis expressed in Body Frame
+500.0                         ! Max Rate, deg/sec
+200.0                         ! Scale Factor Error, ppm
+0.05                          ! Quantization, arcsec
+0.05                          ! Angle Random Walk (deg/rt-hr)
+0.05  1.0                     ! Bias Stability (deg/hr) over timespan (hr)
+0.05                          ! Angle Noise, arcsec RMS
+0.05                          ! Initial Bias (deg/hr)
+0                             ! Node
+============================== Axis 2 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0  0.0  1.0                 ! Axis expressed in Body Frame
+500.0                         ! Max Rate, deg/sec
+200.0                         ! Scale Factor Error, ppm
+0.05                          ! Quantization, arcsec
+0.05                          ! Angle Random Walk (deg/rt-hr)
+0.05  1.0                     ! Bias Stability (deg/hr) over timespan (hr)
+0.05                          ! Angle Noise, arcsec RMS
+0.05                          ! Initial Bias (deg/hr)
+0                             ! Node
+*************************** Magnetometer ********************************
+3                             ! Number of Magnetometer Axes
+============================== Axis 0 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+1.0  0.0  0.0                 ! Axis expressed in Body Frame
+60.0E-6                       ! Saturation, Tesla
+50.0                          ! Scale Factor Error, ppm
+1.0E-8                        ! Quantization, Tesla
+50.0E-9                       ! Noise, Tesla RMS
+0                             ! Node
+============================== Axis 1 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0  1.0  0.0                 ! Axis expressed in Body Frame
+60.0E-6                       ! Saturation, Tesla
+50.0                          ! Scale Factor Error, ppm
+1.0E-8                        ! Quantization, Tesla
+50.0E-9                       ! Noise, Tesla RMS
+0                             ! Node
+============================== Axis 2 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0  0.0  1.0                 ! Axis expressed in Body Frame
+60.0E-6                       ! Saturation, Tesla
+50.0                          ! Scale Factor Error, ppm
+1.0E-8                        ! Quantization, Tesla
+50.0E-9                       ! Noise, Tesla RMS
+0                             ! Node
+*********************** Coarse Sun Sensor *******************************
+0                             ! Number of Coarse Sun Sensors
+============================== CSS 0 ====================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+1.0  1.0  1.0                 ! Axis expressed in Body Frame
+90.0                          ! Half-cone Angle, deg
+1.0                           ! Scale Factor
+0.001                         ! Quantization
+0                             ! Body
+0                             ! Node
+************************* Fine Sun Sensor *******************************
+0                             ! Number of Fine Sun Sensors
+=============================== FSS 0 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+30.0  20.0  10.0  213         ! Mounting Angles (deg), Seq in Body
+Z_AXIS                        ! Boresight Axis X_AXIS, Y_AXIS, or Z_AXIS
+32.0   32.0                   ! X, Y FOV Size, deg
+0.1                           ! Noise Equivalent Angle, deg RMS
+0.5                           ! Quantization, deg
+0                             ! Node
+************************** Star Tracker *********************************
+1                             ! Number of Star Trackers
+=============================== ST 0 ====================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0   0.0   0.0   123         ! Mounting Angles (deg), Seq in Body
+Z_AXIS                        ! Boresight Axis X_AXIS, Y_AXIS, or Z_AXIS
+8.0   8.0                     ! X, Y FOV Size, deg
+30.0  25.0  15.0              ! Sun, Earth, Moon Exclusion Angles, deg
+15.0  15.0  15.0              ! Noise Equivalent Angle, arcsec RMS
+0                             ! Node
+****************************** GPS **************************************
+0                             ! Number of GPS Receivers
+============================= GPSR 0 ====================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+4.0                           ! Position Noise, m RMS
+0.02                          ! Velocity Noise, m/sec RMS
+20.0E-9                       ! Time Noise, sec RMS
+0                             ! Node
+*************************** Accelerometer *******************************
+0                             ! Number of Accel Axes
+============================== Axis 0 ===================================
+1.0                           ! Sample Time,sec (>= DTSIM)
+1.0  0.0  0.0                 ! Axis expressed in Body Frame
+1.0                           ! Max Acceleration (m/s^2)
+0.0                           ! Scale Factor Error, ppm
+0.05                          ! Quantization, m/s^2
+0.0                           ! DV Random Walk (m/s/rt-hr)
+0.0 1.0                       ! Bias Stability (m/s^2) over timespan (hr)
+0.0                           ! DV Noise, m/s
+0.5                           ! Initial Bias (m/s^2)
+0                             ! Node
+************************ Fine Guidance Sensor ****************************
+0                             ! Number of Fine Guidance Sensors
+========================= Fine Guidance Sensor 0 =========================
+1.0                           ! Sample Time,sec (>= DTSIM)
+0.0  0.0  0.0  321            ! Nominal Mounting Angles (deg), Seq in Body
+X_AXIS                        ! Boresight Axis X_AXIS, Y_AXIS, or Z_AXIS
+3600.0   3600.0               ! H, V FOV Size, arcsec
+2.0                           ! Noise Equivalent Angle, arcsec RMS
+60.0                          ! Detector Scale, arcsec/pixel
+0  0                          ! Body, Node
+0.0  0.0  0.0  321            ! FOV Frame (Fr) Angles (deg), Seq wrt R frame
+0.00  0.0                     ! Guide Star H, V (deg) in FOV Frame
+NONE                          ! Optics Input File Name
+NONE                          ! PSF Image File Name

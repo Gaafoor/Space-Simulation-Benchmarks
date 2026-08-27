@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<FreeFlyerProjectFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" timePrecisionMode="nanosecond" schemaVersion="7.10.0.5">
+  <ProjectInformation>
+    <Author>Intern_ws B1</Author>
+    <Source>benchmarks/benchmark_b/freeflyer</Source>
+    <FreeFlyerVersion>7.10.1.60799527</FreeFlyerVersion>
+    <RevisionNumber>1</RevisionNumber>
+    <Title>Benchmark B1 Physics Fidelity</Title>
+    <Subject>Five-case perturbation ladder with identical initial conditions</Subject>
+    <Category>Benchmark</Category>
+    <Keywords>B1,physics fidelity,J2,drag,SRP</Keywords>
+    <Comments>Headless 5-case B1 propagation. Run: ff -mp benchmark_b1_physics_fidelity.MissionPlan -tmps -hwm</Comments>
+    <Notes>Frozen orbit: 500 km SSO-like LEO, epoch 2026-06-02 UTC. Default duration 24 h (86400 s). Edit SIM_DURATION_S at top of script for 7 d runs.</Notes>
+  </ProjectInformation>
+  <ProjectPreferences>
+    <General>
+      <LockProjectFromEditing>false</LockProjectFromEditing>
+    </General>
+    <OnOpen>
+      <ShowControlSequence>true</ShowControlSequence>
+      <ShowEmptyEnvironment>false</ShowEmptyEnvironment>
+      <ShowNotes>false</ShowNotes>
+      <ShowHome>false</ShowHome>
+      <ShowOutput>false</ShowOutput>
+      <CreateBackup>false</CreateBackup>
+      <BackupLocation></BackupLocation>
+    </OnOpen>
+    <OnRun>
+      <SaveMissionPlan>false</SaveMissionPlan>
+      <HideWarningMessages>false</HideWarningMessages>
+    </OnRun>
+  </ProjectPreferences>
+  <ProjectDataFiles>
+    <EarthOrientationFile useDefault="true"></EarthOrientationFile>
+    <ElectronDensityCoefficientFile useDefault="true"></ElectronDensityCoefficientFile>
+    <GeopotentialFile useDefault="true"></GeopotentialFile>
+    <HarrisPriesterDragFile useDefault="true"></HarrisPriesterDragFile>
+    <JacchiaAtmosphereModelFile useDefault="true"></JacchiaAtmosphereModelFile>
+    <MagneticFieldFile useDefault="true"></MagneticFieldFile>
+    <PlanetaryFile useDefault="true"></PlanetaryFile>
+    <StationGeodeticsFile useDefault="true"></StationGeodeticsFile>
+    <SolidTideFile useDefault="true"></SolidTideFile>
+    <DSTFile useDefault="true"></DSTFile>
+    <StarFieldFile useDefault="true"></StarFieldFile>
+  </ProjectDataFiles>
+  <ProjectObjects>
+    <Object>
+      <SolarSystem name="FF_SolarSystem" isConstant="false" isGlobal="true">
+        <Name>FF_SolarSystem</Name>
+        <EarthOrientationModel>1</EarthOrientationModel>
+        <CIRFEvaluationMode>1</CIRFEvaluationMode>
+        <ComputePolarMotion>true</ComputePolarMotion>
+        <ModelCelestialPoleOffsets>true</ModelCelestialPoleOffsets>
+        <ApplyUT1Correction>true</ApplyUT1Correction>
+        <COUpdateInterval units="s" displayed_units="s">0</COUpdateInterval>
+        <IonosphereOptions>
+          <IonosphereOptions name="FF_SolarSystem_|ionoOptions|" isConstant="false" isGlobal="false">
+            <Name>FF_SolarSystem_|ionoOptions|</Name>
+            <MaximumHeight units="km" displayed_units="km">1000</MaximumHeight>
+            <MinimumHeight units="km" displayed_units="km">80</MinimumHeight>
+            <IntegrationStepSize units="km" displayed_units="km">25</IntegrationStepSize>
+            <ScaleFactor units="" displayed_units="">1</ScaleFactor>
+            <Model>0</Model>
+            <IRIDataDirectory>DEFAULT</IRIDataDirectory>
+            <metadata dim="0" />
+          </IonosphereOptions>
+        </IonosphereOptions>
+        <NoradKeplerEqTolerance units="" displayed_units="">1e-12</NoradKeplerEqTolerance>
+        <metadata dim="0" />
+      </SolarSystem>
+    </Object>
+    <Object>
+      <ConsoleWindow name="Console" isConstant="false" isGlobal="true">
+        <Name>Console</Name>
+        <WindowTitle>Console</WindowTitle>
+        <WordWrap>false</WordWrap>
+        <CurrentTextColor>0</CurrentTextColor>
+        <BackColor>16777215</BackColor>
+        <Dimension units="" displayed_units="">10</Dimension>
+        <DockMode>1</DockMode>
+        <CurrentFontType>0</CurrentFontType>
+        <UseStdOut>true</UseStdOut>
+        <ShowOnRun>false</ShowOnRun>
+        <metadata dim="0" />
+      </ConsoleWindow>
+    </Object>
+  </ProjectObjects>
+  <ProjectMissionSequence>
+    <ProjectExternals />
+    <ProjectCommands>
+      <FreeForm enabled="true">
+        <Label>B1 Physics Fidelity Cases 1-5</Label>
+        <Bookmarks />
+        <Breakpoints />
+        <FreeFormScript><![CDATA[// =============================================================================
+// Benchmark B1 — Physics Fidelity (FreeFlyer)
+// Five perturbation cases, identical initial state, CSV export per case.
+//
+// Headless run (from this directory):
+//   ff -mp benchmark_b1_physics_fidelity.MissionPlan -tmps -hwm
+//
+// Outputs:
+//   ../../../data/benchmark_b/b1_physics_fidelity/freeflyer/b1_caseN_*/state_history.csv
+// =============================================================================
+
+// --- Frozen timing (edit SIM_DURATION_S for 7 d = 604800) ---
+Constant Variable SIM_DURATION_S  = 86400;
+Constant Variable OUTPUT_STEP_S   = 600;
+Constant Variable DYNAMICS_STEP_S = 10;
+
+// Earth body index in ForceModel arrays: [2]
+Constant Variable EARTH_IDX = 2;
+Constant Variable MOON_IDX  = 9;
+Constant Variable SUN_IDX   = 10;
+
+String outRoot;
+outRoot = "../../../data/benchmark_b/b1_physics_fidelity/freeflyer/";
+
+// -----------------------------------------------------------------------------
+Define Procedure WriteStateCsvLine(FileInterface csv, Spacecraft sc);
+
+	Variable line;
+	Variable t_s;
+
+	t_s = sc.ElapsedTime.ToSeconds();
+
+	line =
+		t_s.ToString("%.9f") + "," +
+		(sc.X  * 1000).ToString("%.9f") + "," +
+		(sc.Y  * 1000).ToString("%.9f") + "," +
+		(sc.Z  * 1000).ToString("%.9f") + "," +
+		(sc.VX * 1000).ToString("%.9f") + "," +
+		(sc.VY * 1000).ToString("%.9f") + "," +
+		(sc.VZ * 1000).ToString("%.9f");
+
+	csv.PutLine(line);
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure ConfigureB1ForceModel(Spacecraft sc, Variable caseId);
+
+	Alias fm = (sc.Propagator AsType RK89).ForceModel;
+	Variable i;
+
+	// Reset to a clean baseline before enabling the case ladder.
+	For i = 0 to 10;
+		fm.UseBodyForce[i] = 0;
+	End;
+
+	fm.Mercury = 0;
+	fm.Venus   = 0;
+	fm.Mars    = 0;
+	fm.Jupiter = 0;
+	fm.Saturn  = 0;
+	fm.Uranus  = 0;
+	fm.Neptune = 0;
+	fm.Pluto   = 0;
+	fm.Moon    = 0;
+	fm.Sun     = 0;
+
+	fm.Drag = 0;
+	fm.Lift = 0;
+	fm.SRP  = 0;
+
+	fm.UseBodyForce[EARTH_IDX] = 1;
+
+	If (caseId == 1);
+		// Case 1: two-body (Earth point mass only)
+		fm.PlanetFieldType[EARTH_IDX]   = 0;
+		fm.PlanetFieldDegree[EARTH_IDX] = 0;
+		fm.PlanetFieldOrder[EARTH_IDX]  = 0;
+	Else;
+		// Cases 2-5: J2-only style (zonal potential, degree 2 order 0)
+		fm.PlanetFieldType[EARTH_IDX]   = 1;
+		fm.PlanetFieldDegree[EARTH_IDX] = 2;
+		fm.PlanetFieldOrder[EARTH_IDX]  = 0;
+
+		If (caseId >= 3);
+			fm.Drag = 1;
+			fm.Lift = 0;
+		End;
+
+		If (caseId >= 4);
+			fm.SRP = 1;
+			fm.SRPForceGeometry = 0;
+		End;
+
+		If (caseId >= 5);
+			// Case 5: add Sun/Moon point-mass third-body gravity
+			fm.Moon = 1;
+			fm.Sun  = 1;
+			fm.PlanetFieldType[MOON_IDX] = 0;
+			fm.PlanetFieldType[SUN_IDX]  = 0;
+		End;
+	End;
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure InitializeB1Spacecraft(Spacecraft sc);
+
+	sc.CentralBody = "Earth";
+	sc.ReferenceFrame = "International Celestial Reference Frame";
+
+	sc.Epoch = "02 Jun 2026 00:00:00.000";
+
+	sc.A    = 6878.137;
+	sc.E    = 0;
+	sc.I    = 97.4;
+	sc.RAAN = 0;
+	sc.W    = 0;
+	sc.TA   = 0;
+
+	sc.VehicleDryMass = 12;
+	sc.Cd             = 2.2;
+	sc.Cr             = 1.8;
+	sc.DragArea       = 0.01;
+	sc.SRPArea        = 1.0;
+
+	sc.Propagator.StepSize = TimeSpan.FromSeconds(DYNAMICS_STEP_S);
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure RunB1Case(Spacecraft sc, Variable caseId, String caseFolder, String caseLabel);
+
+	FileInterface csv;
+	String csvPath;
+	Variable stopTime;
+	Variable dt;
+
+	Report "=== B1 " + caseLabel + " ===" to Console;
+
+	Restore sc from "B1_IC";
+	ConfigureB1ForceModel(sc, caseId);
+
+	csvPath = outRoot + caseFolder + "/state_history.csv";
+
+	csv.Filename  = csvPath;
+	csv.WriteMode = 1;
+
+	If (!csv.Open());
+		Report "Failed to open output CSV: " + csvPath to Console;
+		Stop;
+	End;
+
+	csv.PutLine("time_s,x_m,y_m,z_m,vx_m_s,vy_m_s,vz_m_s");
+
+	stopTime = TimeSpan.FromSeconds(SIM_DURATION_S);
+	dt       = TimeSpan.FromSeconds(OUTPUT_STEP_S);
+
+	While (sc.ElapsedTime <= stopTime);
+
+		WriteStateCsvLine(csv, sc);
+
+		If (sc.ElapsedTime == stopTime);
+			Break;
+		End;
+
+		Step sc to (sc.ElapsedTime == sc.ElapsedTime + dt);
+
+	End;
+
+	csv.Close();
+
+	Report "Wrote " + csvPath to Console;
+
+EndProcedure;
+
+// =============================================================================
+// Main
+// =============================================================================
+
+ForceModel B1_FM;
+RK89 B1_PROP(B1_FM);
+Spacecraft B1_SC(B1_PROP);
+
+InitializeB1Spacecraft(B1_SC);
+Save B1_SC as "B1_IC";
+
+Report "Benchmark B1 Physics Fidelity — FreeFlyer" to Console;
+Report "Duration (s): " + SIM_DURATION_S.ToString() to Console;
+Report "Output step (s): " + OUTPUT_STEP_S.ToString() to Console;
+Report "Dynamics step (s): " + DYNAMICS_STEP_S.ToString() to Console;
+Report "" to Console;
+
+RunB1Case(B1_SC, 1, "b1_case1_twobody",        "Case 1 twobody");
+RunB1Case(B1_SC, 2, "b1_case2_j2",             "Case 2 J2");
+RunB1Case(B1_SC, 3, "b1_case3_j2_drag",        "Case 3 J2+drag");
+RunB1Case(B1_SC, 4, "b1_case4_j2_drag_srp",    "Case 4 J2+drag+SRP");
+RunB1Case(B1_SC, 5, "b1_case5_all_supported",  "Case 5 all supported");
+
+Report "" to Console;
+Report "B1 FreeFlyer propagation complete." to Console;]]></FreeFormScript>
+      </FreeForm>
+    </ProjectCommands>
+  </ProjectMissionSequence>
+  <ProjectScript><![CDATA[// =============================================================================
+// Benchmark B1 — Physics Fidelity (FreeFlyer)
+// Five perturbation cases, identical initial state, CSV export per case.
+//
+// Headless run (from this directory):
+//   ff -mp benchmark_b1_physics_fidelity.MissionPlan -tmps -hwm
+//
+// Outputs:
+//   ../../../data/benchmark_b/b1_physics_fidelity/freeflyer/b1_caseN_*/state_history.csv
+// =============================================================================
+
+// --- Frozen timing (edit SIM_DURATION_S for 7 d = 604800) ---
+Constant Variable SIM_DURATION_S  = 86400;
+Constant Variable OUTPUT_STEP_S   = 600;
+Constant Variable DYNAMICS_STEP_S = 10;
+
+// Earth body index in ForceModel arrays: [2]
+Constant Variable EARTH_IDX = 2;
+Constant Variable MOON_IDX  = 9;
+Constant Variable SUN_IDX   = 10;
+
+String outRoot;
+outRoot = "../../../data/benchmark_b/b1_physics_fidelity/freeflyer/";
+
+// -----------------------------------------------------------------------------
+Define Procedure WriteStateCsvLine(FileInterface csv, Spacecraft sc);
+
+	Variable line;
+	Variable t_s;
+
+	t_s = sc.ElapsedTime.ToSeconds();
+
+	line =
+		t_s.ToString("%.9f") + "," +
+		(sc.X  * 1000).ToString("%.9f") + "," +
+		(sc.Y  * 1000).ToString("%.9f") + "," +
+		(sc.Z  * 1000).ToString("%.9f") + "," +
+		(sc.VX * 1000).ToString("%.9f") + "," +
+		(sc.VY * 1000).ToString("%.9f") + "," +
+		(sc.VZ * 1000).ToString("%.9f");
+
+	csv.PutLine(line);
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure ConfigureB1ForceModel(Spacecraft sc, Variable caseId);
+
+	Alias fm = (sc.Propagator AsType RK89).ForceModel;
+	Variable i;
+
+	// Reset to a clean baseline before enabling the case ladder.
+	For i = 0 to 10;
+		fm.UseBodyForce[i] = 0;
+	End;
+
+	fm.Mercury = 0;
+	fm.Venus   = 0;
+	fm.Mars    = 0;
+	fm.Jupiter = 0;
+	fm.Saturn  = 0;
+	fm.Uranus  = 0;
+	fm.Neptune = 0;
+	fm.Pluto   = 0;
+	fm.Moon    = 0;
+	fm.Sun     = 0;
+
+	fm.Drag = 0;
+	fm.Lift = 0;
+	fm.SRP  = 0;
+
+	fm.UseBodyForce[EARTH_IDX] = 1;
+
+	If (caseId == 1);
+		// Case 1: two-body (Earth point mass only)
+		fm.PlanetFieldType[EARTH_IDX]   = 0;
+		fm.PlanetFieldDegree[EARTH_IDX] = 0;
+		fm.PlanetFieldOrder[EARTH_IDX]  = 0;
+	Else;
+		// Cases 2-5: J2-only style (zonal potential, degree 2 order 0)
+		fm.PlanetFieldType[EARTH_IDX]   = 1;
+		fm.PlanetFieldDegree[EARTH_IDX] = 2;
+		fm.PlanetFieldOrder[EARTH_IDX]  = 0;
+
+		If (caseId >= 3);
+			fm.Drag = 1;
+			fm.Lift = 0;
+		End;
+
+		If (caseId >= 4);
+			fm.SRP = 1;
+			fm.SRPForceGeometry = 0;
+		End;
+
+		If (caseId >= 5);
+			// Case 5: add Sun/Moon point-mass third-body gravity
+			fm.Moon = 1;
+			fm.Sun  = 1;
+			fm.PlanetFieldType[MOON_IDX] = 0;
+			fm.PlanetFieldType[SUN_IDX]  = 0;
+		End;
+	End;
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure InitializeB1Spacecraft(Spacecraft sc);
+
+	sc.CentralBody = "Earth";
+	sc.ReferenceFrame = "International Celestial Reference Frame";
+
+	sc.Epoch = "02 Jun 2026 00:00:00.000";
+
+	sc.A    = 6878.137;
+	sc.E    = 0;
+	sc.I    = 97.4;
+	sc.RAAN = 0;
+	sc.W    = 0;
+	sc.TA   = 0;
+
+	sc.VehicleDryMass = 12;
+	sc.Cd             = 2.2;
+	sc.Cr             = 1.8;
+	sc.DragArea       = 0.01;
+	sc.SRPArea        = 1.0;
+
+	sc.Propagator.StepSize = TimeSpan.FromSeconds(DYNAMICS_STEP_S);
+
+EndProcedure;
+
+// -----------------------------------------------------------------------------
+Define Procedure RunB1Case(Spacecraft sc, Variable caseId, String caseFolder, String caseLabel);
+
+	FileInterface csv;
+	String csvPath;
+	Variable stopTime;
+	Variable dt;
+
+	Report "=== B1 " + caseLabel + " ===" to Console;
+
+	Restore sc from "B1_IC";
+	ConfigureB1ForceModel(sc, caseId);
+
+	csvPath = outRoot + caseFolder + "/state_history.csv";
+
+	csv.Filename  = csvPath;
+	csv.WriteMode = 1;
+
+	If (!csv.Open());
+		Report "Failed to open output CSV: " + csvPath to Console;
+		Stop;
+	End;
+
+	csv.PutLine("time_s,x_m,y_m,z_m,vx_m_s,vy_m_s,vz_m_s");
+
+	stopTime = TimeSpan.FromSeconds(SIM_DURATION_S);
+	dt       = TimeSpan.FromSeconds(OUTPUT_STEP_S);
+
+	While (sc.ElapsedTime <= stopTime);
+
+		WriteStateCsvLine(csv, sc);
+
+		If (sc.ElapsedTime == stopTime);
+			Break;
+		End;
+
+		Step sc to (sc.ElapsedTime == sc.ElapsedTime + dt);
+
+	End;
+
+	csv.Close();
+
+	Report "Wrote " + csvPath to Console;
+
+EndProcedure;
+
+// =============================================================================
+// Main
+// =============================================================================
+
+ForceModel B1_FM;
+RK89 B1_PROP(B1_FM);
+Spacecraft B1_SC(B1_PROP);
+
+InitializeB1Spacecraft(B1_SC);
+Save B1_SC as "B1_IC";
+
+Report "Benchmark B1 Physics Fidelity — FreeFlyer" to Console;
+Report "Duration (s): " + SIM_DURATION_S.ToString() to Console;
+Report "Output step (s): " + OUTPUT_STEP_S.ToString() to Console;
+Report "Dynamics step (s): " + DYNAMICS_STEP_S.ToString() to Console;
+Report "" to Console;
+
+RunB1Case(B1_SC, 1, "b1_case1_twobody",        "Case 1 twobody");
+RunB1Case(B1_SC, 2, "b1_case2_j2",             "Case 2 J2");
+RunB1Case(B1_SC, 3, "b1_case3_j2_drag",        "Case 3 J2+drag");
+RunB1Case(B1_SC, 4, "b1_case4_j2_drag_srp",    "Case 4 J2+drag+SRP");
+RunB1Case(B1_SC, 5, "b1_case5_all_supported",  "Case 5 all supported");
+
+Report "" to Console;
+Report "B1 FreeFlyer propagation complete." to Console;]]></ProjectScript>
+  <ProjectNotes></ProjectNotes>
+</FreeFlyerProjectFile>

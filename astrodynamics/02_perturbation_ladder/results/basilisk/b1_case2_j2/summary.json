@@ -1,0 +1,56 @@
+{
+  "benchmark": "B1",
+  "simulator": "Basilisk",
+  "run_id": "b1_basilisk_case2_j2",
+  "case_id": "b1_case2_j2",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "force_model": {
+    "gravity_model": "GGM03S J2-only spherical harmonics (max degree 2)",
+    "j2_enabled": true,
+    "drag_enabled": false,
+    "atmosphere_model": null,
+    "srp_enabled": false,
+    "srp_model": null,
+    "third_body_bodies": [],
+    "spice_enabled": false
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "fixed inertial (default hub attitude; isotropic drag/SRP coefficients)"
+  },
+  "integrator": "Basilisk default integrator, dynamics step 10.0 s",
+  "basilisk_version": "2.11.0b0",
+  "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.39",
+  "runtime_s": {
+    "propagation": 0.1423684309993405,
+    "runtime_ratio": 606876.1128680293
+  },
+  "drift_metrics_vs_case1": {
+    "position_drift_vs_case1_m": 474127.6091874239,
+    "ground_track_lon_drift_deg": -12.160025171430235,
+    "raan_change_deg": 0.9887370813421351,
+    "altitude_change_m": -18596.143331131898,
+    "along_track_phase_drift_deg": 4.076752993188791,
+    "final_altitude_m": 481403.85666886903,
+    "final_semi_major_axis_m": 6859540.856668869
+  },
+  "basilisk_perturbation_documentation": {
+    "enabled_basilisk_force_models": [
+      "Earth gravity via GGM03S-J2-only.txt (max degree 2)"
+    ],
+    "increment_vs_previous_case": "Adds J2 via GGM03S-J2-only spherical harmonics.",
+    "previous_case_id": "b1_case1_twobody"
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/basilisk_b1/b1_case2_j2/altitude_vs_time.png"
+  }
+}

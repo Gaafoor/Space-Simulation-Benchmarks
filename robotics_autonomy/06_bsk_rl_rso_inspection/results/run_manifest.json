@@ -1,0 +1,16 @@
+{
+  "case": "bsk_rl_rso",
+  "title": "BSK-RL inspection / autonomy benchmark",
+  "cwd": "/home/mahmedext/Downloads/basilisk-develop2/bsk_rl/examples",
+  "command": [
+    "python3",
+    "postprocess_rso_mission.py",
+    "--results-dir",
+    "/home/mahmedext/ray_results/bench_rso",
+    "--out-dir",
+    "/home/mahmedext/Downloads/robotics_autonomy_benchmark/results/bsk_rl_rso"
+  ],
+  "artifact_dir": "/home/mahmedext/Downloads/robotics_autonomy_benchmark/results/bsk_rl_rso",
+  "notes": "Focus: learned inspection and safe approach around a non-cooperative target.",
+  "created_at": "2026-07-22T11:01:28.636989Z"
+}

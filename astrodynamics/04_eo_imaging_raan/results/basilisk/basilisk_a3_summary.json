@@ -1,0 +1,41 @@
+{
+  "benchmark_id": "A3",
+  "simulator": "Basilisk",
+  "version": "not recorded in current environment snapshot",
+  "status": "closed_for_basilisk",
+  "selected_case": "RAAN_061",
+  "epoch": "2026-06-02T00:00:00",
+  "camera_model": {
+    "type": "Post-processed conical camera geometry",
+    "full_fov_deg": 10.0,
+    "half_angle_deg": 5.0,
+    "pointing_assumption": "nadir pointing"
+  },
+  "metrics": {
+    "imaging_opportunity_count": 1,
+    "imaging_sample_count": 1,
+    "minimum_off_nadir_angle_deg": 2.109545164729093,
+    "minimum_off_nadir_time_s": 40350.0
+  },
+  "coverage": {
+    "covered_cells": 6793,
+    "coverage_percentage": 67.93,
+    "max_coverage_count": 2,
+    "mean_coverage_count": 0.7869,
+    "footprint_radius_km": 43.744331762962005
+  },
+  "runtime_seconds": {
+    "total_pipeline": null,
+    "note": "Runtime not re-measured in this environment because Basilisk Python module is currently unavailable."
+  },
+  "implementation_notes": {
+    "workflow_type": "Basilisk propagation + Python geometry post-processing",
+    "native_sensor_contact": "Not used; A3 FOV geometry and coverage/heatmap are explicit Python calculations.",
+    "coverage_heatmap_source": "Custom Python functions in run_basilisk_a3_imaging_analysis.py, not Basilisk-native feature."
+  },
+  "source_artifacts": {
+    "runner_script": "benchmarks/benchmark_a/run_basilisk_a3_imaging_analysis.py",
+    "results_summary": "benchmarks/benchmark_a/results/basilisk_a3/summary.json",
+    "coverage_json": "benchmarks/benchmark_a/results/basilisk_a3/coverage_percentage.json"
+  }
+}

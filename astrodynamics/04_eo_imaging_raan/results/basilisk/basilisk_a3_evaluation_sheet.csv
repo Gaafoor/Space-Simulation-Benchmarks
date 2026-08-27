@@ -1,0 +1,33 @@
+date,simulator,version,operator,run_id,status,notes
+2026-06-09,Basilisk,not recorded in current environment snapshot,user,a3_basilisk_raan_061,pass,RAAN 61 results consolidated from existing Basilisk A3 artifacts
+
+benchmark_specific_metric,value,unit,comment
+selected_raan,61,deg,Aligned with selected case used in GMAT and Orekit A3 comparisons
+imaging_opportunity_count,1,count,Computed from Python FOV geometry post-processing
+imaging_sample_count,1,count,10 s samples inside 5 deg half-angle
+minimum_off_nadir_angle,2.109545164729093,deg,Best Basilisk A3 geometry result
+coverage_percentage,67.93,percent,Madrid box regional coverage from 100x100 grid
+coverage_max_count,2,samples,Maximum per-cell coverage count
+camera_fov,10,deg,Full cone angle
+camera_half_angle,5,deg,Imaging threshold
+rendered_image_output_supported,No,yes_no,A3 geometry only; C1 deferred
+sensor_geometry_native_support,No,qualitative,FOV access and coverage metrics are computed in Python post-processing
+wall_clock_runtime,Not re-measured,qualitative,Basilisk module unavailable in this environment during consolidation
+scenario_setup_time,existing_run,qualitative,Using previously generated A3 Basilisk artifacts
+required_custom_code_lines,1046,lines,run_basilisk_a3_imaging_analysis.py
+manual_configuration_steps,2,count,Run script and review outputs
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+Physics Fidelity,4,Basilisk J2 run with explicit orbital configuration and dense state output
+Performance,3,Prior run completed and generated full artifact set; no rerun runtime captured here
+Ease of Integration,3,Python-native workflow but requires Basilisk environment setup
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+Mission Capabilities,25,4,20,Produces consistent A3 imaging geometry and regional coverage evidence
+Dynamics and GNC,20,3,12,Strong propagation capability; no closed-loop attitude/GNC exercise in A3 scope
+Robotics and AI,20,N/A,N/A,Not applicable to A3 mission geometry benchmark
+Ease of Use,10,3,6,Single Python workflow but requires Basilisk installation availability
+Documentation,10,3,6,A3 assumptions and artifacts are explicit and reproducible
+Visualization,10,4,8,Provides off-nadir elevation ground-track footprint and heatmap plots
+Extensibility,5,4,4,Python pipeline is extensible for additional imaging and coverage metrics
+TOTAL,100,partial,56,Basilisk A3 closed for selected RAAN 61 case

@@ -1,0 +1,225 @@
+// =============================================================================
+// FreeForm 6 — Map/3D views + main loop + plot updates + export
+// =============================================================================
+
+Viewpoint mapCamera;
+mapCamera.ViewpointType  = "map";
+mapCamera.ViewpointName  = "map";
+mapCamera.MapView.Width  = 60;
+mapCamera.MapView.Height = 40;
+mapCamera.MapView.CenterLatitude  = 38;
+mapCamera.MapView.CenterLongitude = 5;
+mapCamera.MapView.LatitudeGridLabelLocation = 2;
+
+Viewpoint viewCamera;
+viewCamera.ViewpointName = "view";
+viewCamera.ThreeDView.RightAscension = 110;
+viewCamera.ThreeDView.Declination    = -8;
+viewCamera.ThreeDView.Radius         = 3000;
+viewCamera.ThreeDView.Source         = CubeSat.ObjectId;
+viewCamera.ThreeDView.Target         = CubeSat.ObjectId;
+viewCamera.ThreeDView.ReferenceFrame = "inertial";
+
+MapView.AddViewpoint(mapCamera);
+MapView.ActivateViewpoint(mapCamera.ViewpointName);
+
+ThreeDView.AddViewpoint(viewCamera);
+ThreeDView.ActivateViewpoint(viewCamera.ViewpointName);
+
+sensorSwath.ShapeType = "Triangle Strip";
+sensorSwath.DefaultColor = ColorTools.Red;
+
+SensorTarget.RemoveAllShapes();
+SensorTarget.AddShape();
+SensorTarget.Shapes[0].SetSize(1, 520, 130);
+SensorTarget.Shapes[0].SetOrigin(1, 5, 5);
+SensorTarget.Shapes[0].TextOptions.Font.Size             = 20;
+SensorTarget.Shapes[0].TextOptions.AlignmentVertical     = 0;
+SensorTarget.Shapes[0].TextOptions.AlignmentHorizontal   = 0;
+SensorTarget.Shapes[0].TextOptions.BackdropBorderOpacity = 0;
+
+CoordinateSystem currentCS;
+CoordinateSystem deltaCS;
+Array q[4];
+Variable simTimeHr;
+
+While (CubeSat.ElapsedTime < TimeSpan.FromDays(5));
+
+	simTimeHr           = CubeSat.ElapsedTime.ToHours();
+	pointingMode        = POINTING_EARTH;
+	targetElevation     = 0;
+	slewError           = 180;
+	quatErr             = 0;
+	activeStationIndex  = -1;
+
+	If (cairoCaptured == 1 and madridCaptured == 1 and parisCaptured == 1);
+
+		If (CubeSat.InShadow() == 0);
+			pointingMode = POINTING_SUN;
+		End;
+
+	Else;
+
+		If (CubeSat.InShadow() == 1);
+			pointingMode = POINTING_EARTH;
+		Else;
+
+			pointingMode = POINTING_SUN;
+
+			If (cairoCaptured == 0 and Cairo.Elevation(CubeSat) >= ACQUISITION_ELEV);
+				targetStation        = Cairo;
+				activeStationIndex   = 0;
+				pointingMode         = POINTING_GROUND;
+			ElseIf (madridCaptured == 0 and Madrid.Elevation(CubeSat) >= ACQUISITION_ELEV);
+				targetStation        = Madrid;
+				activeStationIndex   = 1;
+				pointingMode         = POINTING_GROUND;
+			ElseIf (parisCaptured == 0 and Paris.Elevation(CubeSat) >= ACQUISITION_ELEV);
+				targetStation        = Paris;
+				activeStationIndex   = 2;
+				pointingMode         = POINTING_GROUND;
+			End;
+
+		End;
+
+	End;
+
+	If (pointingMode == POINTING_GROUND and targetStation.DisplayName != cachedStation.DisplayName);
+		Console.CurrentTextColor = ColorTools.White;
+		Report "Now slewing towards " to Console without linefeed;
+		Console.CurrentTextColor = targetStation.Color;
+		Report targetStation.DisplayName to Console without linefeed;
+		Console.CurrentTextColor = ColorTools.White;
+		Report "!" to Console;
+	End;
+
+	If (pointingMode == POINTING_GROUND);
+		cachedStation             = targetStation;
+		cachedStation.DisplayName = targetStation.DisplayName;
+	Else;
+		cachedStation.DisplayName = "";
+	End;
+
+	Call ComputeTargetAttitude(CubeSat, targetStation, targetCS, pointingMode);
+	Call SlewSpacecraft(targetCS, PERFORM_SLEW, SLEW_RATE, CubeSat);
+
+	If (pointingMode == POINTING_GROUND);
+
+		lineOfSight.Epoch = CubeSat.Epoch;
+		bodyX.Epoch       = CubeSat.Epoch;
+		lineOfSight.BuildVector(9, CubeSat, targetStation);
+		bodyX.BuildVector(4, CubeSat, 3);
+		slewError         = bodyX.VertexAngle(lineOfSight);
+		targetElevation   = targetStation.Elevation(CubeSat);
+
+		currentCS.Epoch = CubeSat.Epoch;
+		deltaCS.Epoch   = CubeSat.Epoch;
+		currentCS.BuildCoordinateSystem(CubeSat);
+		deltaCS.SetAttitudeMatrix(
+		    targetCS.GetAttitudeMatrix() *
+		    currentCS.GetAttitudeMatrix().Inverse()
+		);
+		q = deltaCS.GetQuaternion();
+		quatErr = 2*acos(q[3])*180/3.14159;
+
+		If (targetElevation >= IMAGE_ELEV_MIN and targetElevation <= IMAGE_ELEV_MAX and slewError < SETTLE_ANGLE);
+
+			If (activeStationIndex == 0 and cairoCaptured == 0);
+				Console.CurrentTextColor = Cairo.Color;
+				Report "Imaging Cairo!  Elev=" + targetElevation.Format("%4.1f") + " deg, Boresight err=" + slewError.Format("%4.2f") + " deg" to Console;
+				Console.CurrentTextColor = ColorTools.White;
+				cairoCaptured = 1;
+				CapMarkCairo.AddPoints(simTimeHr, targetElevation, "Cairo");
+			ElseIf (activeStationIndex == 1 and madridCaptured == 0);
+				Console.CurrentTextColor = Madrid.Color;
+				Report "Imaging Madrid! Elev=" + targetElevation.Format("%4.1f") + " deg, Boresight err=" + slewError.Format("%4.2f") + " deg" to Console;
+				Console.CurrentTextColor = ColorTools.White;
+				madridCaptured = 1;
+				CapMarkMadrid.AddPoints(simTimeHr, targetElevation, "Madrid");
+			ElseIf (activeStationIndex == 2 and parisCaptured == 0);
+				Console.CurrentTextColor = Paris.Color;
+				Report "Imaging Paris!  Elev=" + targetElevation.Format("%4.1f") + " deg, Boresight err=" + slewError.Format("%4.2f") + " deg" to Console;
+				Console.CurrentTextColor = ColorTools.White;
+				parisCaptured = 1;
+				CapMarkParis.AddPoints(simTimeHr, targetElevation, "Paris");
+			End;
+
+			If (cairoCaptured == 1 and madridCaptured == 1 and parisCaptured == 1);
+				Report "All three cities captured. Sun-only for remainder of simulation." to Console;
+			End;
+
+		End;
+
+	End;
+
+	CubeSat.Sensors[0].GetFootprintPoints(Earth, sensorFootprintLongitudePoints, sensorFootprintLatitudePoints);
+
+	If (sensorFootprintLongitudePoints.Dimension > 0 and sensorFootprintLatitudePoints.Dimension > 0);
+
+		sensorFootprintCenter = {sensorFootprintLongitudePoints.Mean(), sensorFootprintLatitudePoints.Mean()};
+
+		sensorFootprintLatitudePoints.SortAscending(sensorFootprintLongitudePoints);
+		sensorFootprintMaxLat = {sensorFootprintLongitudePoints.Last,  sensorFootprintLatitudePoints.Last};
+		sensorFootprintMinLat = {sensorFootprintLongitudePoints.First, sensorFootprintLatitudePoints.First};
+
+		sensorSwath.AddOverlayElement("ra-dec-radius", sensorFootprintMaxLat[0], sensorFootprintMaxLat[1], Earth.RadiusEquatorial+1);
+		sensorSwath.AddOverlayElement("ra-dec-radius", sensorFootprintMinLat[0], sensorFootprintMinLat[1], Earth.RadiusEquatorial+1);
+
+	End;
+
+	If (pointingMode == POINTING_SUN);
+		SensorTarget.Shapes[0].TextOptions.Text = TimeTools.ConvertToCalendarDate(CubeSat.Epoch, "UTC", "MJD GSFC") + " UTC\n" +
+		                                          "Mode: Sun-point\n" +
+		                                          "Cairo: "   + cairoCaptured.Format("%i")   + "  Madrid: " + madridCaptured.Format("%i") + "  Paris: " + parisCaptured.Format("%i");
+	ElseIf (pointingMode == POINTING_EARTH);
+		SensorTarget.Shapes[0].TextOptions.Text = TimeTools.ConvertToCalendarDate(CubeSat.Epoch, "UTC", "MJD GSFC") + " UTC\n" +
+		                                          "Mode: Earth (eclipse)\n" +
+		                                          "Cairo: "   + cairoCaptured.Format("%i")   + "  Madrid: " + madridCaptured.Format("%i") + "  Paris: " + parisCaptured.Format("%i");
+	Else;
+		SensorTarget.Shapes[0].TextOptions.Text = TimeTools.ConvertToCalendarDate(CubeSat.Epoch, "UTC", "MJD GSFC") + " UTC\n" +
+		                                          "Target: " + targetStation.DisplayName + "\n" +
+		                                          "Elev: "   + targetElevation.Format("%4.1f") + " deg  Boresight err: " + slewError.Format("%4.2f") + " deg\n" +
+		                                          "Cairo: "  + cairoCaptured.Format("%i")   + "  Madrid: " + madridCaptured.Format("%i") + "  Paris: " + parisCaptured.Format("%i");
+	End;
+
+	// --- Plot updates (each step) ---
+	ElevCairo.AddPoints(simTimeHr, Cairo.Elevation(CubeSat));
+	ElevMadrid.AddPoints(simTimeHr, Madrid.Elevation(CubeSat));
+	ElevParis.AddPoints(simTimeHr, Paris.Elevation(CubeSat));
+	ThrAcquire10.AddPoints(simTimeHr, ACQUISITION_ELEV);
+	ThrImageMin45.AddPoints(simTimeHr, IMAGE_ELEV_MIN);
+	ThrImageMax80.AddPoints(simTimeHr, IMAGE_ELEV_MAX);
+
+	If (pointingMode == POINTING_GROUND);
+		BoresightZ.AddPoints(simTimeHr, slewError);
+	End;
+	ThrSettle2.AddPoints(simTimeHr, SETTLE_ANGLE);
+
+	SeriesPointingMode.AddPoints(simTimeHr, pointingMode);
+	SeriesInShadow.AddPoints(simTimeHr, CubeSat.InShadow());
+
+	FlagCairo.AddPoints(simTimeHr, cairoCaptured);
+	FlagMadrid.AddPoints(simTimeHr, madridCaptured + 1.2);
+	FlagParis.AddPoints(simTimeHr, parisCaptured + 2.4);
+
+	Update MissionDebugLog;
+
+	Update MapView;
+	Update ThreeDView;
+
+	Step CubeSat;
+
+End;
+
+Report "Simulation complete. Exporting plots to results/ ..." to Console;
+
+PlotElevations.SavePlotImage("PNG", "results/Plot1_Elevations.png");
+PlotElevations.SavePlotData(1, "results/Plot1_Elevations.txt");
+PlotBoresight.SavePlotImage("PNG", "results/Plot2_Boresight.png");
+PlotBoresight.SavePlotData(1, "results/Plot2_Boresight.txt");
+PlotPointingMode.SavePlotImage("PNG", "results/Plot3_PointingMode.png");
+PlotPointingMode.SavePlotData(1, "results/Plot3_PointingMode.txt");
+PlotCaptureFlags.SavePlotImage("PNG", "results/Plot6_CaptureFlags.png");
+PlotCaptureFlags.SavePlotData(1, "results/Plot6_CaptureFlags.txt");
+
+Report "Saved: results/Plot1_Elevations.png, Plot2_Boresight.png, Plot3_PointingMode.png, Plot6_CaptureFlags.png" to Console;

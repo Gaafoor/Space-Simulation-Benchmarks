@@ -1,0 +1,75 @@
+{
+  "benchmark_id": "A3",
+  "simulator": "GMAT",
+  "version": "R2026a",
+  "status": "closed_for_gmat",
+  "selected_case": "RAAN_061",
+  "epoch": "2026-06-02T00:00:00",
+  "camera_model": {
+    "type": "ConicalFOV / Imager object in GMAT, post-processed with Python geometry",
+    "full_fov_deg": 10.0,
+    "half_angle_deg": 5.0,
+    "pointing_assumption": "nadir pointing"
+  },
+  "workflow": {
+    "gmat": [
+      "Orbit propagation",
+      "Ground station contacts",
+      "State export",
+      "Imager and ConicalFOV object setup"
+    ],
+    "python": [
+      "Madrid position",
+      "Nadir vector",
+      "Off-nadir angle",
+      "FOV test",
+      "Imaging opportunities"
+    ]
+  },
+  "native_sensor_contact_result": {
+    "contact_locator_with_imager_target": "failed - target must be Spacecraft or PlanetographicRegion",
+    "contact_locator_sensor_property": "failed - Sensor field is not permitted",
+    "conclusion": "Native sensor-contact workflow tested, not supported through tested ContactLocator syntax"
+  },
+  "raan_trade_result": {
+    "trade_table": "benchmarks/benchmark_a/results/raan_trade_study.csv",
+    "selected_raan_deg": 61.0,
+    "reason": "Only tested RAAN case with one imaging opportunity inside the 5 deg half-angle requirement"
+  },
+  "metrics": {
+    "pass_count": 2,
+    "minimum_off_nadir_angle_deg": 2.1745760343264178,
+    "minimum_off_nadir_time_s": 40350.00055428827,
+    "imaging_opportunity_count": 1,
+    "imaging_sample_count": 61,
+    "best_pass_off_nadir_deg": 2.1745760343264178,
+    "max_elevation_deg": 87.65256132009452
+  },
+  "passes": [
+    {
+      "pass_index": 1,
+      "utc_start": "02 Jun 2026 00:32:51.194",
+      "utc_stop": "02 Jun 2026 00:39:25.500",
+      "duration_min": 6.5717773855,
+      "min_off_nadir_deg": 52.48675686788727,
+      "max_elevation_deg": 31.172167503307247,
+      "imaging_candidate": false
+    },
+    {
+      "pass_index": 2,
+      "utc_start": "02 Jun 2026 11:08:49.185",
+      "utc_stop": "02 Jun 2026 11:16:11.768",
+      "duration_min": 7.376391302166667,
+      "min_off_nadir_deg": 2.1745760343264178,
+      "max_elevation_deg": 87.65256132009452,
+      "imaging_candidate": true
+    }
+  ],
+  "source_artifacts": {
+    "gmat_script": "benchmarks/benchmark_a/gmat/benchmark_a3_gmat.script",
+    "gmat_state_csv": "benchmarks/benchmark_a/gmat/gmat_a3_state.csv",
+    "gmat_contact_report": "benchmarks/benchmark_a/gmat/gmat_a3_madrid_contacts.txt",
+    "post_processor": "benchmarks/benchmark_a/run_gmat_a3_analysis.py",
+    "selected_summary": "benchmarks/benchmark_a/results/RAAN_061/summary.json"
+  }
+}

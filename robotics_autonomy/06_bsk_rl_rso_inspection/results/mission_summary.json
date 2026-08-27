@@ -1,0 +1,17 @@
+{
+  "steps": 7,
+  "sim_time_s": 11400.0,
+  "total_reward": 0.26642524135982587,
+  "inspected": 33,
+  "total_points": 100,
+  "inspected_frac": 0.33,
+  "illuminated": 83,
+  "bonus": false,
+  "alive": true,
+  "out_of_range": false,
+  "fuel_used": 0.6357475864017417,
+  "thrust_count": 7,
+  "final_range_m": 184.7821522332848,
+  "mean_att_err_mrp": 0.19218472426252378,
+  "max_att_err_mrp": 0.3906975542355143
+}

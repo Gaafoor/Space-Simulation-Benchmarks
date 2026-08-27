@@ -1,0 +1,36 @@
+date,simulator,version,operator,run_id,status,notes
+2026-06-03,GMAT,R2026a (64-bit),user,a1_gmat_001,pass,A1 analytical two-body; STK deferred; wall time from GMAT GUI log with plots
+
+benchmark_specific_metric,value,unit,comment
+position_difference_vs_reference_final,0.24883111184915452,meters,after 24 hours vs Kepler reference
+position_difference_vs_reference_max,0.24883111184915452,meters,max over 145 sampled epochs
+velocity_difference_vs_reference_final,0.0002754171329383506,m_per_s,after 24 hours
+velocity_difference_vs_reference_max,0.0002754171329383506,m_per_s,max over sampled trajectory
+simulated_duration,24,hours,
+wall_clock_runtime,0.829,seconds,GMAT GUI mission run including orbit/ground-track plots
+runtime_ratio,104221.95416164053,sim_time_over_wall_time,86400 / wall_clock_runtime
+samples,145,count,600 s cadence; mission Report only (no ReportFile.Add)
+observation_window_count,N/A,count,A1 propagation only; see A2
+avg_observation_window_duration,N/A,minutes,A1 propagation only; see A2
+total_contact_time,N/A,minutes,A1 propagation only; see A2
+eclipse_time_percent,N/A,percent,A1 disables third-body/eclipse
+coverage_revisit_time,N/A,minutes,A1 propagation only; see A2
+scenario_setup_time,90,minutes,estimate GUI scenario + script fixes (Add line CSV flood)
+tutorial_availability,Good,qualitative,GMAT docs and examples; ReportFile.Add behavior non-obvious
+required_custom_code_lines,211,lines,benchmark_a1_gmat.script; plus 443 lines Python post-processor
+manual_configuration_steps,4,count,open GMAT; load script; delete old CSV; run; run Python post-processor
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+Physics Fidelity,3,Two-body (JGM2 deg/order 0) within 0.25 m of analytical reference after 24 h
+Performance,5,24 h GUI run in 0.83 s with plots enabled
+Ease of Integration,3,Script-based workflow; CSV export + external Python for km→m and reference compare
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+Mission Capabilities,25,N/A,N/A,A1 does not evaluate coverage/ground station products
+Dynamics and GNC,20,4,16,RK89 propagation stable; closer to reference than Basilisk in A1 (different mu/frame handling)
+Robotics and AI,20,N/A,N/A,Not applicable to A1
+Ease of Use,10,3,6,GUI accessible; ReportFile.Add vs Report distinction caused CSV issues
+Documentation,10,3,6,ReportFile docs clarify Add vs Report; discovered via trial
+Visualization,10,4,4,Orbit view and ground track available in same run
+Extensibility,5,3,3,Script mission sequence; post-processing needed for benchmark CSV format
+TOTAL,100,N/A,N/A,Partial A1 score only; not full Benchmark A weighted total

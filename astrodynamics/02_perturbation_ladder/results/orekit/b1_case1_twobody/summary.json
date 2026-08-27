@@ -1,0 +1,44 @@
+{
+  "benchmark": "B1",
+  "simulator": "Orekit",
+  "run_id": "b1_orekit_case1_twobody",
+  "case_id": "b1_case1_twobody",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "force_model": {
+    "gravity_harmonics_degree": 0,
+    "gravity_harmonics_order": 0,
+    "drag_enabled": false,
+    "atmosphere_model": null,
+    "srp_enabled": false,
+    "third_body_bodies": []
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+  },
+  "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+  "runtime_s": {
+    "propagation": 0.12402662800013786,
+    "runtime_ratio": 696624.5990329105
+  },
+  "drift_metrics_vs_case1": {},
+  "orekit_perturbation_documentation": {
+    "enabled_orekit_force_models": [
+      "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 0x0 (central Earth)"
+    ],
+    "increment_vs_previous_case": "Baseline case. No perturbations beyond central Earth gravity.",
+    "previous_case_id": null
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/altitude_vs_time.png"
+  }
+}

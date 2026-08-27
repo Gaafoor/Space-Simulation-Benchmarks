@@ -1,0 +1,6 @@
+<<<<<<<<<<<<<<<<  Body Node Inputs for 42  >>>>>>>>>>>>>>>>>>>>>
+A3 EP nodes (CM + offset thruster)     ! Description
+2                                      ! Number of Nodes
+******************* Node Location, Comment *********************
+ 0.0  0.0  0.0        "CM"
+ 0.0  0.01  0.0       "EP thruster (+Y arm, +X thrust -> -Z torque)"

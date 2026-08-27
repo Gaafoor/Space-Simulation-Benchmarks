@@ -1,0 +1,356 @@
+{
+  "benchmark": "B1",
+  "simulator": "Orekit",
+  "status": "pass",
+  "cases": [
+    "b1_case1_twobody",
+    "b1_case2_j2",
+    "b1_case3_j2_drag",
+    "b1_case4_j2_drag_srp",
+    "b1_case5_all_supported"
+  ],
+  "summaries": [
+    {
+      "benchmark": "B1",
+      "simulator": "Orekit",
+      "run_id": "b1_orekit_case1_twobody",
+      "case_id": "b1_case1_twobody",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_harmonics_degree": 0,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "third_body_bodies": []
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+      },
+      "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+      "runtime_s": {
+        "propagation": 0.12402662800013786,
+        "runtime_ratio": 696624.5990329105
+      },
+      "drift_metrics_vs_case1": {},
+      "orekit_perturbation_documentation": {
+        "enabled_orekit_force_models": [
+          "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 0x0 (central Earth)"
+        ],
+        "increment_vs_previous_case": "Baseline case. No perturbations beyond central Earth gravity.",
+        "previous_case_id": null
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case1_twobody/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Orekit",
+      "run_id": "b1_orekit_case2_j2",
+      "case_id": "b1_case2_j2",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": false,
+        "atmosphere_model": null,
+        "srp_enabled": false,
+        "third_body_bodies": []
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+      },
+      "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+      "runtime_s": {
+        "propagation": 0.06835483299801126,
+        "runtime_ratio": 1263992.5548865544
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474085.595893742,
+        "ground_track_lon_drift_deg": -12.168730730916558,
+        "raan_change_deg": 0.9889729820765312,
+        "altitude_change_m": -18607.309066576883,
+        "along_track_phase_drift_deg": 4.076541819184484,
+        "final_altitude_m": 481392.6909334231,
+        "final_semi_major_axis_m": 6859529.690933423
+      },
+      "orekit_perturbation_documentation": {
+        "enabled_orekit_force_models": [
+          "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)"
+        ],
+        "increment_vs_previous_case": "Adds J2 via gravity harmonics 2x0 (replaces 0x0 central-only gravity).",
+        "previous_case_id": "b1_case1_twobody"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case2_j2/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Orekit",
+      "run_id": "b1_orekit_case3_j2_drag",
+      "case_id": "b1_case3_j2_drag",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE00 + CssiSpaceWeatherData",
+        "srp_enabled": false,
+        "third_body_bodies": []
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+      },
+      "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+      "runtime_s": {
+        "propagation": 0.7583406910016492,
+        "runtime_ratio": 113932.9605086589
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474348.80726545537,
+        "ground_track_lon_drift_deg": -12.177861366237408,
+        "raan_change_deg": 0.9889742615627104,
+        "altitude_change_m": -18611.106847645715,
+        "along_track_phase_drift_deg": 4.078739767815875,
+        "final_altitude_m": 481388.8931523543,
+        "final_semi_major_axis_m": 6859525.893152354
+      },
+      "orekit_perturbation_documentation": {
+        "enabled_orekit_force_models": [
+          "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+          "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+          "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)"
+        ],
+        "increment_vs_previous_case": "Adds atmospheric drag (NRLMSISE00 + isotropic drag model).",
+        "previous_case_id": "b1_case2_j2"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case3_j2_drag/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Orekit",
+      "run_id": "b1_orekit_case4_j2_drag_srp",
+      "case_id": "b1_case4_j2_drag_srp",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE00 + CssiSpaceWeatherData",
+        "srp_enabled": true,
+        "third_body_bodies": []
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+      },
+      "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+      "runtime_s": {
+        "propagation": 0.365672285999608,
+        "runtime_ratio": 236277.13476785776
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474285.12779942574,
+        "ground_track_lon_drift_deg": -12.175834451824585,
+        "raan_change_deg": 0.9890134121879577,
+        "altitude_change_m": -18611.42217950523,
+        "along_track_phase_drift_deg": 4.078218832521799,
+        "final_altitude_m": 481388.5778204948,
+        "final_semi_major_axis_m": 6859525.577820495
+      },
+      "orekit_perturbation_documentation": {
+        "enabled_orekit_force_models": [
+          "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+          "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+          "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)",
+          "SolarRadiationPressure with IsotropicRadiationSingleCoefficient(Cr=1.8, area=1.0 m\u00b2)"
+        ],
+        "increment_vs_previous_case": "Adds solar radiation pressure (isotropic single-coefficient model).",
+        "previous_case_id": "b1_case3_j2_drag"
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case4_j2_drag_srp/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case4_j2_drag_srp/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case4_j2_drag_srp/altitude_vs_time.png"
+      }
+    },
+    {
+      "benchmark": "B1",
+      "simulator": "Orekit",
+      "run_id": "b1_orekit_case5_all_supported",
+      "case_id": "b1_case5_all_supported",
+      "status": "pass",
+      "epoch_utc": "2026-06-02T00:00:00.000Z",
+      "simulated_duration_s": 86400.0,
+      "sample_count": 145,
+      "force_model": {
+        "gravity_harmonics_degree": 2,
+        "gravity_harmonics_order": 0,
+        "drag_enabled": true,
+        "atmosphere_model": "NRLMSISE00 + CssiSpaceWeatherData",
+        "srp_enabled": true,
+        "third_body_bodies": [
+          "Sun",
+          "Moon"
+        ]
+      },
+      "spacecraft": {
+        "dry_mass_kg": 12.0,
+        "drag_coefficient": 2.2,
+        "srp_reflectivity": 1.8,
+        "drag_area_m2": 0.01,
+        "srp_area_m2": 1.0,
+        "attitude_policy": "fixed_inertial (isotropic drag/SRP coefficients)"
+      },
+      "integrator": "DormandPrince853Integrator(0.1, 300.0, 1.0, 1.0)",
+      "runtime_s": {
+        "propagation": 0.5591063069987285,
+        "runtime_ratio": 154532.3293950903
+      },
+      "drift_metrics_vs_case1": {
+        "position_drift_vs_case1_m": 474369.54704939766,
+        "ground_track_lon_drift_deg": -12.178705902636622,
+        "raan_change_deg": 0.9887887259304265,
+        "altitude_change_m": -18611.3744738698,
+        "along_track_phase_drift_deg": 4.078894035695953,
+        "final_altitude_m": 481388.6255261302,
+        "final_semi_major_axis_m": 6859525.62552613
+      },
+      "orekit_perturbation_documentation": {
+        "enabled_orekit_force_models": [
+          "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+          "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+          "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)",
+          "SolarRadiationPressure with IsotropicRadiationSingleCoefficient(Cr=1.8, area=1.0 m\u00b2)",
+          "ThirdBodyAttraction(Sun)",
+          "ThirdBodyAttraction(Moon)"
+        ],
+        "increment_vs_previous_case": "Adds Sun and Moon third-body gravity via ThirdBodyAttraction. Inherits all force models from Case 4.",
+        "previous_case_id": "b1_case4_j2_drag_srp",
+        "all_supported_orekit_definition": {
+          "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The Orekit-specific definition is below.",
+          "inherits_from_case": "b1_case4_j2_drag_srp",
+          "added_in_case5_vs_case4": [
+            "ThirdBodyAttraction(Sun)",
+            "ThirdBodyAttraction(Moon)"
+          ],
+          "full_force_stack": [
+            "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+            "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+            "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)",
+            "SolarRadiationPressure with IsotropicRadiationSingleCoefficient(Cr=1.8, area=1.0 m\u00b2)",
+            "ThirdBodyAttraction(Sun)",
+            "ThirdBodyAttraction(Moon)"
+          ],
+          "not_added_in_case5": [
+            "Higher-degree/order gravity field (beyond 2x0 J2-only policy)",
+            "Solid Earth tides or ocean tides on gravity field",
+            "Additional planets as third bodies",
+            "Relativistic corrections",
+            "Earth albedo / infrared radiation pressure",
+            "Empirical accelerations or custom force models"
+          ]
+        }
+      },
+      "artifacts": {
+        "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case5_all_supported/state_history.csv",
+        "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case5_all_supported/ground_track.png",
+        "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/orekit_b1/b1_case5_all_supported/altitude_vs_time.png"
+      }
+    }
+  ],
+  "metrics_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/data/benchmark_b/B1_METRICS_COMPARISON.csv",
+  "parameter_table": "data/benchmark_b/B1_PARAMETER_TABLE.md",
+  "orekit_case5_all_supported_definition": {
+    "note": "Cross-tool Case 5 label means 'all perturbations this tool supports natively for this benchmark'. The Orekit-specific definition is below.",
+    "inherits_from_case": "b1_case4_j2_drag_srp",
+    "added_in_case5_vs_case4": [
+      "ThirdBodyAttraction(Sun)",
+      "ThirdBodyAttraction(Moon)"
+    ],
+    "full_force_stack": [
+      "HolmesFeatherstoneAttractionModel with normalized gravity harmonics 2x0 (J2-only policy)",
+      "DragForce with IsotropicDrag(Cd=2.2, area=0.01 m\u00b2)",
+      "NRLMSISE00 atmosphere with CssiSpaceWeatherData(SpaceWeather-All-v1.2.txt)",
+      "SolarRadiationPressure with IsotropicRadiationSingleCoefficient(Cr=1.8, area=1.0 m\u00b2)",
+      "ThirdBodyAttraction(Sun)",
+      "ThirdBodyAttraction(Moon)"
+    ],
+    "not_added_in_case5": [
+      "Higher-degree/order gravity field (beyond 2x0 J2-only policy)",
+      "Solid Earth tides or ocean tides on gravity field",
+      "Additional planets as third bodies",
+      "Relativistic corrections",
+      "Earth albedo / infrared radiation pressure",
+      "Empirical accelerations or custom force models"
+    ]
+  },
+  "orekit_b1_physics_scope": {
+    "covered_in_this_b1_run": [
+      "Numerical propagation (DormandPrince853Integrator)",
+      "Central gravity and J2-only gravity harmonics policy",
+      "NRLMSISE00 atmospheric drag with space-weather data",
+      "Isotropic solar radiation pressure",
+      "Sun and Moon third-body point-mass gravity",
+      "7-day LEO state history export and drift metrics"
+    ],
+    "orekit_native_but_not_in_b1": [
+      "Full gravity field to high degree/order (e.g. EGM2008, tides)",
+      "Alternative atmosphere models (Harris-Priester, exponential, DTM2000, etc.)",
+      "Box-wing or multi-panel radiation pressure models",
+      "Third-body perturbations from additional solar-system bodies",
+      "Relativistic correction force models",
+      "Earth albedo and infrared radiation pressure",
+      "Empirical acceleration / custom force models",
+      "Semi-analytical propagators (e.g. DSST) and TLE/SGP4 workflows",
+      "Attitude-dependent drag and SRP (requires attitude dynamics, B2 scope)",
+      "Maneuver modeling and event detection beyond fixed-force propagation"
+    ],
+    "conclusion": "Orekit B1 demonstrates a staged perturbation ladder using native Orekit force models aligned with the frozen cross-tool benchmark. It does not claim to exercise every physics feature Orekit supports."
+  },
+  "runtime_s": {
+    "orekit_init": 0.0009874940005829558,
+    "total_pipeline": 10.83368419999897
+  }
+}

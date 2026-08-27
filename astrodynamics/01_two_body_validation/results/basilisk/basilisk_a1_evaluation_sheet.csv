@@ -1,0 +1,72 @@
+date,simulator,version,operator,run_id,status,notes
+
+2026-06-03,Basilisk,2.10.2,user,a1_basilisk_001,pass,A1 analytical two-body; STK deferred; wall time = propagation only (perf_counter)
+
+
+
+benchmark_specific_metric,value,unit,comment
+
+position_difference_vs_reference_final,0.44059132932061534,meters,after 24 hours vs Kepler reference
+
+position_difference_vs_reference_max,0.44059132932061534,meters,max over 145 sampled epochs
+
+velocity_difference_vs_reference_final,0.0004893986744614766,m_per_s,after 24 hours
+
+velocity_difference_vs_reference_max,0.0004893986744614766,m_per_s,max over sampled trajectory
+
+simulated_duration,24,hours,
+
+wall_clock_runtime,0.24735610000789165,seconds,ExecuteSimulation only; re-run 2026-06-03
+
+runtime_ratio,349293.993547131,sim_time_over_wall_time,86400 / wall_clock_runtime
+
+samples,145,count,600 s cadence including t=0
+
+observation_window_count,N/A,count,A1 propagation only; see A2
+
+avg_observation_window_duration,N/A,minutes,A1 propagation only; see A2
+
+total_contact_time,N/A,minutes,A1 propagation only; see A2
+
+eclipse_time_percent,N/A,percent,A1 disables Sun/Moon/SPICE/eclipse
+
+coverage_revisit_time,N/A,minutes,A1 propagation only; see A2
+
+scenario_setup_time,120,minutes,estimate first-time runner + venv; re-run under 5 min
+
+tutorial_availability,Partial,qualitative,Examples exist; default scenarios need SPICE/support-data
+
+required_custom_code_lines,234,lines,run_basilisk_a1_analytical_validation.py
+
+manual_configuration_steps,1,count,activate venv and run Python script
+
+
+
+required_non_weighted_category,score_1_to_5,evidence_summary
+
+Physics Fidelity,3,Two-body propagation within 0.44 m of analytical reference after 24 h; higher-fidelity effects disabled for A1
+
+Performance,5,24 h simulated in 0.25 s propagation time; ratio ~349k (A1 is lightweight)
+
+Ease of Integration,4,Python API and self-contained runner; avoided SPICE via custom script
+
+
+
+category,weight_percent,score_1_to_5,weighted_contribution,evidence_summary
+
+Mission Capabilities,25,N/A,N/A,A1 does not evaluate coverage/ground station products
+
+Dynamics and GNC,20,4,16,Reliable two-body propagation; sub-meter agreement with reference
+
+Robotics and AI,20,N/A,N/A,Not applicable to A1
+
+Ease of Use,10,3,6,API works; example friction from support-data defaults
+
+Documentation,10,3,6,Useful docs; some examples assume different scenario architecture
+
+Visualization,10,N/A,N/A,Not used in A1
+
+Extensibility,5,4,4,Straightforward custom runner once defaults avoided
+
+TOTAL,100,N/A,N/A,Partial A1 score only; not full Benchmark A weighted total
+

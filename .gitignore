@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Tool / sim outputs that do not belong in git
+*.bin
+*.UnityViz.bin
+*.bsp
+*.bak
+*.log
+*.aux
+*.out
+*.toc
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Vendor installs (never commit GMAT, Basilisk, NASA 42, Isaac, ROS workspaces)
+vendor/
+.conda/
+node_modules/

@@ -1,0 +1,27 @@
+// =============================================================================
+// FreeForm 2 — ComputeTargetAttitude Procedure
+// pointingMode: 0 = Sun, 1 = Earth (nadir), 2 = GroundStation (target)
+// =============================================================================
+
+Define Procedure ComputeTargetAttitude(Spacecraft source, GroundStation target, CoordinateSystem targetCS, Variable pointingMode);
+
+	Vector spacecraftToTarget;
+	Vector velocityVector;
+
+	targetCS.Epoch           = source.Epoch;
+	spacecraftToTarget.Epoch = source.Epoch;
+	velocityVector.Epoch     = source.Epoch;
+
+	velocityVector.BuildVector(7, source);
+
+	If (pointingMode == 0);
+		spacecraftToTarget.BuildVector(9, source, Sun);
+	ElseIf (pointingMode == 1);
+		spacecraftToTarget.BuildVector(9, source, Earth);
+	Else;
+		spacecraftToTarget.BuildVector(9, source, target);
+	End;
+
+	targetCS.BuildCoordinateSystem(3, spacecraftToTarget, 1, velocityVector);
+
+EndProcedure;

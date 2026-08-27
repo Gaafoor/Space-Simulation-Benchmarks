@@ -1,0 +1,39 @@
+{
+  "RAAN": 62.0,
+  "epoch": "2026-06-02T00:00:00",
+  "pass_count": 2,
+  "minimum_off_nadir_angle_deg": 3.494394649757335,
+  "minimum_off_nadir_time_s": 84470.00116036506,
+  "imaging_opportunity_count": 0,
+  "imaging_sample_count": 57,
+  "all_pass_metrics": [
+    {
+      "pass_index": 1,
+      "start_s": 1969.655,
+      "stop_s": 2374.177,
+      "duration_s": 404.52275587,
+      "duration_min": 6.742045931166667,
+      "utc_start": "02 Jun 2026 00:32:49.655",
+      "utc_stop": "02 Jun 2026 00:39:34.177",
+      "min_off_nadir_deg": 49.54603777174792,
+      "max_elevation_deg": 34.835965024398504
+    },
+    {
+      "pass_index": 2,
+      "start_s": 40132.397,
+      "stop_s": 40573.885,
+      "duration_s": 441.48830012,
+      "duration_min": 7.358138335333334,
+      "utc_start": "02 Jun 2026 11:08:52.397",
+      "utc_stop": "02 Jun 2026 11:16:13.885",
+      "min_off_nadir_deg": 7.3945661138011,
+      "max_elevation_deg": 82.014247613393
+    }
+  ],
+  "artifacts": {
+    "off_nadir_plot": "results//RAAN_062//off_nadir_angle_vs_time.png",
+    "source_state_file": "gmat//gmat_a3_state.csv",
+    "source_contact_file": "gmat//gmat_a3_madrid_contacts.txt",
+    "source_script_file": "gmat//benchmark_a3_gmat.script"
+  }
+}

@@ -1,0 +1,63 @@
+// =============================================================================
+// FreeForm 4 — Constants, state variables, station list, initial attitude
+// Requires GUI objects: CubeSat, Cairo, Madrid, Paris, Sun, Earth, targetCS
+// =============================================================================
+
+// --- Mission constants ---
+Constant Variable PERFORM_SLEW     = 1;   // 1 = rate-limited slew, 0 = instant snap
+Constant Variable SLEW_RATE        = 2;   // deg/s (typical 6U kinematic limit)
+Constant Variable ACQUISITION_ELEV = 10;  // deg — start tracking city pass
+Constant Variable IMAGE_ELEV_MIN   = 45;  // deg — image window lower bound
+Constant Variable IMAGE_ELEV_MAX   = 80;  // deg — image window upper bound
+Constant Variable SETTLE_ANGLE     = 2;   // deg — max boresight error to capture
+
+Constant Variable POINTING_SUN     = 0;
+Constant Variable POINTING_EARTH   = 1;
+Constant Variable POINTING_GROUND  = 2;
+
+// --- Capture flags (any order) ---
+Variable cairoCaptured   = 0;
+Variable madridCaptured  = 0;
+Variable parisCaptured   = 0;
+
+// --- Pointing state ---
+Variable pointingMode    = 0;
+Variable targetElevation = 0;
+Variable slewError       = 180;
+Variable quatErr         = 0;
+Variable activeStationIndex = -1;
+
+GroundStation targetStation;
+GroundStation cachedStation;
+
+// --- Station list (tie-break priority: Cairo > Madrid > Paris) ---
+List<GroundStation> stations[3];
+stations[0] := Cairo;
+stations[1] := Madrid;
+stations[2] := Paris;
+
+stations[0].DisplayName = "Cairo";
+stations[1].DisplayName = "Madrid";
+stations[2].DisplayName = "Paris";
+
+// --- Footprint / overlay arrays (sensor swath) ---
+Array sensorFootprintLatitudePoints[0];
+Array sensorFootprintLongitudePoints[0];
+Array sensorFootprintMaxLat;
+Array sensorFootprintMinLat;
+Array sensorFootprintCenter;
+
+// --- Vectors for boresight settle check ---
+Vector bodyX;
+Vector lineOfSight;
+
+// --- Initial attitude: Sun, no deliberate offset ---
+pointingMode = POINTING_SUN;
+targetStation = Cairo;
+cachedStation = Cairo;
+cachedStation.DisplayName = "";
+
+Call ComputeTargetAttitude(CubeSat, Cairo, targetCS, pointingMode);
+Call SlewSpacecraft(targetCS, 0, SLEW_RATE, CubeSat);
+
+Report "Initial attitude: Sun-pointing (snap at t=0)." to Console;

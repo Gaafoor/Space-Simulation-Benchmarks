@@ -1,0 +1,8 @@
+<<<<<<<<<<<<<<<<<  42:  Command Script File  >>>>>>>>>>>>>>>>>
+% A3 LEO-GEO: RW/MTB attitude + proportional EP thrust (realistic GNC)
+0.0 SC[0] FswTag = PROTOTYPE_FSW
+0.0 Point SC[0].B[0] Primary Vector [0.0 0.0 -1.0] at EARTH
+0.0 Point SC[0].B[0] Secondary Vector [1.0 0.0 0.0] at VELOCITY
+0.0 SC[0].AC.Thr[0].ThrustLevelCmd = 0.0
+2829.282859351952 SC[0].AC.Thr[0].ThrustLevelCmd = 1.0
+EOF

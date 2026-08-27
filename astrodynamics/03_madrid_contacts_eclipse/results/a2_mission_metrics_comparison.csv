@@ -1,0 +1,7 @@
+metric,unit,gmat_a2,basilisk_a2,notes
+gravity_model_j2,policy,JGM-2 deg2 ord0,GGM03S J2-only deg2,Path B: propagation state compare indicative only; mission metrics valid
+observation_window_count,count,4,4,Madrid min elev 10 deg
+avg_observation_window_duration,minutes,5.5301,5.458333333333333,
+coverage_revisit_time,minutes,94.1824,94.16666666666667,min gap between pass starts
+eclipse_time_percent,percent,14.8297,15.24305555555555,GMAT=sum of 15 total eclipse events; Basilisk=shadowFactor<0.999
+eclipse_time_percent_umbra_only_gmat,percent,13.3735,,GMAT Umbra segments only

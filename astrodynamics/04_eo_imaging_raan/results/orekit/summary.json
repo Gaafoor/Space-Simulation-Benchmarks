@@ -1,0 +1,63 @@
+{
+  "RAAN_deg": 61.0,
+  "minimum_off_nadir_angle_deg": 2.174549790167907,
+  "minimum_off_nadir_time_s": 40350.0,
+  "imaging_opportunity_count": 1,
+  "imaging_sample_count": 1,
+  "aggregate_metrics": {
+    "imaging_opportunity_count": 1,
+    "avg_imaging_opportunity_duration_min": 0.16666666666666666,
+    "total_imaging_time_min": 0.16666666666666666,
+    "min_revisit_time_min": 0.0,
+    "camera_fov_deg": 10.0,
+    "camera_half_angle_deg": 5.0,
+    "ground_footprint_diameter_km": 87.48866352592401,
+    "minimum_boresight_angle_deg": 2.174549790167907,
+    "maximum_target_elevation_deg": 87.65258965269305,
+    "rendered_image_output_supported": "No - A3 geometry only; C1 deferred"
+  },
+  "revisit_windows": [],
+  "off_nadir_plot": "benchmarks/benchmark_a/results/orekit_a3/off_nadir_angle_vs_time.png",
+  "elevation_plot": "benchmarks/benchmark_a/results/orekit_a3/elevation_vs_time.png",
+  "ground_track_map": "benchmarks/benchmark_a/results/orekit_a3/ground_track_madrid_imaging_map.png",
+  "camera_footprint_plot": "benchmarks/benchmark_a/results/orekit_a3/camera_footprint_best_instant.png",
+  "coverage_heatmap": "benchmarks/benchmark_a/results/orekit_a3/coverage_heatmap.png",
+  "coverage_statistics_csv": "benchmarks/benchmark_a/results/orekit_a3/madrid_coverage_statistics.csv",
+  "coverage_percentage_json": "benchmarks/benchmark_a/results/orekit_a3/coverage_percentage.json",
+  "madrid_regional_coverage": {
+    "region": {
+      "lat_min_deg": 40.2,
+      "lat_max_deg": 40.7,
+      "lon_min_deg": -4.2,
+      "lon_max_deg": -3.2
+    },
+    "grid": {
+      "lat_divisions": 100,
+      "lon_divisions": 100,
+      "total_cells": 10000
+    },
+    "coverage": {
+      "covered_cells": 6703,
+      "coverage_percentage": 67.03,
+      "max_coverage_count": 2,
+      "mean_coverage_count": 0.7767,
+      "footprint_radius_km": 43.744331762962005
+    },
+    "artifacts": {
+      "coverage_heatmap": "benchmarks/benchmark_a/results/orekit_a3/coverage_heatmap.png",
+      "coverage_statistics_csv": "benchmarks/benchmark_a/results/orekit_a3/madrid_coverage_statistics.csv"
+    }
+  },
+  "runtime_seconds": {
+    "orekit_init_and_data_setup": 0.0011763440002141579,
+    "orbit_propagation": 6.369036804000189,
+    "python_post_processing_and_outputs": 2.68624329100021,
+    "total_pipeline": 9.056462703999841
+  },
+  "implementation_notes": {
+    "workflow_type": "Orekit numerical propagation + Python geometry post-processing",
+    "orekit_data_setup": "Requires orekit-data.zip and JVM (OpenJDK) before running",
+    "gravity_model": "Orekit normalized harmonics 2x0 (J2-only style policy)",
+    "native_sensor_contact": "Not used; A3 FOV geometry computed explicitly in Python"
+  }
+}

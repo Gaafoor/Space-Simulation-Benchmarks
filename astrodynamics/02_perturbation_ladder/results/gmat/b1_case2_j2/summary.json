@@ -1,0 +1,53 @@
+{
+  "benchmark": "B1",
+  "simulator": "GMAT",
+  "run_id": "b1_gmat_case2_j2",
+  "case_id": "b1_case2_j2",
+  "status": "pass",
+  "epoch_utc": "2026-06-02T00:00:00.000Z",
+  "simulated_duration_s": 86400.0,
+  "sample_count": 145,
+  "expected_sample_count": 145,
+  "source_gmat_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/gmat_b1_case2_j2_state.csv",
+  "raw_gmat_csv_rows_parsed": 1009,
+  "force_model": {
+    "gravity_potential_file": "JGM2.cof",
+    "gravity_harmonics_degree": 2,
+    "gravity_harmonics_order": 0,
+    "drag_enabled": false,
+    "atmosphere_model": null,
+    "srp_enabled": false,
+    "srp_model": null,
+    "third_body_bodies": [],
+    "integrator": "RungeKutta89, InitialStepSize=10 s, Accuracy=1e-12"
+  },
+  "spacecraft": {
+    "dry_mass_kg": 12.0,
+    "drag_coefficient": 2.2,
+    "srp_reflectivity": 1.8,
+    "drag_area_m2": 0.01,
+    "srp_area_m2": 1.0,
+    "attitude_policy": "CoordinateSystemFixed (isotropic drag/SRP coefficients)"
+  },
+  "drift_metrics_vs_case1": {
+    "position_drift_vs_case1_m": 474085.4333391307,
+    "ground_track_lon_drift_deg": -12.168721640592096,
+    "raan_change_deg": 0.9889728325948232,
+    "altitude_change_m": -18607.29279111419,
+    "along_track_phase_drift_deg": 4.076540455563929,
+    "final_altitude_m": 481392.70203216746,
+    "final_semi_major_axis_m": 6859529.702032167
+  },
+  "gmat_perturbation_documentation": {
+    "enabled_gmat_force_models": [
+      "Earth gravity via JGM-2, degree 2, order 0 (J2-only policy)"
+    ],
+    "increment_vs_previous_case": "Adds J2 via JGM-2 degree 2, order 0.",
+    "previous_case_id": "b1_case1_twobody"
+  },
+  "artifacts": {
+    "state_history_csv": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/state_history.csv",
+    "ground_track_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/ground_track.png",
+    "altitude_plot": "/media/mahmedext/7616F05F16F02233/Users/mahmed.ext/Downloads/Intern_ws/benchmarks/benchmark_b/results/gmat_b1/b1_case2_j2/altitude_vs_time.png"
+  }
+}
