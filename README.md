@@ -51,14 +51,14 @@ The LEO-to-GEO electric-transfer campaign (report §1.5–1.11) shares one execu
 
 | Folder | Concept | Tools |
 |--------|---------|-------|
-| [01_mujoco_hub_rebound](robotics_autonomy/01_mujoco_hub_rebound/) | 1U hub-to-hub contact rebound | Basilisk + MuJoCo |
-| [02_mujoco_arm_docking](robotics_autonomy/02_mujoco_arm_docking/) | Arm docking with capture weld | Basilisk + MuJoCo |
-| [03_mujoco_thruster_arm](robotics_autonomy/03_mujoco_thruster_arm/) | 6-DOF hub + thruster arms | Basilisk + MuJoCo |
+| [01_mujoco_hub_rebound](robotics_autonomy/01_mujoco_hub_rebound/) | 1U hub-to-hub contact rebound (custom scenario) | Basilisk + MuJoCo |
+| [02_mujoco_arm_docking](robotics_autonomy/02_mujoco_arm_docking/) | Arm docking with capture weld (custom scenario) | Basilisk + MuJoCo |
+| [03_mujoco_thruster_arm](robotics_autonomy/03_mujoco_thruster_arm/) | 6-DOF hub + thruster arms + inspection path | Basilisk + MuJoCo |
 | [04_nasa42_docking](robotics_autonomy/04_nasa42_docking/) | Face-to-face CubeSat docking | NASA 42 |
 | [05_basilisk_rendezvous](robotics_autonomy/05_basilisk_rendezvous/) | Servicer–debris proximity / ADCS modes | Basilisk |
 | [06_bsk_rl_rso_inspection](robotics_autonomy/06_bsk_rl_rso_inspection/) | RL inspector vs non-cooperative RSO | BSK-RL |
 | [07_basilisk_opnav](robotics_autonomy/07_basilisk_opnav/) | Camera limb OD (Hough vs CNN) | Basilisk OpNav |
-| [08_basilisk_ros2_pid_mpc](robotics_autonomy/08_basilisk_ros2_pid_mpc/) | Hill-frame PID vs MPC, 3 spacecraft | Basilisk + ROS 2 |
+| [08_basilisk_ros2_pid_mpc](robotics_autonomy/08_basilisk_ros2_pid_mpc/) | Official plant + custom PID/MPC comparison layer | Basilisk + ROS 2 |
 | [09_space_ros_canadarm2](robotics_autonomy/09_space_ros_canadarm2/) | Canadarm2 in Gazebo / MoveIt / Isaac | Space ROS |
 
 ## What you need locally

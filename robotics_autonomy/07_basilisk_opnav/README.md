@@ -6,20 +6,36 @@ Two Basilisk OpNav cases on a Mars elliptical orbit (a = 18000 km, e = 0.6): lim
 
 Circ position RMS 0.55 vs CNN 5.24; Circ velocity RMS 1.41 vs CNN 13.18; CNN runtime ~2.3× Circ.
 
-## Official example this started from
+## Official upstream (AVSLab Basilisk)
 
-**Basilisk** `examples/OpNavScenarios/scenariosOpNav/scenario_OpNavAttOD.py` and `scenario_CNNAttOD.py`. These **are** the official demos. This benchmark ran both on the same orbit and compared RMS and runtime (`opnav_summary.json`). The scenario sources stay in your Basilisk tree.
+| Official file | Role |
+|---------------|------|
+| `examples/OpNavScenarios/scenariosOpNav/scenario_OpNavAttOD.py` | Hough-circle limb; combined attitude + orbit determination |
+| `examples/OpNavScenarios/scenario_CNNAttOD.py` | CNN-based attitude + orbit determination |
 
-## What changed
+Both scripts are **official demos**. This repo does not fork or store them.
 
-- Paired execution and a single metrics table (runtime, pos/vel RMS, image method).
-- Side-by-side plot panels `bsk_opnav_circ_plots.png` / `bsk_opnav_cnn_plots.png`.
+## Files in this repo
+
+| Content | Status |
+|---------|--------|
+| `results/opnav_summary.json` | **Custom** — paired metrics table |
+| `results/bsk_opnav_circ_plots.png`, `bsk_opnav_cnn_plots.png` | **Custom** — side-by-side panels |
+
+## What changed vs official Basilisk
+
+- Paired execution on the **same** Mars orbit ICs and a single metrics table (runtime, pos/vel RMS, image method).
+- Side-by-side plot panels for direct Circ vs CNN comparison.
+
+The scenario sources remain in your Basilisk tree.
 
 ## How to run
 
 ```bash
-cd /path/to/basilisk-develop/examples/OpNavScenarios/scenariosOpNav
+cd /path/to/basilisk/examples/OpNavScenarios/scenariosOpNav
 python3 scenario_OpNavAttOD.py
+
+cd /path/to/basilisk/examples/OpNavScenarios
 python3 scenario_CNNAttOD.py
 ```
 
