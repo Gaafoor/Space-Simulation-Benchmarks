@@ -30,6 +30,35 @@ Each benchmark folder:
 
 The LEO-to-GEO electric-transfer campaign (report §1.5–1.11) shares one execution pipeline. Canonical scripts live in `astrodynamics/05_leo_geo_ep_design/` (GMAT design) and `astrodynamics/06_transfer_execution/` (Basilisk + NASA 42). Folders 07–11 keep their own README and results and point back to those scripts.
 
+## Tool selection flowchart
+
+```mermaid
+graph TD
+    A[Start: Define Primary Project Purpose] --> B{Core Activity?};
+
+    B -->|"Trajectory / Coverage / OD<br/>(Mission Analysis)"| C{GUI / Desktop Operations<br/>Required?};
+    C -->|Yes| D{Commercial Budget<br/>for Monthly License?};
+    D -->|Yes| E[FreeFlyer];
+    D -->|No| F["GMAT + (Optional SNOPT)"];
+    C -->|"No (Code-only / Embedded)"| G[Orekit];
+
+    B -->|Spacecraft Dynamics / GNC / FSW| H{Primary Focus?};
+
+    H -->|GNC / Estimation / Control| I{"Ultra-long continuous<br/>finite burn or massive<br/>MEE propagation?"};
+    I -->|Yes| J[NASA 42];
+    I -->|No| K[Basilisk];
+
+    H -->|Robotics / Contact / Perception| L{Is ROS2 middleware<br/>mandatory?};
+    L -->|Yes| M["Basilisk + MuJoCo<br/>(via ROS2 Bridge)"];
+    L -->|No| N{"Is advanced Perception<br/>(CNN/OpNav) or RL<br/>the main objective?"};
+    N -->|Yes| O[Basilisk];
+    N -->|"No (Rigid docking,<br/>simple multibody contact)"| P[NASA 42];
+
+    H -->|Constellation / Formation| Q{Purpose of Constellation?};
+    Q -->|Coverage / Revisit Analysis| C;
+    Q -->|"Formation Control /<br/>Inter-satellite GNC"| K;
+```
+
 ## Astrodynamics
 
 | Folder | Concept | Tools |
