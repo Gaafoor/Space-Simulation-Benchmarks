@@ -22,11 +22,11 @@ docs/figures/           # figures used in the reports
 NOTICE.md               # third-party tools and what is not shipped
 ```
 
-Each benchmark folder has:
+Each benchmark folder:
 
-- `README.md` — what the case is, **which official example it started from**, and **what changed**
-- `scripts/` — runners and native decks (when this case owns them)
-- `results/` — JSON/CSV summaries and selected plots (not full state histories)
+- `README.md` — summary, original files, changes, run commands
+- `scripts/` — runners and input decks
+- `results/` — JSON/CSV summaries and plots
 
 The LEO-to-GEO electric-transfer campaign (report §1.5–1.11) shares one execution pipeline. Canonical scripts live in `astrodynamics/05_leo_geo_ep_design/` (GMAT design) and `astrodynamics/06_transfer_execution/` (Basilisk + NASA 42). Folders 07–11 keep their own README and results and point back to those scripts.
 
